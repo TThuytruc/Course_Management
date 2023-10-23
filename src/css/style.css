@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+}
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+:root {
+    --header-height: 50px;
+    --header-background: #2e5185;
+    --body-background: blue;
+    --footer-background: blue;
+}
+/* Header */
+.header {
+    height: var(--header-height);
+    width: 100%;
+    background-color: var(--header-background);
+    display: flex;
+    justify-content: center;
+}
+.header__container {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 0 50px 0 50px; */
+    color: white;
+}
+.header__email-link {
+    text-decoration: none;
+    color: white;
+}
+.header__email-link:hover {
+    text-decoration: none;
+    color: white;
+}
+.header__email-link:hover {
+    text-decoration: underline;
+}
+.header__phone-no {
+    border-right: 1px solid white;
+    margin-right: 4px;
+}
+.header__user:hover {
+    cursor: pointer;
+}
+.header__user {
+    position: relative;
+}
+.header__user-list::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    right: 0;
+    top: -10px;
+    height: 20px;
+    /* background-color: red; */
+}
+/* Make a bridge between  */
+.header__user-list {
+    position: absolute;
+    top: 130%;
+    background-color: white;
+    border: 1px solid black;
+    position: absolute;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    right: 0;
+    width: 140%;
+    display: none;
+}
+.header__user:hover .header__user-list {
+    display: block;
+}
+
+
+.header__user-list a {
+    text-decoration: none;
+    color: black;
+}
+.header__user-list a:hover {
+    color: black;
+    text-decoration: none;
+}
+.header__user-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 10px;
+    border-top: 1px solid black;
+}
+.header__user-item:hover {
+    background-color: azure;
+}
+.header__user-logout {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.header__user-logout span {
+    color: black;
+    font-family: inherit;
+}
+.header__user-icon {
+    width: 20px;
+    color: black;
+    margin-right: 5px;
+}
