@@ -121,6 +121,21 @@ body {
     border-bottom: 1px solid gray;
     /* padding-left: 30px; */
 }
+.content_body
+{
+    display: flex;
+}
+.list_document_submission
+{
+    flex: 70%;
+}
+.list_teacher_exam
+{
+    flex: 30%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.8%;
+}
 .img_language
 {
     display: flex;
@@ -200,7 +215,7 @@ option
     width: 98%;
     background-color: white;
     flex-direction: row;
-    border: 1px solid gray;
+    border: 1px solid #CCCCCC;
     padding: 0 30px;
     flex-direction: column;
     margin-left: 1%;
@@ -253,4 +268,79 @@ option
 .last_box
 {
     margin-bottom: 50px;
+}
+
+/* Custom for list teacher and list exam on the right page */
+.list_people
+{
+    padding: 0;
+}
+.title_text
+{
+    padding-left: 5%;
+}
+li {
+    list-style-type: none;
+  }
+.list_teacher
+{
+    display: flex;
+    flex-direction: column;
+}
+.teacher
+{
+    display: flex;
+    flex-direction: row;
+}
+.name_teacher
+{
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    padding: 0;
+}
+.name
+{
+    margin: 0 10px;
+}
+.send_messeage
+{
+    margin: 0 10px;
+}
+.send_messeage:hover{
+    color: #f60;
+}
+.link_group_people
+{
+    color: #f60;
+}
+.link_group_people:hover
+{
+    color:#f60 ;
+}
+.list_exam
+{
+    padding: 0;
+}
+.list_submission
+{
+    display: flex;
+    flex-direction: column;
+}
+.color_box
+{
+    background-color: #EEEEEE;
+
+}
+.color_submission
+{
+    color: #f60;
+}
+.color_submission:hover
+{
+    color: #f60;
+}
+.score_box
+{
+    display: flex;
 }
