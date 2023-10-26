@@ -5,7 +5,7 @@ window.onload=function()
     for(submission of listSubmission)
     {
         let clone= submission.cloneNode(true);
-        let changeColor=clone.querySelector('.icon').querySelector('.text');
+        let changeColor=clone.querySelector('.text');
 
         changeColor.classList.add("color_submission");
         list_current_submission.appendChild(clone);

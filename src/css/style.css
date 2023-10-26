@@ -340,3 +340,7 @@ li {
 {
     color: #f60;
 }
+.score_box
+{
+    display: flex;
+}
