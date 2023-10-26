@@ -332,3 +332,11 @@ li {
     background-color: #EEEEEE;
 
 }
+.color_submission
+{
+    color: #f60;
+}
+.color_submission:hover
+{
+    color: #f60;
+}
