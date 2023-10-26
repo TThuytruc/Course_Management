@@ -11,6 +11,7 @@ body {
     --header-background: #2e5185;
     --body-background: blue;
     --footer-background: blue;
+    --border: 1px solid rgb(223, 220, 220);
 }
 /* Header */
 .header {
@@ -72,11 +73,11 @@ body {
     right: 0;
     width: 140%;
     display: none;
+    z-index:1;
 }
 .header__user:hover .header__user-list {
     display: block;
 }
-
 
 .header__user-list a {
     text-decoration: none;
@@ -116,11 +117,12 @@ body {
     position: relative;
     display: flex;
     width: 100%;
-    background-color: white;
+    /* background-color: white; */
     flex-direction: column;
-    border-bottom: 1px solid gray;
+    border-bottom: var(--border);
     /* padding-left: 30px; */
 }
+
 .img_language
 {
     display: flex;
@@ -131,9 +133,8 @@ body {
     display: flex;
     width: 200px; /* Set the desired width for the div */
     height: 150px; /* Set the desired height for the div */
-    margin-left: 10px;
-    margin-left: 9%;
-
+    margin-left: 15px;
+    /* margin-top:-20px; */
 }
 .img_university img {
     width: 100%;
@@ -147,7 +148,6 @@ body {
     width:fit-content;
     justify-content: flex-end;
     margin-right: 9%;
-    
 }
 #choosen_language
 {
@@ -172,13 +172,19 @@ option
 }
 .name_course
 {
-    font-size: 50px;
+    font-size: 35px;
     color: #4682B4;
+    margin-top: 30px;
 }
 .link_current_page
 {
+    margin-top: 15px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    line-height: 0.5;
+    max-width: 70%;
 }
 .link_page
 {
@@ -200,11 +206,11 @@ option
     width: 98%;
     background-color: white;
     flex-direction: row;
-    border: 1px solid gray;
+    border: var(--border);
     padding: 0 30px;
     flex-direction: column;
     margin-left: 1%;
-    margin-top: 2%;
+    margin-top: 1.3%;
 }
 
 
