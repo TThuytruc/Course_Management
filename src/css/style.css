@@ -493,6 +493,66 @@ a[download]:hover
     cursor: pointer;
     /* text-decoration: underline; */
 }
-
+.box_home_search{
+    border: 1px solid ;
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    margin-top:0px;
+    height: 80px;
+    padding:20px;
+}
+.search_bar{
+    flex: 1;
+    border: 1px solid;
+    height: 40px;
+    padding-left: 10px;
+}
+.searchbar::placeholder{
+    margin-left: 20px;
+}
+.search_button{
+    border: 1px solid;
+    height:40px;
+    width: 30px;
+}
+.search_icon{
+    height: 40px;
+    width: 30px;
+    object-fit: cover;
+}
+.home_content{
+   background-color: rgb(228, 228, 228);
+   padding:20px;
+}
+.home_title{
+    margin-left:20px;
+    margin-top:20px;
+    margin-bottom:40px;
+    color:#4682B4;
+}
+.box_home_courses{
+   margin:20px;
+   padding: 20px;
+   box-shadow: 2px 2px 2px rgb(135, 135, 135);
+   background-color: white;
+}
+.home_classname{
+    color:#689f59;
+}
+.home_classname:hover{
+    color:#689f59;
+}
+.teacher_name{
+    color:#f60;
+}
+.teacher_name:hover{
+    color:#f60;
+}
+.list_teacher{
+    list-style-type: none;
+    margin-top: 20px;
+    margin-left: -40px;
+}
 
 
