@@ -8,17 +8,82 @@
 </head>
 
 <body>
-    <header>
-        
-    </header>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>School Signup</title>
+        <style>
+            body {
+                background-image: url(https://wallpapers.com/images/hd/school-background-pdx3rkmcq5zlpunn.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            #sign-in-form {
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                padding: 30px;
+                width: 500px;
+            }
+            .form-group {
+                margin-bottom: 20px;
+            }
+            .form-group label {
+                display: block;
+                font-weight: bold;
+            }
+            .form-group input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+            .form-group button {
+                background-color: #007BFF;
+                color: #fff;
+                border: none;
+                border-radius: 3px;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="sign-in-form">
+            <h2>Sign In for School</h2>
+            <form action="sign-in.php" method="post">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-input" type="text" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-input" type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <button id="sign-in-btn" type="submit">Sign In</button>
+                </div>
+            </form>
+        </div>
+    </body>
 
-    <main>
-
-    </main>
-
-    <footer>
-
-    </footer>
+    <script>
+        document.getElementById('sign-in-btn').onclick = function() {
+            location.href = "./student/home.html"
+        }
+    </script>
+    </html>
+    
 </body>
 
 </html>
