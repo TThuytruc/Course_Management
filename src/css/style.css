@@ -487,12 +487,19 @@ a[download]:hover
     color: #f60;
 }
 
+.plus
+{
+    display: inline;
+    color: #f60;
+}
+
 #add_submission:hover
 {
     color: #f60;
     cursor: pointer;
-    /* text-decoration: underline; */
+    text-decoration: underline;
 }
+
 .box_home_search{
     border: 1px solid ;
     display: flex;
@@ -502,57 +509,79 @@ a[download]:hover
     height: 80px;
     padding:20px;
 }
-.search_bar{
+
+.search_bar
+{
     flex: 1;
     border: 1px solid;
     height: 40px;
     padding-left: 10px;
 }
-.searchbar::placeholder{
+
+.searchbar::placeholder
+{
     margin-left: 20px;
 }
-.search_button{
+
+.search_button
+{
     border: 1px solid;
     height:40px;
     width: 30px;
 }
-.search_icon{
+.search_icon
+{
     height: 40px;
     width: 30px;
     object-fit: cover;
 }
-.home_content{
+
+.home_content
+{
    background-color: rgb(228, 228, 228);
    padding:20px;
 }
-.home_title{
+
+.home_title
+{
     margin-left:20px;
     margin-top:20px;
     margin-bottom:40px;
     color:#4682B4;
 }
-.box_home_courses{
+
+.box_home_courses
+{
    margin:20px;
    padding: 20px;
    box-shadow: 2px 2px 2px rgb(135, 135, 135);
    background-color: white;
 }
-.home_classname{
+
+.home_classname
+{
     color:#689f59;
 }
-.home_classname:hover{
+
+.home_classname:hover
+{
     color:#689f59;
 }
-.teacher_name{
+
+.teacher_name
+{
     color:#f60;
 }
-.teacher_name:hover{
+
+.teacher_name:hover
+{
     color:#f60;
 }
-.list_teacher{
+
+.list_teacher
+{
     list-style-type: none;
     margin-top: 20px;
-    margin-left: -40px;
 }
 
 
