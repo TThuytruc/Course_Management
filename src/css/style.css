@@ -13,9 +13,9 @@ body
 :root 
 {
     --header-height: 50px;
-    --header-background: #2e5185;
-    --body-background: blue;
-    --footer-background: blue;
+    --header-background: #854759;
+    --body-background: rgb(135, 164, 76);
+    --footer-background: rgb(135, 164, 76);
     --border: 1px solid rgb(223, 220, 220);
 }
 
@@ -220,14 +220,14 @@ main
 {
     display: inline-block;
     border: 0;
-    color: #f60;
+    color: #e91e63;
     margin-bottom: 3px;
     border-bottom: 3px solid white;
 }
 
 #choosen_language:hover
 {
-    border-bottom: 3px solid #f60;
+    border-bottom: 3px solid #41434a;
 }
 
 .title_course
@@ -239,8 +239,9 @@ main
 .name_course
 {
     font-size: 35px;
-    color: #4682B4;
+    color: rgb(135, 164, 76);
     margin-top: 30px;
+    font-weight: bold;
 }
 
 .link_current_page
@@ -268,12 +269,12 @@ main
 
 .link_page
 {
-    color:#f60
+    color:#e91e63;
 }
 
 .link_page:hover
 {
-    color:#f60
+    color:#41434a;
 }
 
 .box
@@ -318,7 +319,8 @@ main
 .title_row
 {
     margin: 10px 0;
-    color: #f60;
+    color: rgb(151, 184, 85);
+    font-weight: bold;
     font-size: 20px;
 }
 
@@ -392,17 +394,17 @@ li
 
 .send_messeage:hover
 {
-    color: #f60;
+    color: #41434a;
 }
 
 .link_group_people
 {
-    color: #f60;
+    color: #e91e63;
 }
 
 .link_group_people:hover
 {
-    color:#f60 ;
+    color:#41434a;
 }
 
 .list_exam
@@ -423,12 +425,13 @@ li
 
 .color_submission
 {
-    color: #f60;
+    color: #e91e63;
+    font-weight: normal;
 }
 
 .color_submission:hover
 {
-    color: #f60;
+    color: #41434a;
 }
 
 .score_box
@@ -438,8 +441,9 @@ li
 
 .title_submission
 {
-    font-size: 30px;
-    color: #4682B4;
+    font-size: 27px;
+    color: rgb(135, 164, 76);
+    font-weight: bold;
     margin-top: 30px;
 }
 
@@ -456,8 +460,9 @@ li
 
 .submission_status
 {
-    font-size: 25px;
-    color: #4682B4;
+    font-size: 23px;
+    color: rgb(135, 164, 76);
+    font-weight: bold;
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -474,12 +479,12 @@ th
 
 a[download]
 {
-    color: #f60;
+    color: #e91e63;
 }
 
 a[download]:hover
 {
-    color: #f60;
+    color: #e91e63;
 }
 
 #file_submission
@@ -489,18 +494,18 @@ a[download]:hover
 
 #add_submission
 {
-    color: #f60;
+    color: #e91e63;
 }
 
 .plus
 {
     display: inline;
-    color: #f60;
+    color: #e91e63;
 }
 
 #add_submission:hover
 {
-    color: #f60;
+    color: #e91e63;
     cursor: pointer;
     text-decoration: underline;
 }
@@ -552,7 +557,8 @@ a[download]:hover
     margin-left:20px;
     margin-top:20px;
     margin-bottom:40px;
-    color:#4682B4;
+    font-weight: bold;
+    color:#bb6880;
 }
 
 .box_home_courses
@@ -565,7 +571,9 @@ a[download]:hover
 
 .home_classname
 {
-    color:#689f59;
+    color:rgb(146, 180, 82);
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .home_classname:hover
@@ -575,12 +583,12 @@ a[download]:hover
 
 .teacher_name
 {
-    color:#f60;
+    color:#e91e63;
 }
 
 .teacher_name:hover
 {
-    color:#f60;
+    color:#41434a;
 }
 
 .list_teacher
@@ -592,19 +600,20 @@ a[download]:hover
 /*Teacher submission page*/
 .submissions    
 {
-    font-size: 25px;
-    color: #4682B4;
+    font-size: 23px;
+    color: rgb(135, 164, 76);
+    font-weight: bold;
     margin-top: 30px;
     margin-bottom: 30px;
 }
 
 .file_name
 {
-    color: #f60;
+    color: #e91e63;
 }
 
 .file_name:hover
 {
-    color: #f60;
+    color: #e91e63;
 }
 
