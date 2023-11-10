@@ -617,3 +617,41 @@ a[download]:hover
     color: #e91e63;
 }
 
+.dropdown
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+#button_add
+{
+    width:80px;
+    height:40px;
+    background-color: #c76e87;
+    border:none;
+    border-radius: 5px;
+    color:white;
+    font-weight:600;
+    float:right;
+    margin-top:15px;
+}
+
+#button_add:hover
+{
+    background-color: #af5f77;
+}
+
+/* #button_add_container
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: end;
+} */
+
+.dropdown-menu
+{
+background-color: red;
+}
+
+
