@@ -779,7 +779,7 @@ a[download]:hover
     margin-right: 15px;
 }
 
-input[type="text"] 
+.window_body input[type="text"] 
 {
     border:none;
     border-bottom: solid 1px;
