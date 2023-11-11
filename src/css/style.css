@@ -162,10 +162,8 @@ main
     position: relative;
     display: flex;
     width: 100%;
-    /* background-color: white; */
     flex-direction: column;
     border-bottom: var(--border);
-    /* padding-left: 30px; */
 }
 
 .content_body
@@ -447,11 +445,6 @@ li
     margin-top: 30px;
 }
 
-.bold
-{
-    font-weight: bold;
-}
-
 .time
 {
     margin-top:10px;
@@ -597,7 +590,7 @@ a[download]:hover
     margin-top: 20px;
 }
 
-/*Teacher submission page*/
+/* Teacher submission.html */
 .submissions    
 {
     font-size: 23px;
@@ -617,7 +610,8 @@ a[download]:hover
     color: #e91e63;
 }
 
-.dropdown
+/* Teacher course.html */
+.btn-group
 {
     display:flex;
     flex-direction: row;
@@ -626,15 +620,15 @@ a[download]:hover
 
 #button_add
 {
-    width:80px;
+    max-width: 90px;
     height:40px;
     background-color: #c76e87;
     border:none;
     border-radius: 5px;
     color:white;
     font-weight:600;
-    float:right;
     margin-top:15px;
+    display: inline-block;
 }
 
 #button_add:hover
@@ -642,13 +636,169 @@ a[download]:hover
     background-color: #af5f77;
 }
 
-/* #button_add_container
+.dropdown-item
 {
+    color: #e91e63 !important;
+    font-weight: 400;
+}
+
+.dropdown-item:hover 
+{
+    background-color: rgb(223, 220, 220) !important; 
+}
+
+.dropdown-item:active, .dropdown-item.active
+{
+    background-color: rgb(223, 220, 220) !important; 
+    outline:0px;
+}
+
+#window_background
+{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;    
+    z-index: 2;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+}
+
+[id^="window__"] 
+{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    flex-direction: column;
+    z-index: 3;
+}
+
+.window_header
+{
+    background-color: #b5637a;
+    height: 48px;
     display:flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.window_title
+{
+    font-size: 25px;
+    font-weight: 640;
+    color: rgb(241, 238, 238);
+    padding:7px;
+}
+
+.fa-xmark
+{
+    color: rgb(241, 238, 238);
+    font-size: 20px;
+    padding-right: 20px;
+}
+
+.fa-xmark:hover
+{
+    cursor: pointer;
+}
+
+.window_body
+{
+    height: 100%;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.window_footer
+{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: end;
-} */
+}
 
+.window_footer input
+{
+    width: 75px;
+    height: 40px;
+    background-color: #c76e87;
+    border:none;
+    border-radius: 5px;
+    color:white;
+    font-weight:600;
+    margin-top:15px;
+    margin-right: 15px;
+    margin-bottom:15px;
+    display: inline-block;
+}
 
+.window_footer input:hover
+{
+    background-color: #af5f77;
+}
 
+#window__add_topic
+{
+    width: 620px;
+    height: 400px;
+}
 
+#table_add_topic
+{
+    width:85%;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 9px;
+}
+
+#window__add_assignment
+{
+    width: 620px;
+    height: 500px;
+}
+
+#table_add_assignment
+{
+    width:85%;
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr 1fr;
+    gap: 9px;
+}
+
+#table_add_assignment label
+{
+    margin-right: 15px;
+}
+
+input[type="text"] 
+{
+    border:none;
+    border-bottom: solid 1px;
+    outline:0px;
+}
+
+#assignment_name, #assignment_topic, #assignment_description
+{
+    grid-column: span 3;
+}
+
+#assignment_description, #topic_description
+{
+    grid-row: span 20;
+    padding:10px;
+    resize: none;
+}
+
+#assignment_open_date:focus, #assignment_due_date:focus, #assignment_description:focus, #topic_description:focus
+{
+    outline: none;
+}
