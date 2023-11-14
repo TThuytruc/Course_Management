@@ -802,3 +802,25 @@ a[download]:hover
 {
     outline: none;
 }
+#box_scores
+{
+    border: 0 solid black;
+    background-color: inherit;
+    text-align: center;
+}
+#btn_download-all
+{
+    border: 0 solid black;
+    background-color: var(--body-background);
+    color: white;
+    border-radius: 20px;
+    padding: 1%;
+    width: 15%;
+}
+.btn_dowload
+{
+    margin:1% 0;
+    justify-content: end;
+    display:flex;
+    width: 100%;
+}

@@ -7,10 +7,14 @@
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Submission</title>
 </head>
 
@@ -66,7 +70,7 @@
                 <img src="#" alt="Logo">
             </div>
         </div>
-        
+
         <!-- Course -->
         <div class="box title_course">
             <div class="name_course">
@@ -94,15 +98,15 @@
                     <!-- Submission Title -->
                     <div class="row_content">
                         <div class="title_submission">
-                             PA1 - Submission - Filename: GroupID.zip - Ex: Group02.zip
+                            PA1 - Submission - Filename: GroupID.zip - Ex: Group02.zip
                         </div>
-                
+
                         <div class="time">
                             <div>
                                 <span style="font-weight: bold; margin-right: 5px;">Opened:</span>
                                 <span>19/09/2023 - 13:00</span>
                             </div>
-                
+
                             <div>
                                 <span style="font-weight: bold; margin-right: 35px;">Due:</span>
                                 <span>28/10/2023 - 23:30</span>
@@ -123,16 +127,31 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a class="file_name" href="#" id="downloadLink">Group10.zip</a></td>
+                                <td><a class="file_name" href="#" id="downloadLink">test_1.txt</a></td>
                                 <td>Lê Phan Thủy Trúc</td>
-                                <td>20/10/2023 - 20:32</td> 
-                                <td></td>
+                                <td>20/10/2023 - 20:32</td>
+                                <td>
+                                    <input type="number" id="box_scores" name="score" min="0" max="10" step="0.1"  onkeydown="scoreEnter(event)"
+                                        placeholder="Scores">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a class="file_name" href="#">test_2.txt</a></td>
+                                <td>Trương Tuấn Anh</td>
+                                <td>20/10/2023 - 20:32</td>
+                                <td>
+                                    <input type="number" id="box_scores" name="score" min="0" max="10" step="0.1"  onkeydown="scoreEnter(event)"
+                                        placeholder="Scores">
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+                    <div class="btn_dowload">
+                        <button id="btn_download-all" onclick="downloadAll()">Download All</button>
+                    </div>
                 </div>
             </div>
-        
+
             <!-- Side -->
             <div class="side">
                 <div class="box list_people">
@@ -144,7 +163,8 @@
                         <ul class="list">
                             <li class="member">
                                 <div class="teacher">
-                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
+                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
+                                        alt="Teacher">
                                     <div class="name_teacher">
                                         <p class="name">Hồ Tuấn Thanh</p>
                                     </div>
@@ -152,7 +172,8 @@
                             </li>
                             <li class="member">
                                 <div class="teacher">
-                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
+                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
+                                        alt="Teacher">
                                     <div class="name_teacher">
                                         <p class="name">Mai Anh Tuấn</p>
                                     </div>
@@ -160,7 +181,8 @@
                             </li>
                             <li class="member">
                                 <div class="teacher">
-                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
+                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
+                                        alt="Teacher">
                                     <div class="name_teacher">
                                         <p class="name">Nguyen Thi Minh Tuyen</p>
                                     </div>
@@ -172,14 +194,14 @@
                             <a class="text link_group_people" href="#">Show participants list</a>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="box list_exam">
                     <div class="title_submission">
                         <p class="title_row title_text" style="color: rgb(151, 184, 85);">Upcoming events</p>
                         <div class="list_submission color_box">
                             <ul class="list_current_submission">
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -188,7 +210,7 @@
         </div>
     </main>
 
-    
+
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -212,7 +234,7 @@
                     <ul>
                         <li>227 Nguyen Van Cu, District 5, Ho Chi Minh city, Vietnam</li>
                         <li>Phone : (028) 3835 4266</li>
-                        <li>Email : <a href="#">   info@fit.hcmus.edu.vn</a></li>
+                        <li>Email : <a href="#"> info@fit.hcmus.edu.vn</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -226,9 +248,9 @@
                 </div>
             </div>
         </div>
-     <div class='cr-con'>Powered by <a href="#">Moodle</a></div>
-   </footer>
-   
+        <div class='cr-con'>Powered by <a href="#">Moodle</a></div>
+    </footer>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -240,7 +262,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="../js/teacher_submission.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <!-- <script src="./myscript.js">
 
     </script> -->
