@@ -504,7 +504,7 @@ a[download]:hover
 }
 
 .box_home_search{
-    border: 1px solid ;
+    border: var(--border);
     display: flex;
     align-items: center;
     margin: 20px;
@@ -516,9 +516,10 @@ a[download]:hover
 .search_bar
 {
     flex: 1;
-    border: 1px solid;
+    border: var(--border);
     height: 40px;
     padding-left: 10px;
+    width: 75%;
 }
 
 .searchbar::placeholder
@@ -528,7 +529,7 @@ a[download]:hover
 
 .search_button
 {
-    border: 1px solid;
+    border: var(--border);
     height:40px;
     width: 30px;
 }
@@ -541,10 +542,12 @@ a[download]:hover
 
 .home_content
 {
-   background-color: rgb(228, 228, 228);
-   padding:20px;
+    display: flex;
+    flex-direction: row;
 }
-
+.home_main_content{
+    flex: 70%;
+}
 .home_title
 {
     margin-left:20px;
@@ -553,7 +556,10 @@ a[download]:hover
     font-weight: bold;
     color:#bb6880;
 }
-
+.home_list_courses{
+    background-color:#EEEEEE;
+    padding:20px;
+ }
 .box_home_courses
 {
    margin:20px;
@@ -589,7 +595,42 @@ a[download]:hover
     list-style-type: none;
     margin-top: 20px;
 }
-
+.home_side{
+    flex: 30%;
+    background-color: white;
+    padding: 20px;
+}
+.home_side_header_box{
+    flex:30% ;
+    border: var(--border);
+    background-color: white;
+    padding: 10px;
+}
+.home_side_content_box{
+    flex:25;
+    border: var(--border);
+    padding: 10px;
+    background-color:rgb(238, 238, 238);
+}
+.side_deadline_date{
+    color: #e91e63;
+}
+.side_deadline_date:hover{
+    color: #41434a;
+}
+.side_deadline{
+    color: #e91e63;
+}
+.side_deadline:hover{
+    color: #41434a;
+    }
+.student_email{
+    color: #e91e63;
+    font-size: 0.9em;
+}
+.student_email:hover{
+    color:#41434a
+}
 /* Teacher submission.html */
 .submissions    
 {
