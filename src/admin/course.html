@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/admin_course.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <!-- Fontawesome: get icon  -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <title>Course</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__first-block">
+                <span class="header__phone-no">
+                    <i class="fa-solid fa-phone"></i>
+                    Call us : (028) 3835 4266
+                </span>
+                <span class="header__email">
+                    <i class="fa-regular fa-envelope"></i>
+                    Email :
+                    <a href="#" class="header__email-link">info@fit.hcmus.edu.vn</a>
+                </span>
+            </div>
+            <!-- end first-block -->
+            <div class="header__second-block">
+                <div class="header__user">
+                    <span class="header__user-name">Admin</span>
+                    <i class="fa-regular fa-user"></i>
+                    <i class="fa-solid fa-angle-down"></i>
+
+
+                    <ul class="header__user-list">
+                        <!-- <li class="header__user-item">
+                            <i class="header__user-icon fa-regular fa-calendar"></i>
+                            <a href="">View Deadline</a>
+                        </li>
+                        <li class="header__user-item">
+                            <i class="header__user-icon fa-solid fa-graduation-cap"></i>
+                            <a href="">View Scores</a>
+                        </li> -->
+                        <li class="header__user-item">
+                            <i class="header__user-icon fa-solid fa-right-from-bracket"></i>
+                            <button class="btn btn--default header__user-logout">
+                                <span>Log out</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div> <!--header__second-block -->
+            </div>
+
+        </div>
+    </header>
+
+
+    <main>
+        <div class="row_content img_language">
+            <div class="img_university">
+                <img src="//courses.fit.hcmus.edu.vn/pluginfile.php/1/theme_academi/logo/1697455118/fit-logo-chuan-V2-MOODLE.jpg"
+                    alt="Logo">
+            </div>
+            <div class="language">
+                <select id="choosen_language">
+                    <option value="en">English(en)</option>
+                    <option value="vi">Vietnamese(vi)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="box title_course">
+            <div class="name_course">
+                Nhập môn công nghệ phần mềm - 21_3
+            </div>
+            <div class="link_current_page">
+
+                <a class="link_page" href="#">Home</a>
+                <p class="slash"> / </p>
+
+
+                <a href="#" class="link_page">Học kỳ 1 (2023-2024)</a>
+                <p class="slash"> / </p>
+
+                <a href="#" class="link_page">Chính Quy</a>
+                <p class="slash"> / </p>
+
+                <a href="#" class="link_page">Nhập môn công nghệ phần mềm - 21_3</a>
+            </div>
+
+            <h1 class="text-dark">Danh sách giáo viên</h1>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center" scope="col">Mã số</th>
+                        <th class="text-center" scope="col">Họ tên</th>
+                        <th class="text-center" scope="col">Email</th>
+                        <th class="text-center" scope="col">Thành phố</th>
+                        <th class="text-center" scope="col">Xử lý</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th  scope="row">122323</th>
+                        <td>Le Viet Long</td>
+                        <td><a href="mailto:lvlong@fit.hcmus.edu.vn">lvlong@fit.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white pd-2 text-center">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <th  scope="row">223322</th>
+                        <td>Hồ Tuấn Thanh</td>
+                        <td><a href="mailto:htthanh@fit.hcmus.edu.vn">htthanh@fit.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <th  scope="row">323232</th>
+                        <td>Nguyen Thi Minh Tuyen</td>
+                        <td><a href="mailto:ntmtuyen@fit.hcmus.edu.vn">ntmtuyen@fit.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;">+</button>
+
+            <h1 class="text-dark" style="margin-top: 25px">Danh sách học sinh</h1>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center" scope="col">Mã số</th>
+                        <th class="text-center" scope="col">Họ tên</th>
+                        <th class="text-center" scope="col">Email</th>
+                        <th class="text-center" scope="col">Thành phố</th>
+                        <th class="text-center" scope="col">Xử lý</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th  scope="row">21120581</th>
+                        <td>Lê Phan Thủy Trúc</td>
+                        <td><a href="mailto:21120581@student.hcmus.edu.vn">21120581@student.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <th  scope="row">21120537</th>
+                        <td>Trần Huỳnh Anh Quân</td>
+                        <td><a href="mailto:21120537@student.hcmus.edu.vn">21120537@student.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <th  scope="row">20120531</th>
+                        <td>Lương Văn Nam</td>
+                        <td><a href="mailto:20120531@student.hcmus.edu.vn">20120531@student.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <th  scope="row">21120589</th>
+                        <td>Trương Anh Tuấn</td>
+                        <td><a href="mailto:21120589@student.hcmus.edu.vn">21120589@student.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-secondary" title="Thêm học sinh" style="width: 50px; height: 40px;">+</button>
+
+
+
+
+        </div>
+
+
+
+    </main>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col1">
+                    <h4>Website</h4>
+                    <ul>
+                        <li>Khoa Công nghệ Thông tin, Trường Đại học Khoa học Tự nhiên, ĐHQG-HCM</li>
+                        <li>Faculty of Information Technology, VNUHCM-University of Science</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <ul>
+                        <li><a href="#">Website Trường</a></li>
+                        <li><a href="#">Website khoa</a></li>
+                        <li><a href="#">Portals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact us</h4>
+                    <ul>
+                        <li>227 Nguyen Van Cu, District 5, Ho Chi Minh city, Vietnam</li>
+                        <li>Phone : (028) 3835 4266</li>
+                        <li>Email : <a href="#"> info@fit.hcmus.edu.vn</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='cr-con'>Powered by <a href="#">Moodle</a></div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="../js/course_student.js"></script>
+    <!-- <script src="./myscript.js">
+
+    </script> -->
+</body>
+
+</html>
