@@ -852,9 +852,8 @@ a[download]:hover
 #btn_download-all
 {
     border: 0 solid black;
-    background-color: var(--body-background);
     color: white;
-    border-radius: 20px;
+    border-radius: 8px;
     padding: 1%;
     width: 15%;
 }
