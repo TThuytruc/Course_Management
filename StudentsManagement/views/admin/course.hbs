@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/admin_course.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <!-- Fontawesome: get icon  -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <title>Course</title>
+</head>
+
+<body>
+    {{>header}}
+
+
+    <main>
+        <div class="row_content img_language">
+            <div class="img_university">
+                <img src="//courses.fit.hcmus.edu.vn/pluginfile.php/1/theme_academi/logo/1697455118/fit-logo-chuan-V2-MOODLE.jpg"
+                    alt="Logo">
+            </div>
+        </div>
+
+        <div class="box title_course">
+            <div class="name_course">
+                Nhập môn công nghệ phần mềm - 21_3
+            </div>
+            <div class="link_current_page">
+
+                <a class="link_page" href="#">Home</a>
+                <p class="slash"> / </p>
+
+
+                <a href="#" class="link_page">Học kỳ 1 (2023-2024)</a>
+                <p class="slash"> / </p>
+
+                <a href="#" class="link_page">Chính Quy</a>
+                <p class="slash"> / </p>
+
+                <a href="#" class="link_page">Nhập môn công nghệ phần mềm - 21_3</a>
+            </div>
+
+            <h1 class="text-dark">List of teachers</h1>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center" scope="col">ID</th>
+                        <th class="text-center" scope="col">Name</th>
+                        <th class="text-center" scope="col">Email</th>
+                        <th class="text-center" scope="col">City/Town</th>
+                        <th class="text-center" scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th  scope="row">122323</th>
+                        <td>Le Viet Long</td>
+                        <td><a href="mailto:lvlong@fit.hcmus.edu.vn">lvlong@fit.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white pd-2 text-center">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <th  scope="row">223322</th>
+                        <td>Hồ Tuấn Thanh</td>
+                        <td><a href="mailto:htthanh@fit.hcmus.edu.vn">htthanh@fit.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <th  scope="row">323232</th>
+                        <td>Nguyen Thi Minh Tuyen</td>
+                        <td><a href="mailto:ntmtuyen@fit.hcmus.edu.vn">ntmtuyen@fit.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-secondary text-center" title="Thêm giáo viên" style="width: 50px; height: 40px;">Add</button>
+
+            <h1 class="text-dark" style="margin-top: 25px">List of students</h1>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center" scope="col">ID</th>
+                        <th class="text-center" scope="col">Name</th>
+                        <th class="text-center" scope="col">Email</th>
+                        <th class="text-center" scope="col">City/Town</th>
+                        <th class="text-center" scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th  scope="row">21120581</th>
+                        <td>Lê Phan Thủy Trúc</td>
+                        <td><a href="mailto:21120581@student.hcmus.edu.vn">21120581@student.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <th  scope="row">21120537</th>
+                        <td>Trần Huỳnh Anh Quân</td>
+                        <td><a href="mailto:21120537@student.hcmus.edu.vn">21120537@student.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <th  scope="row">20120531</th>
+                        <td>Lương Văn Nam</td>
+                        <td><a href="mailto:20120531@student.hcmus.edu.vn">20120531@student.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <th  scope="row">21120589</th>
+                        <td>Trương Anh Tuấn</td>
+                        <td><a href="mailto:21120589@student.hcmus.edu.vn">21120589@student.hcmus.edu.vn</a></td>
+                        <td class="text-center">Ho Chi Minh</td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-secondary" title="Thêm học sinh" style="width: 50px; height: 40px;">Add</button>
+
+
+
+
+        </div>
+
+
+
+    </main>
+
+
+    {{> footer}}
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="../js/course_student.js"></script>
+    <!-- <script src="./myscript.js">
+
+    </script> -->
+</body>
+
+</html>
