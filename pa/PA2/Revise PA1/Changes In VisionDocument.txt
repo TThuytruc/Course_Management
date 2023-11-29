@@ -1,0 +1,3 @@
+- Chỉnh sửa lại phần Revision History cho cụ thể hơn các lần cập nhật tài liệu.
+- Ngoài ra không còn chỉnh sửa gì khác vì nhóm em thấy rằng Vision Document hiện tại đã
+hợp lí và giảng viên cũng không có nhận xét gì thêm.
