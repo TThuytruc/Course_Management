@@ -1,30 +1,32 @@
-
-
+require('dotenv').config();
 const fs = require('fs');
-const { as } = require('pg-promise');
+// const { as } = require('pg-promise');
 const pgp = require('pg-promise')({
     capSQL: true
 });
+
 const cn = {
     // Sử dụng 1 trong 2 đoạn code dưới để chọn giá trị các thuộc tính.
 
-    // nhớ thay đổi tên database và pass tùy vào máy đang chạy (của mấy ông á)
-    host: 'localhost',
-    port: 5432,
-    database: 'nmcnpm',
-    user: 'postgres',
-    password: '1234'
+    // // Cách 1 (nhớ thay đổi tên database và pass tùy vào máy đang chạy (của mấy ông á))
+    // host: 'localhost',
+    // port: 5432,
+    // database: 'nmcnpm',
+    // user: 'postgres',
+    // password: '1234'
 
 
-    // host: process.env.DB_HOST,
-    // port: process.env.DB_PORT,
-    // database: "postgres", // Thay đổi DB_NAME thành database
-    // user: process.env.DB_USER,
-    // password: process.env.DB_PW
+    // Cách 2 (có thể thay đổi các thuộc tính trong file .env)
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME, 
+    user: process.env.DB_USER,
+    password: process.env.DB_PW
 };
 
 // Sau khi chọn xong thuộc tính trong cn, hãy connect database
 const db = pgp(cn);
+
 module.exports = {
     getAll: async (tbName) => {
         let dbcn = null;
@@ -44,6 +46,7 @@ module.exports = {
             dbcn.done();
         }
     },
+
     getCondition: async (tbName, tbColum, value) => {
         let dbcn = null;
         try {
@@ -63,6 +66,7 @@ module.exports = {
             dbcn.done();
         }
     },
+
     insert:async (tbName,entity,idreturn)=>{
         const query=pgp.helpers.insert(entity,null,tbName);
         console.log(query);

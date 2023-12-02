@@ -61,7 +61,7 @@ CREATE TABLE Course_Teacher(
 	PRIMARY KEY (Course_id, User_id) 
 );
 
--- Tạo bange Exercise
+-- Tạo bảng Exercise
 CREATE TABLE Exercise (
     Exercise_id SERIAL PRIMARY KEY,
 	Topic_id INTEGER NOT NULL,

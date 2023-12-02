@@ -16,7 +16,8 @@ class StudentController {
         res.render('student/course');
     }
     async home(req,res) {
-
+        // console.log(req.url);
+        
         // test query database
         // await Account.getAll();
         // await Exercise.getCondition('Exercise_id','2');
