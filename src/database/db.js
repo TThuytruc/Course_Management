@@ -63,13 +63,13 @@ module.exports = {
         //     dbcn.done();
         // }
     },
-    insert:async (tbName,entity)=>{
+    insert:async (tbName,entity,idreturn)=>{
         const query=pgp.helpers.insert(entity,null,tbName);
         console.log(query);
 
         // const data= await db.one(query);
-        // await db.one(query);
+        // const data=await db.one(query + ` RETURNING "${idreturn}"`);
 
-        // return data;
+        return data;
     }
 };

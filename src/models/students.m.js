@@ -26,7 +26,8 @@ module.exports = class Student {
     }
     static async insert(student) {
         try {
-            await db.insert(tbName, student);
+            const data=await db.insert(tbName, student,'User_id');
+            return data;
         }
         catch (error) {
             throw error;
