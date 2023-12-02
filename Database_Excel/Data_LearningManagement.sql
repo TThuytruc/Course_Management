@@ -126,7 +126,7 @@ VALUES
 -- Bảng Course_Student
 INSERT INTO Course_Student (Course_id, User_id, FinalScore)
 VALUES
-(1, 5, NULL);,
+(1, 5, NULL),
 (1, 4, NULL),
 (1, 6, NULL),
 (1, 7, NULL),
@@ -165,12 +165,3 @@ VALUES
 
 
 
-
-
-
-
-
-VALUES
-(1, 'Algebra Quiz 1', '2023-11-01 09:00:00', '2023-11-01 10:00:00', 'Quiz on algebraic equations'),
-(1, 'Algebra Quiz 2', '2023-11-08 09:00:00', '2023-11-08 10:00:00', 'Quiz on algebraic expressions'),
-(2, 'Geometry Quiz 1', '2023-11-02 09:00:00', '2023-11-02 10:00:00', 'Quiz on geometric shapes');
