@@ -19,8 +19,8 @@ class StudentController {
 
         // test query database
         // await Account.getAll();
-        // await Account.getCondition('abc','123');
-        // const dataInsert=new Account({email:'quantranhuynh@gmail.com',password:'123'})
+        // await Exercise.getCondition('Exercise_id','2');
+        // const dataInsert=new Account({email:'info@gmail.com',password:'123'})
         // await Account.insert(dataInsert);
 
         console.log("test");

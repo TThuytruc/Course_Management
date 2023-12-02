@@ -1,13 +1,13 @@
 const db = require('../database/db');
-const tbName = 'Exercise';
+const tbName = 'exercise';
 module.exports = class Exercise {
 
     constructor({ topic_id, Exercise_name, OpenTime, DueTime, Description }) {
-        this.Topic_id = topic_id;
-        this.Exercise_name = Exercise_name;
-        this.OpenTime = OpenTime;
-        this.DueTime = DueTime;
-        this.Description = Description;
+        this.topic_id = topic_id;
+        this.exercise_name = Exercise_name;
+        this.opentime = OpenTime;
+        this.duetime = DueTime;
+        this.description = Description;
     }
     static async getAll() {
         try {

@@ -1,13 +1,13 @@
 const db = require('../database/db');
-const tbName = 'Course';
+const tbName = 'course';
 module.exports = class Course {
 
-    constructor({ course_name, numberOfStudent,numberOfTeacher,Row,MaxNumberOfStudent }) {
-        this.Course_name=course_name;
-        this.NumberOfStudent=numberOfStudent;
-        this.NumberOfTeacher=numberOfTeacher;
-        this.Row=Row;
-        this.MaxNumberOfStudent=MaxNumberOfStudent;
+    constructor({ course_name, numberOfStudent,numberOfTeacher,schedule,MaxNumberOfStudent }) {
+        this.course_name=course_name;
+        this.numberofstudent=numberOfStudent;
+        this.numberofteacher=numberOfTeacher;
+        this.schedule=schedule;
+        this.maxnumberofstudent=MaxNumberOfStudent;
     }
     static async getAll() {
         try {
@@ -30,7 +30,7 @@ module.exports = class Course {
     }
     static async insert(course) {
         try {
-            const data=await db.insert(tbName, course,'Course_name');
+            const data=await db.insert(tbName, course,'course_name');
             return data;
         }
         catch (error) {

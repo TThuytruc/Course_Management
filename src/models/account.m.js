@@ -1,10 +1,10 @@
 const db = require('../database/db');
-const tbName = 'Account';
+const tbName = 'account';
 module.exports = class Account {
 
     constructor({ email, password }) {
-        this.Email = email;
-        this.Password = password;
+        this.account_email = email;
+        this.account_password = password;
     }
     static async getAll() {
         try {
@@ -27,7 +27,7 @@ module.exports = class Account {
     }
     static async insert(account) {
         try {
-            const data=await db.insert(tbName, account,'Email');
+            const data=await db.insert(tbName, account,'account_email');
             return data;
         }
         catch (error) {

@@ -1,9 +1,9 @@
 const db = require('../database/db');
-const tbName = 'Student';
+const tbName = 'student';
 module.exports = class Student {
 
     constructor({ User_id }) {
-        this.User_id=User_id;
+        this.user_id=User_id;
     }
     static async getAll() {
         try {
@@ -26,7 +26,7 @@ module.exports = class Student {
     }
     static async insert(student) {
         try {
-            const data=await db.insert(tbName, student,'User_id');
+            const data=await db.insert(tbName, student,'user_id');
             return data;
         }
         catch (error) {

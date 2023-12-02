@@ -1,12 +1,13 @@
 const db = require('../database/db');
-const tbName = 'Submission';
+const tbName = 'submission';
 module.exports = class Submission {
 
-    constructor({ user_id,exercise_id,SubmissionTime,Score }) {
-        this.User_id=user_id;
-        this.Exercise_id=exercise_id;
-        this.SubmissionTime=SubmissionTime;
-        this.Score=Score;
+    constructor({ user_id,exercise_id,SubmissionTime,submissionfile,Score }) {
+        this.user_id=user_id;
+        this.exercise_id=exercise_id;
+        this.submissiontime=SubmissionTime;
+        this.submissionfile=submissionfile;
+        this.score=Score;
     }
     static async getAll() {
         try {
@@ -29,7 +30,7 @@ module.exports = class Submission {
     }
     static async insert(submission) {
         try {
-            const data=await db.insert(tbName, submission,'User_id');
+            const data=await db.insert(tbName, submission,'user_id');
             return data;
         }
         catch (error) {

@@ -1,12 +1,11 @@
 const db = require('../database/db');
-const tbName = 'Topic';
+const tbName = 'topic';
 module.exports = class Topic {
 
-    constructor({course_id,user_id,topic_name,Description }) {
-        this.Course_id=course_id;
-        this.User_id=user_id;
-        this.Topic_name=topic_name;
-        this.Description=Description;
+    constructor({course_id,topic_name,Description }) {
+        this.course_id=course_id;
+        this.topic_name=topic_name;
+        this.description=Description;
     }   
     static async getAll() {
         try {
@@ -29,7 +28,7 @@ module.exports = class Topic {
     }
     static async insert(topic) {
         try {
-            const data=await db.insert(tbName, topic,'Course_id');
+            const data=await db.insert(tbName, topic,'course_id');
             return data;
         }
         catch (error) {
