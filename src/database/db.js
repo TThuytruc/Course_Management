@@ -47,7 +47,7 @@ module.exports = {
     getCondition: async (tbName, tbColum, value) => {
         let dbcn = null;
         try {
-            const query=`SELECT * FROM "${tbName}" WHERE ${tbColum}='${value}'`;
+            const query=`SELECT * FROM "${tbName}" WHERE "${tbColum}"='${value}'`;
             console.log(query);
             // dbcn = await db.connect();
 
