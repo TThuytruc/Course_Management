@@ -129,3 +129,18 @@ FOREIGN KEY (Exercise_id) REFERENCES Exercise(Exercise_id);
 ALTER TABLE Submission
 ADD CONSTRAINT fk_SE2
 FOREIGN KEY (User_id) REFERENCES Student(User_id);
+
+-- Function: lấy user từ account_id
+CREATE OR REPLACE FUNCTION get_user_with_account_id(account_id_param integer)
+RETURNS user_ AS $$
+DECLARE
+    user_record user_;
+BEGIN 
+    SELECT *
+    INTO user_record
+    FROM user_
+    WHERE account_id = account_id_param;
+    
+    RETURN user_record;
+END;
+$$ LANGUAGE plpgsql;

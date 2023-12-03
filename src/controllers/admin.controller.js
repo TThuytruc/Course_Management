@@ -3,6 +3,7 @@ class AdminController {
         res.render('admin/course');
     }
     home(req,res, next) {
+        console.log('req.query', req.query);
         res.render('admin/home');
     }
 }
