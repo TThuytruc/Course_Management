@@ -111,10 +111,10 @@ VALUES
 
 
 -- Bảng Course
-INSERT INTO Course (Course_name, NumberOfStudent, NumberOfTeacher, MaxNumberOfStudent, Schedule)
+INSERT INTO Course (Course_name, MaxNumberOfStudent, Schedule)
 VALUES
-('Introduction to SE', 30, 1, 40, 'T2'),
-('Operation system', 25, 1, 30, 'T3');
+('Introduction to SE', 40, 'T2'),
+('Operation system', 30, 'T3');
 
 -- Bảng Topic
 INSERT INTO Topic (Course_id, Topic_name, Description)
@@ -161,7 +161,4 @@ VALUES
 (1, 'Quiz 1', '2023-11-01 09:00:00', '2023-11-01 10:00:00', 'Quiz on architecture'),
 (1, 'Quiz 2', '2023-11-08 09:00:00', '2023-11-08 10:00:00', 'Quiz on use case'),
 (2, 'Quiz 1', '2023-11-02 09:00:00', '2023-11-02 10:00:00', 'Quiz on byte');
-
-
-
 

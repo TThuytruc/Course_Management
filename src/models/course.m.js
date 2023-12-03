@@ -2,10 +2,8 @@ const db = require('../database/db');
 const tbName = 'course';
 module.exports = class Course {
 
-    constructor({ course_name, numberOfStudent,numberOfTeacher,schedule,MaxNumberOfStudent }) {
+    constructor({ course_name, schedule, MaxNumberOfStudent }) {
         this.course_name=course_name;
-        this.numberofstudent=numberOfStudent;
-        this.numberofteacher=numberOfTeacher;
         this.schedule=schedule;
         this.maxnumberofstudent=MaxNumberOfStudent;
     }

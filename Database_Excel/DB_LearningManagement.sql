@@ -32,8 +32,6 @@ CREATE TABLE Student (
 CREATE TABLE Course (
     Course_id SERIAL PRIMARY KEY,
     Course_name VARCHAR(100) NOT NULL,
-	NumberOfStudent INTEGER NOT NULL,
-	NumberOfTeacher INTEGER NOT NULL,
 	MaxNumberOfStudent INTEGER NOT NULL,
 	Schedule VARCHAR(20)
 );
