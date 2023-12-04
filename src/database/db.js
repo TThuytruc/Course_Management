@@ -36,7 +36,7 @@ module.exports = {
             dbcn = await db.connect();
             const data = await dbcn.any(query);
 
-            console.log(data);
+            // console.log(data);
             return data;
         }
         catch (error) {
@@ -56,7 +56,7 @@ module.exports = {
 
             const data = await dbcn.any(query);
 
-            console.log(data);
+            // console.log(data);
             return data;
         }
         catch (error) {
@@ -74,5 +74,24 @@ module.exports = {
         const data=await db.one(query + ` RETURNING ${idreturn}`);
 
         return data;
+    },
+    getAllInforUser:async()=>{
+        let dbcn = null;
+        try {
+            const query=`select user_.user_id,account.account_email,user_.user_name  from account  join user_  on account.account_id=user_.account_id`;
+            console.log(query);
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+
+            // console.log(data);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            dbcn.done();
+        }
     }
 };

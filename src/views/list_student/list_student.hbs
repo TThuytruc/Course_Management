@@ -67,45 +67,54 @@
                                 <th>MSSV</th>
                                 <th>Student name</th>
                                 <th>Email</th>
+                                <th>Final Score</th>
                             </tr>
                         </thead>
                         <tbody id="list_student">
-                            <!--
-                             -->
+                                {{#each array}}
+                                <tr>
+                                    <td>{{this.user_id}}</td>
+                                    <td>{{this.user_name}}</td>
+                                    <td>{{this.account_email}}</td>
+                                    <td>{{this.finalscore}}</td>
+                                </tr>
+                                {{/each}}
                         </tbody>
                     </table>
                 </div>
             </div>
 
             <!-- Side -->
-           
+
             <div class="side">
                 <div class="box list_people">
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class ID</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="id-class">NMCNPM_21-2</a> </strong></h5>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class name</a>
                     </div>
-    
+
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="course_name">Nhập môn Công nghệ phần mềm</a></strong></h5>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Teachers</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="number-lecturers">3</a> </strong></h5>
-                    </div>    
+                    </div>
                     <div class="list_teacher color_box">
                         <strong class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</strong>
                         <ul class="list">
                             <li class="member">
                                 <div class="teacher">
-                                    <img style="margin-left:2%" src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
+                                    <img style="margin-left:2%"
+                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
+                                        alt="Teacher">
                                     <div class="name_teacher">
                                         <p class="name">Hồ Tuấn Thanh</p>
                                     </div>
@@ -113,7 +122,9 @@
                             </li>
                             <li class="member">
                                 <div class="teacher">
-                                    <img style="margin-left:2%" src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
+                                    <img style="margin-left:2%"
+                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
+                                        alt="Teacher">
                                     <div class="name_teacher">
                                         <p class="name">Mai Anh Tuấn</p>
                                     </div>
@@ -121,7 +132,9 @@
                             </li>
                             <li class="member">
                                 <div class="teacher">
-                                    <img style="margin-left:2%" src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
+                                    <img style="margin-left:2%"
+                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
+                                        alt="Teacher">
                                     <div class="name_teacher">
                                         <p class="name">Nguyen Thi Minh Tuyen</p>
                                     </div>
@@ -129,7 +142,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
