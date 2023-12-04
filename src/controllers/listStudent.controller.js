@@ -1,18 +1,10 @@
 const Course_student=require('../models/course_student.m');
-const Student=require('../models/students.m');
+const Course_teacher=require('../models/course_teacher.m')
+const Course=require('../models/course.m');
 const db= require('../database/db')
 class ListStundentController {
-    constructor()
-    {
-        this.listStudent="abc";
-    }
-    index(req,res, next) {
-        const listStudent=ListStundentController.listStudent;
-        res.render('list_student/list_student',listStudent);
-    };
-    
-    async loadListStudent(req,res){
-        const id_course=req.body.id_course;
+    async index(req,res, next) {
+        const id_course=req.query.id_course;
         const dataUserAccount= await db.getAllInforUser();
         const listIDStudent= await Course_student.getCondition('course_id',id_course);
         const dataReturn= dataUserAccount.filter(objA => listIDStudent.some(objB => objB.user_id === objA.user_id));
@@ -24,9 +16,25 @@ class ListStundentController {
         }
         // console.log(dataReturn);
         count=0;    
-        ListStundentController.listStudent={array:dataReturn};
-        res.send({data:'0k'});
-    }
+        let dataCourse= await Course.getCondition('course_id',id_course);
+        dataCourse=dataCourse[0];
+        const listIDTeacher= await Course_teacher.getCondition('course_id',id_course);
+        const inforTeacher= dataUserAccount.filter(objA => listIDTeacher.some(objB => objB.user_id === objA.user_id));
+        const listTeacher=[];
+        for(const teacher of inforTeacher)
+        {
+            const obj={user_name:teacher.user_name};
+            listTeacher.push(obj);
+        }
+        const listStudent={ array:dataReturn,
+                            course_id:dataCourse.course_id,
+                            course_name:dataCourse.course_name,
+                            numberofteacher:dataCourse.numberofteacher,
+                            numberofstudent:dataCourse.numberofstudent,
+                            schedule:dataCourse.schedule,
+                            teachers:listTeacher};
+        res.render('list_student/list_student',listStudent);
+    };
 }
 
 module.exports = new ListStundentController();

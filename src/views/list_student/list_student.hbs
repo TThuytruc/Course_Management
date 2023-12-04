@@ -33,14 +33,13 @@
         <!-- Course -->
         <div class="box title_course">
             <div class="name_course">
-                Nhập môn công nghệ phần mềm - 21_3
-            </div>
+                {{course_name}} </div>
 
             <div class="link_current_page">
                 <a class="link_page" href="#">Home</a>
                 <p class="slash"> / </p>
 
-                <a href="#" class="link_page">Nhập môn công nghệ phần mềm - 21_3</a>
+                <a href="#" class="link_page">{{course_name}}</a>
                 <p class="slash"> / </p>
 
                 <a href="#" class="link_page">Project</a>
@@ -71,14 +70,14 @@
                             </tr>
                         </thead>
                         <tbody id="list_student">
-                                {{#each array}}
-                                <tr>
-                                    <td>{{this.user_id}}</td>
-                                    <td>{{this.user_name}}</td>
-                                    <td>{{this.account_email}}</td>
-                                    <td>{{this.finalscore}}</td>
-                                </tr>
-                                {{/each}}
+                            {{#each array}}
+                            <tr>
+                                <td>{{this.user_id}}</td>
+                                <td>{{this.user_name}}</td>
+                                <td>{{this.account_email}}</td>
+                                <td>{{this.finalscore}}</td>
+                            </tr>
+                            {{/each}}
                         </tbody>
                     </table>
                 </div>
@@ -92,61 +91,49 @@
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class ID</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="id-class">NMCNPM_21-2</a> </strong></h5>
+                        <h5><strong><a class="id-class">{{course_id}}</a> </strong></h5>
                     </div>
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class name</a>
                     </div>
 
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="course_name">Nhập môn Công nghệ phần mềm</a></strong></h5>
+                        <h5><strong><a class="course_name">{{course_name}}</a></strong></h5>
+                    </div>
+                    <div class="home_side_header_box">
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Schedule</a>
+                    </div>
+                    <div class="home_side_inf_box home_side_content_box">
+                        <h5><strong><a class="schedule">{{schedule}}</a> </strong></h5>
                     </div>
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Teachers</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">3</a> </strong></h5>
+                        <h5><strong><a class="number-lecturers">{{numberofteacher}}</a> </strong></h5>
                     </div>
                     <div class="list_teacher color_box">
                         <strong class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</strong>
                         <ul class="list">
+                            {{#each teachers}}
                             <li class="member">
                                 <div class="teacher">
                                     <img style="margin-left:2%"
                                         src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
                                         alt="Teacher">
                                     <div class="name_teacher">
-                                        <p class="name">Hồ Tuấn Thanh</p>
+                                        <p class="name">{{this.user_name}}</p>
                                     </div>
                                 </div>
                             </li>
-                            <li class="member">
-                                <div class="teacher">
-                                    <img style="margin-left:2%"
-                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
-                                        alt="Teacher">
-                                    <div class="name_teacher">
-                                        <p class="name">Mai Anh Tuấn</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="member">
-                                <div class="teacher">
-                                    <img style="margin-left:2%"
-                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
-                                        alt="Teacher">
-                                    <div class="name_teacher">
-                                        <p class="name">Nguyen Thi Minh Tuyen</p>
-                                    </div>
-                                </div>
-                            </li>
+                            {{/each}}
                         </ul>
                     </div>
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">30</a> </strong></h5>
+                        <h5><strong><a class="number-lecturers">{{numberofstudent}}</a> </strong></h5>
                     </div>
                 </div>
             </div>

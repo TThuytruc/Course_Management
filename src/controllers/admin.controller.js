@@ -1,9 +1,27 @@
+const Course = require('../models/course.m');
+const Course_Student = require('../models/course_student.m');
+const Course_Teacher = require('../models/course_teacher.m');
+const db = require('../database/db')
 class AdminController {
-    course(req,res, next) {
-        res.render('admin/course');
+    async course(req, res, next) {
+        const id_course = req.query.id_course;
+        const listTeacher = await Course_Teacher.getCondition('course_id', id_course);
+        const listStudent = await Course_Student.getCondition('course_id', id_course);
+        const dataUserAccount= await db.getAllInforUser();
+        let course= await Course.getCondition('course_id',id_course);
+        course=course[0];
+
+
+
+        const listInforTeacher = dataUserAccount.filter(objA => listTeacher.some(objB => objB.user_id === objA.user_id));
+        const listInforStudent=dataUserAccount.filter(objA => listStudent.some(objB => objB.user_id === objA.user_id));
+        const dataRender={teachers:listInforTeacher,students:listInforStudent,namecourse:course.course_name};
+        res.render('admin/course',dataRender);
     }
-    home(req,res, next) {
-        res.render('admin/home');
+    async home(req, res, next) {
+        const data = await Course.getAll();
+        const result = { arrayCourse: data };
+        res.render('admin/home', result);
     }
 }
 
