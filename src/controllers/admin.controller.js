@@ -20,6 +20,16 @@ class AdminController {
     }
     async home(req, res, next) {
         const data = await Course.getAll();
+        for(const item of data)
+        {
+            let student= await db.countItem('course_student','course_id',item.course_id);
+            console.log(student);
+            student=student[0].count;
+            let teacher= await db.countItem('course_teacher','course_id',item.course_id);
+            teacher=teacher[0].count;
+            item['numberofstudent']=student;
+            item['numberofteacher']=teacher;
+        }
         const result = { arrayCourse: data };
         res.render('admin/home', result);
     }

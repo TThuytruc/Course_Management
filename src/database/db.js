@@ -93,5 +93,24 @@ module.exports = {
         finally {
             dbcn.done();
         }
+    },
+    countItem: async(tbName, tbColum,tbValue)=>{
+        let dbcn = null;
+        try {
+            const query=`select count(*) from ${tbName} where ${tbColum}='${tbValue}' `;
+            console.log(query);
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+
+            // console.log(data);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            dbcn.done();
+        }
     }
 };
