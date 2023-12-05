@@ -1,8 +1,8 @@
-class ListStundentController {
-    index(req,res, next) {
+class ListStudentController {
+    index(req,res) {
         res.render('list_student/list_student');
     }
 
 }
 
-module.exports = new ListStundentController;
+module.exports = new ListStudentController;

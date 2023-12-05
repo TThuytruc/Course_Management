@@ -1,9 +1,9 @@
 class AdminController {
-    course(req,res, next) {
+    course(req,res) {
         res.render('admin/course');
     }
-    home(req,res, next) {
-        console.log('req.query', req.query);
+    home(req,res) {
+        // console.log('req.query', req.query);
         res.render('admin/home');
     }
 }
