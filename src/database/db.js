@@ -56,7 +56,7 @@ module.exports = {
 
             const data = await dbcn.any(query);
 
-            console.log(data);
+            // console.log(data);
             return data;
         }
         catch (error) {
@@ -75,8 +75,26 @@ module.exports = {
 
         return data;
     },
+    getAllInforUser:async()=>{
+        let dbcn = null;
+        try {
+            const query=`select user_.user_id,account.account_email,user_.user_name  from account  join user_  on account.account_id=user_.account_id`;
+            console.log(query);
+            dbcn = await db.connect();
 
-    getUserWithAccountId: async (accountId) => {
+            const data = await dbcn.any(query);
+
+            // console.log(data);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            dbcn.done();
+        }
+    },
+       getUserWithAccountId: async (accountId) => {
         let dbcn = null;
         try {
             const query = `SELECT get_user_with_account_id($1)`;
@@ -97,6 +115,25 @@ module.exports = {
             };
             console.log(userObject);
             return userObject;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            dbcn.done();
+        }
+    },
+    countItem: async(tbName, tbColum,tbValue)=>{
+        let dbcn = null;
+        try {
+            const query=`select count(*) from ${tbName} where ${tbColum}='${tbValue}' `;
+            console.log(query);
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+
+            // console.log(data);
+            return data;
         }
         catch (error) {
             throw error;
