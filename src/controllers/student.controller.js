@@ -17,15 +17,7 @@ class StudentController {
     }
     async home(req,res) {
         // console.log(req.url);
-        
-        // test query database
-        // await Account.getAll();
-        // await Exercise.getCondition('Exercise_id','2');
-        // const dataInsert=new Account({email:'info@gmail.com',password:'123'})
-        // await Account.insert(dataInsert);
-
-        console.log("test");
-
+        console.log('req.query', req.query);
         res.render('student/home');
     }
     submission(req,res) {

@@ -19,7 +19,7 @@ const cn = {
     // Cách 2 (có thể thay đổi các thuộc tính trong file .env)
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    database: process.env.DB_NAME, 
+    database: process.env.DB_NAME,
     user: process.env.DB_USER,
     password: process.env.DB_PW
 };
@@ -31,7 +31,7 @@ module.exports = {
     getAll: async (tbName) => {
         let dbcn = null;
         try {
-            const query= `SELECT * FROM ${tbName}`;
+            const query = `SELECT * FROM ${tbName}`;
             // console.log(query);
             dbcn = await db.connect();
             const data = await dbcn.any(query);
@@ -50,7 +50,7 @@ module.exports = {
     getCondition: async (tbName, tbColum, value) => {
         let dbcn = null;
         try {
-            const query=`SELECT * FROM ${tbName} WHERE ${tbColum}='${value}'`;
+            const query = `SELECT * FROM ${tbName} WHERE ${tbColum}='${value}'`;
             console.log(query);
             dbcn = await db.connect();
 
@@ -67,11 +67,11 @@ module.exports = {
         }
     },
 
-    insert:async (tbName,entity,idreturn)=>{
-        const query=pgp.helpers.insert(entity,null,tbName);
+    insert: async (tbName, entity, idreturn) => {
+        const query = pgp.helpers.insert(entity, null, tbName);
         console.log(query);
 
-        const data=await db.one(query + ` RETURNING ${idreturn}`);
+        const data = await db.one(query + ` RETURNING ${idreturn}`);
 
         return data;
     },
@@ -86,6 +86,35 @@ module.exports = {
 
             // console.log(data);
             return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            dbcn.done();
+        }
+    },
+       getUserWithAccountId: async (accountId) => {
+        let dbcn = null;
+        try {
+            const query = `SELECT get_user_with_account_id($1)`;
+            // console.log(query);
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query, [accountId]);
+            console.log(data[0].get_user_with_account_id);
+            const resultString = data[0].get_user_with_account_id;
+            const matches = resultString.match(/\(([^)]+)\)/);
+            const values = matches[1].split(',');
+
+            const userObject = {
+                user_id: parseInt(values[0]),
+                account_id: parseInt(values[1]),
+                user_name: values[2].replace(/"/g, ''), // Remove double quotes from the name
+                user_role: values[3].replace(/"/g, ''), // Remove double quotes from the role
+            };
+            console.log(userObject);
+            return userObject;
         }
         catch (error) {
             throw error;
