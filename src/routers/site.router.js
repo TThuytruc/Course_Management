@@ -4,7 +4,7 @@ const siteController = require('../controllers/site.controller');
 const { requireAuth} = require('../middleware/auth.middleware');
 const jwt = require('jsonwebtoken');
 const db = require('../database/db')
-router.use(requireAuth);
+// router.use(requireAuth);
 
 
 router.get('/logout', siteController.logout_get)
