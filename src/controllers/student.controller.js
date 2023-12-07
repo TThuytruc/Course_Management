@@ -17,7 +17,7 @@ class StudentController {
     }
     async home(req,res) {
         // console.log(req.url);
-        console.log('req.query', req.query);
+        // console.log('req.query', req.query);
         res.render('student/home');
     }
     submission(req,res) {
