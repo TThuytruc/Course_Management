@@ -75,6 +75,7 @@ module.exports = {
 
         return data;
     },
+
     getAllInforUser:async()=>{
         let dbcn = null;
         try {
@@ -94,7 +95,8 @@ module.exports = {
             dbcn.done();
         }
     },
-       getUserWithAccountId: async (accountId) => {
+
+    getUserWithAccountId: async (accountId) => {
         let dbcn = null;
         try {
             const query = `SELECT get_user_with_account_id($1)`;
@@ -123,6 +125,7 @@ module.exports = {
             dbcn.done();
         }
     },
+
     countItem: async(tbName, tbColum,tbValue)=>{
         let dbcn = null;
         try {
@@ -133,6 +136,45 @@ module.exports = {
             const data = await dbcn.any(query);
 
             // console.log(data);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            dbcn.done();
+        }
+    },
+
+    getByJoin: async(tbName1, tbName2, tbColumn, value)=>{
+        let dbcn = null;
+        try {
+            const query=`select * from ${tbName1} natural join ${tbName2} where ${tbName1}.${tbColumn} = ${value}`;
+
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            dbcn.done();
+        }
+    },
+
+    getUpcommingEvents: async(courseId)=>{
+        let dbcn = null;
+
+        try {
+            const query=`select * from exercise join topic 
+            on exercise.topic_id = topic.topic_id
+            where duetime > NOW() and topic.course_id = ${courseId}`;
+          
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
             return data;
         }
         catch (error) {

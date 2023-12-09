@@ -572,22 +572,41 @@ a[download]:hover
 {
     color:rgb(146, 180, 82);
     font-weight: bold;
-    font-size: 18px;
+    font-size: 23px;
 }
 
 .home_classname:hover
 {
     color:#689f59;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
-.teacher_name
+.home_courseid
 {
     color:#e91e63;
 }
 
-.teacher_name:hover
+.home_courseid:hover
 {
     color:#41434a;
+}
+
+#home_side_grid
+{
+    display:grid;
+    grid-template-columns: 1fr 2.5fr;
+    gap: 5px;;
+}
+
+#home_side_userid
+{
+    color: #e91e63;
+}
+
+#home_side_userid:hover
+{
+    color: #41434a;
 }
 
 .list_teacher
@@ -612,18 +631,31 @@ a[download]:hover
     padding: 10px;
     background-color:rgb(238, 238, 238);
 }
-.side_deadline_date{
-    color: #e91e63;
+
+.grid-container
+{
+    width:450px;
+    display:grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 7px;;
 }
-.side_deadline_date:hover{
-    color: #41434a;
+
+.box_upcoming_events
+{
+    margin-bottom: 5px;
+    padding: 10px;
+    box-shadow: 1.5px 1.5px 1px rgb(135, 135, 135);
+    background-color: white;
 }
+
 .side_deadline{
     color: #e91e63;
 }
 .side_deadline:hover{
     color: #41434a;
-    }
+    cursor: pointer;
+    text-decoration: underline;
+}
 .student_email{
     color: #e91e63;
     font-size: 0.9em;

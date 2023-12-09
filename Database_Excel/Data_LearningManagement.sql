@@ -30,8 +30,11 @@ VALUES
 ('htaquan@gmail.com', '123'),
 ('ndhan@gmail.com', '123'),
 ('ntkiet@gmail.com', '123'),
-('tpminh@gmail.com', '123');
-
+('tpminh@gmail.com', '123'),
+('ntnphuong@gmail.com', '123'),
+('dclam@gmail.com', '123'),
+('dmhai@gmail.com', '123'),
+('tnqhuong@gmail.com', '123');
 
 -- Bảng User_
 INSERT INTO User_ (Account_id, User_name, User_Role)
@@ -65,7 +68,11 @@ VALUES
 (27, 'Huynh Tran Anh Quan', 'student'),
 (28, 'Nguyen Dieu Han', 'student'),
 (29, 'Nguyen Tuan Kiet', 'student'),
-(30, 'Tran Phuc Minh', 'student');
+(30, 'Tran Phuc Minh', 'student'),
+(31, 'Nguyen Thi Ngoc Phuong', 'teacher'),
+(32, 'Do Cao Lam', 'teacher'),
+(33, 'Doan Manh Hai', 'teacher'),
+(34, 'Tran Ngoc Que Huong', 'teacher');
 
 -- Bảng Admin_
 INSERT INTO Admin_ (User_id)
@@ -76,7 +83,11 @@ VALUES
 INSERT INTO Teacher (User_id)
 VALUES
 (2),
-(3);
+(3),
+(31),
+(32),
+(33),
+(34);
 
 -- Bảng Student
 INSERT INTO Student (User_id)
@@ -113,15 +124,15 @@ VALUES
 -- Bảng Course
 INSERT INTO Course (Course_name, MaxNumberOfStudent, Schedule)
 VALUES
-('Introduction to SE', 40, 'T2'),
-('Operation system', 30, 'T3');
+('Introduction to Software Engineering', 40, 'T2'),
+('Computer Networks', 30, 'T3');
 
 -- Bảng Topic
 INSERT INTO Topic (Course_id, Topic_name, Description)
 VALUES
-(1, 'Topic 1', 'Introduction to SE'),
-(1, 'Topic 2', 'Archiecture'),
-(2, 'Topic 1', 'Introduction');
+(1, 'Project Management', NULL),
+(1, 'Architectural Design', 'Use package diagram and class diagram to design the architectural in all assignments.'),
+(2, 'Projects', NULL);
 
 -- Bảng Course_Student
 INSERT INTO Course_Student (Course_id, User_id, FinalScore)
@@ -136,6 +147,7 @@ VALUES
 (1, 11, NULL),
 (1, 12, NULL),
 (1, 23, NULL),
+(1, 24, NULL),
 (2, 6, NULL),
 (2, 9, NULL),
 (2, 10, NULL),
@@ -153,12 +165,18 @@ VALUES
 INSERT INTO Course_Teacher (Course_id, User_id)
 VALUES
 (1, 2),
-(2, 3);
+(1, 32),
+(1, 34),
+(1, 3),
+(2, 3),
+(2, 31),
+(2, 32),
+(2, 33);
 
 -- Bảng Exercise
 INSERT INTO Exercise (Topic_id, Exercise_name, OpenTime, DueTime, Description)
 VALUES
-(1, 'Quiz 1', '2023-11-01 09:00:00', '2023-11-01 10:00:00', 'Quiz on architecture'),
-(1, 'Quiz 2', '2023-11-08 09:00:00', '2023-11-08 10:00:00', 'Quiz on use case'),
-(2, 'Quiz 1', '2023-11-02 09:00:00', '2023-11-02 10:00:00', 'Quiz on byte');
-
+(1, 'Exercise 01: Risk analysis', '2023-11-01 06:00:00', '2023-11-01 23:00:00', 'All files must be compressed into zip. File name: <StudentID>.zip'),
+(1, 'Exercise 02: Estimate', '2023-11-08 09:00:00', '2023-12-25 23:59:00', NULL),
+(2, 'Use case', '2023-11-02 14:15:00', '2024-01-03 10:00:00', 'Create use-case specification for the exercise in slide 42.'),
+(3, 'Project 01 - Socket', '2023-11-02 07:00:00', '2024-01-05 22:30:00', 'If files are too large, upload to Google Drive and submit the .txt file containing the link');
