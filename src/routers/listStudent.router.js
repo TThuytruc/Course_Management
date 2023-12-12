@@ -5,6 +5,6 @@ const { requireAuth} = require('../middleware/auth.middleware');
 
 // router.use(requireAuth);
 
-router.get('/', listStudentController.index);
+router.get('/list_student', listStudentController.index);
 
 module.exports = router;

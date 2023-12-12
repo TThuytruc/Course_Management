@@ -43,7 +43,10 @@ module.exports = {
             throw error;
         }
         finally {
-            dbcn.done();
+            if(dbcn!=null)
+            {
+                dbcn.done();
+            }
         }
     },
 
@@ -63,7 +66,10 @@ module.exports = {
             throw error;
         }
         finally {
-            dbcn.done();
+            if(dbcn!=null)
+            {
+                dbcn.done();
+            }
         }
     },
 
@@ -92,7 +98,10 @@ module.exports = {
             throw error;
         }
         finally {
-            dbcn.done();
+            if(dbcn!=null)
+            {
+                dbcn.done();
+            }
         }
     },
 
@@ -122,7 +131,10 @@ module.exports = {
             throw error;
         }
         finally {
-            dbcn.done();
+            if(dbcn!=null)
+            {
+                dbcn.done();
+            }
         }
     },
 
@@ -142,7 +154,10 @@ module.exports = {
             throw error;
         }
         finally {
-            dbcn.done();
+            if(dbcn!=null)
+            {
+                dbcn.done();
+            }
         }
     },
 
@@ -160,7 +175,10 @@ module.exports = {
             throw error;
         }
         finally {
-            dbcn.done();
+            if(dbcn!=null)
+            {
+                dbcn.done();
+            }
         }
     },
 
@@ -181,7 +199,10 @@ module.exports = {
             throw error;
         }
         finally {
-            dbcn.done();
+            if(dbcn!=null)
+            {
+                dbcn.done();
+            }
         }
     }
 };
