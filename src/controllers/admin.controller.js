@@ -4,7 +4,7 @@ const Course_Teacher = require('../models/course_teacher.m');
 const db = require('../database/db')
 class AdminController {
     async course(req, res, next) {
-        const id_course = req.query.id_course;
+        const id_course = req.query.course_id;
         const listTeacher = await Course_Teacher.getCondition('course_id', id_course);
         const listStudent = await Course_Student.getCondition('course_id', id_course);
         const dataUserAccount= await db.getAllInforUser();

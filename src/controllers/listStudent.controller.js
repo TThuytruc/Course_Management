@@ -4,7 +4,7 @@ const Course = require('../models/course.m');
 const db = require('../database/db')
 class ListStundentController {
     async index(req, res, next) {
-        const id_course = req.query.id_course;
+        const id_course = req.query.course_id;
         const dataUserAccount = await db.getAllInforUser();
         const listIDStudent = await Course_student.getCondition('course_id', id_course);
         const dataReturn = dataUserAccount.filter(objA => listIDStudent.some(objB => objB.user_id === objA.user_id));
