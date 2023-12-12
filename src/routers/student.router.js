@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const studentController = require('../controllers/student.controller')
-// Define a controller to handle route "/news" in "app/controllers"
+const { requireAuth} = require('../middleware/auth.middleware');
+
+// router.use(requireAuth);
 
 router.get('/course', studentController.course);
 router.get('/home', studentController.home);

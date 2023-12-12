@@ -35,4 +35,14 @@ module.exports = class User {
             throw error;
         }
     }
+
+    static async getAccount(userId) {
+        try {
+            const data=await db.getByJoin('user_', 'account','user_id', userId);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 };
