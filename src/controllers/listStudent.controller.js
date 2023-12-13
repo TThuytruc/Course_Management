@@ -37,7 +37,8 @@ class ListStundentController {
             numberofteacher:teacher,
             numberofstudent:student,
             schedule: dataCourse.schedule,
-            teachers: listTeacher
+            teachers: listTeacher,
+            username:'Admin'
         };
         res.render('list_student/list_student', listStudent);
     };
