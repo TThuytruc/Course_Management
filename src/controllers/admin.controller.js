@@ -15,7 +15,7 @@ class AdminController {
 
         const listInforTeacher = dataUserAccount.filter(objA => listTeacher.some(objB => objB.user_id === objA.user_id));
         const listInforStudent=dataUserAccount.filter(objA => listStudent.some(objB => objB.user_id === objA.user_id));
-        const dataRender={teachers:listInforTeacher,students:listInforStudent,namecourse:course.course_name};
+        const dataRender={teachers:listInforTeacher,students:listInforStudent,namecourse:course.course_name,username:'Admin'};
         res.render('admin/course',dataRender);
     }
     async home(req, res, next) {
@@ -30,7 +30,7 @@ class AdminController {
             item['numberofstudent']=student;
             item['numberofteacher']=teacher;
         }
-        const result = { arrayCourse: data };
+        const result = { arrayCourse: data,username:'Admin' };
         res.render('admin/home', result);
     }
 }
