@@ -9,6 +9,7 @@ module.exports = class Exercise {
         this.duetime = DueTime;
         this.description = Description;
     }
+
     static async getAll() {
         try {
             const data = await db.getAll(tbName);
@@ -18,6 +19,7 @@ module.exports = class Exercise {
             throw error;
         }
     }
+
     static async getCondition(tbColum, value) {
         try {
             const data = await db.getCondition(tbName, tbColum, value);
@@ -28,9 +30,20 @@ module.exports = class Exercise {
         }
 
     }
+
     static async insert(exercise) {
         try {
             const data=await db.insert(tbName, exercise,'topic_id');
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+    }
+
+    static async getUpcommingEvents(courseId) {
+        try {
+            const data=await db.getUpcommingEvents(courseId);
             return data;
         }
         catch (error) {

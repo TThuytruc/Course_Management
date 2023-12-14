@@ -34,21 +34,11 @@
 
         <div class="box title_course">
             <div class="name_course">
-                Nhập môn công nghệ phần mềm - 21_3
+               {{namecourse}}
             </div>
             <div class="link_current_page">
 
-                <a class="link_page" href="#">Home</a>
-                <p class="slash"> / </p>
-
-
-                <a href="#" class="link_page">Học kỳ 1 (2023-2024)</a>
-                <p class="slash"> / </p>
-
-                <a href="#" class="link_page">Chính Quy</a>
-                <p class="slash"> / </p>
-
-                <a href="#" class="link_page">Nhập môn công nghệ phần mềm - 21_3</a>
+               <button style="border: 0;" ><a   class="btn bg-secondary text-white pd-2 text-center" href="./home">Home</a></button>
             </div>
 
             <h1 class="text-dark">List of teachers</h1>
@@ -58,35 +48,26 @@
                         <th class="text-center" scope="col">ID</th>
                         <th class="text-center" scope="col">Name</th>
                         <th class="text-center" scope="col">Email</th>
-                        <th class="text-center" scope="col">City/Town</th>
                         <th class="text-center" scope="col">Handle</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {{#each teachers}}
                     <tr>
-                        <th  scope="row">122323</th>
-                        <td>Le Viet Long</td>
-                        <td><a href="mailto:lvlong@fit.hcmus.edu.vn">lvlong@fit.hcmus.edu.vn</a></td>
-                        <td class="text-center">Ho Chi Minh</td>
-                        <td class="text-center"><button class="btn bg-secondary text-white pd-2 text-center">Delete</button></td>
+                        <th class="text-center" scope="row">{{this.user_id}}</th>
+                        <td class="text-center">{{this.user_name}}</td>
+                        <td class="text-center"><a href="mailto:{{this.account_email}}">{{this.account_email}}</a></td>
+                        <td class="text-center" class="text-center"><button
+                                class="btn bg-secondary text-white pd-2 text-center">Delete</button></td>
                     </tr>
-                    <tr>
-                        <th  scope="row">223322</th>
-                        <td>Hồ Tuấn Thanh</td>
-                        <td><a href="mailto:htthanh@fit.hcmus.edu.vn">htthanh@fit.hcmus.edu.vn</a></td>
-                        <td class="text-center">Ho Chi Minh</td>
-                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <th  scope="row">323232</th>
-                        <td>Nguyen Thi Minh Tuyen</td>
-                        <td><a href="mailto:ntmtuyen@fit.hcmus.edu.vn">ntmtuyen@fit.hcmus.edu.vn</a></td>
-                        <td class="text-center">Ho Chi Minh</td>
-                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
-                    </tr>
+                    {{/each}}
+
                 </tbody>
             </table>
-            <button class="btn btn-secondary text-center" title="Thêm giáo viên" style="width: 50px; height: 40px;">Add</button>
+            <span>
+                <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;">Add</button>
+                <button class="btn btn-secondary" style="width: 100px; height: 40px;" >Delete All</button>
+            </span>
 
             <h1 class="text-dark" style="margin-top: 25px">List of students</h1>
             <table class="table table-striped">
@@ -95,46 +76,25 @@
                         <th class="text-center" scope="col">ID</th>
                         <th class="text-center" scope="col">Name</th>
                         <th class="text-center" scope="col">Email</th>
-                        <th class="text-center" scope="col">City/Town</th>
                         <th class="text-center" scope="col">Handle</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {{#each students}}
                     <tr>
-                        <th  scope="row">21120581</th>
-                        <td>Lê Phan Thủy Trúc</td>
-                        <td><a href="mailto:21120581@student.hcmus.edu.vn">21120581@student.hcmus.edu.vn</a></td>
-                        <td class="text-center">Ho Chi Minh</td>
-                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
+                        <th class="text-center" scope="row">{{this.user_id}}</th>
+                        <td class="text-center">{{this.user_name}}</td>
+                        <td class="text-center"><a href="mailto:{{this.account_email}}">{{this.account_email}}</a></td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button>
+                        </td>
                     </tr>
-                    <tr>
-                        <th  scope="row">21120537</th>
-                        <td>Trần Huỳnh Anh Quân</td>
-                        <td><a href="mailto:21120537@student.hcmus.edu.vn">21120537@student.hcmus.edu.vn</a></td>
-                        <td class="text-center">Ho Chi Minh</td>
-                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <th  scope="row">20120531</th>
-                        <td>Lương Văn Nam</td>
-                        <td><a href="mailto:20120531@student.hcmus.edu.vn">20120531@student.hcmus.edu.vn</a></td>
-                        <td class="text-center">Ho Chi Minh</td>
-                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <th  scope="row">21120589</th>
-                        <td>Trương Anh Tuấn</td>
-                        <td><a href="mailto:21120589@student.hcmus.edu.vn">21120589@student.hcmus.edu.vn</a></td>
-                        <td class="text-center">Ho Chi Minh</td>
-                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button></td>
-                    </tr>
+                    {{/each}}
                 </tbody>
             </table>
-            <button class="btn btn-secondary" title="Thêm học sinh" style="width: 50px; height: 40px;">Add</button>
-
-
-
-
+            <span>
+                <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;">Add</button>
+                <button class="btn btn-secondary" style="width: 100px; height: 40px;" >Delete All</button>
+            </span>
         </div>
 
 
