@@ -3,7 +3,7 @@ const db = require('../database/db');
 const jwt = require('jsonwebtoken')
 
 
-const maxAge =  3*24*60*60*1000;
+const maxAge = 60*60*1000;
 const createToken = (user_id) => {
     return jwt.sign({user_id}, 'mySecretKey', {
         expiresIn: maxAge
