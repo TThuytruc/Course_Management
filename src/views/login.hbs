@@ -130,10 +130,9 @@
                         .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
                         .join('&');
                     console.log(queryString);
-
+                    localStorage.setItem('user_id', data.user_id);
                     // Redirect to the same route with the data as query parameters
-                    {{!-- location.assign(`/${data.user_role}/home?${queryString}`); --}}
-                    location.assign(`/${data.user_role}/home?user_id=${data.user_id}`);
+                    location.assign(`/`);
                 }
             }
             catch (err) {

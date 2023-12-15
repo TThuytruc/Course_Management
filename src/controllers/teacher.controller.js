@@ -5,7 +5,8 @@ const Course = require('../models/course.m');
 
 class TeacherController {
     async home(req,res) {
-        const userid = req.query.user_id;
+        const userid = req.session.user_id;
+        // const userid = req.query.user_id;
         const user = await User.getCondition('user_id', userid);
 
         const userAccount = await User.getAccount(userid);

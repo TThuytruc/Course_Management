@@ -10,6 +10,7 @@ module.exports = {
         }
         else if (token) {
             jwt.verify(token, 'mySecretKey', (err, decodedToken) => {
+                req.session.user_id = decodedToken.user_id;
                 if (err) {
                     console.log(err.message)
                     res.redirect('/login')

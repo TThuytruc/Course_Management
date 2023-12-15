@@ -3,7 +3,7 @@ const db = require('../database/db');
 const jwt = require('jsonwebtoken')
 
 
-const maxAge =  3*24*60*60*1000;
+const maxAge = 60*60*1000;
 const createToken = (user_id) => {
     return jwt.sign({user_id}, 'mySecretKey', {
         expiresIn: maxAge
@@ -27,6 +27,8 @@ class SiteController {
                 const token = createToken(user.user_id);
                 // console.log('token', token);    
                 res.cookie('jwt', token, {httpOnly: false, maxAge: maxAge})
+                req.session.user_id = user.user_id;
+                console.log(req.session);
                 res.json(user);
             }
         }
