@@ -7,7 +7,10 @@ const moment = require('moment');
 
 class StudentController {
     async home(req,res) {
-        const userid = req.query.user_id;
+        console.log('req.session.user_id', req.session.user_id);
+        const userid = req.session.user_id;
+        // const userid = req.query.user_id;
+        // res.json(req.session);
         const user = await User.getCondition('user_id', userid);
 
         const userAccount = await User.getAccount(userid);

@@ -27,6 +27,8 @@ class SiteController {
                 const token = createToken(user.user_id);
                 // console.log('token', token);    
                 res.cookie('jwt', token, {httpOnly: false, maxAge: maxAge})
+                req.session.user_id = user.user_id;
+                console.log(req.session);
                 res.json(user);
             }
         }

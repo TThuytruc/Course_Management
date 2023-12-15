@@ -6,6 +6,14 @@ const app = express(); //instance
 const { requireAuth } = require('./middleware/auth.middleware');
 const port = 3000;
 const bodyParser = require('body-parser');
+const session = require('express-session')
+
+app.use(session({
+    secret: 'mySecretKey',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+  }))
 
 // const demo=require('./public/js/list_student.js')
 const adminRouter = require('./routers/admin.router');
