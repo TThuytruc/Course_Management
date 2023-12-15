@@ -7,6 +7,9 @@ const { requireAuth} = require('../middleware/auth.middleware');
 
 router.get('/course', adminController.course);
 router.get('/home', adminController.home);
+router.post('/deleteAllTeacher',adminController.DeleteAllTeacher);
+router.post('/deleteAllStudent',adminController.DeleteAllStudent);
+
 // req.params.slug
 
 module.exports = router;

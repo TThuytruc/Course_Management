@@ -15,7 +15,7 @@ class AdminController {
 
         const listInforTeacher = dataUserAccount.filter(objA => listTeacher.some(objB => objB.user_id === objA.user_id));
         const listInforStudent=dataUserAccount.filter(objA => listStudent.some(objB => objB.user_id === objA.user_id));
-        const dataRender={teachers:listInforTeacher,students:listInforStudent,namecourse:course.course_name,username:'Admin'};
+        const dataRender={teachers:listInforTeacher,students:listInforStudent,namecourse:course.course_name,username:'Admin',id_course:id_course};
         res.render('admin/course',dataRender);
     }
     async home(req, res, next) {
@@ -32,6 +32,18 @@ class AdminController {
         }
         const result = { arrayCourse: data,username:'Admin' };
         res.render('admin/home', result);
+    }
+    async DeleteAllTeacher(req,res,next)
+    {
+        const courseId=req.body.id_course;
+        await db.deleteAllInforInCourse(courseId,'course_teacher');
+        res.send('ok');
+    }
+    async DeleteAllStudent(req,res,next)
+    {
+        const courseId=req.body.id_course;
+        await db.deleteAllInforInCourse(courseId,'course_student');
+        res.send('ok');
     }
 }
 
