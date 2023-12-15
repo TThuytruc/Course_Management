@@ -51,7 +51,7 @@
                         <th class="text-center" scope="col">Handle</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="list_teacher">
                     {{#each teachers}}
                     <tr>
                         <th class="text-center" scope="row">{{this.user_id}}</th>
@@ -66,7 +66,7 @@
             </table>
             <span>
                 <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;">Add</button>
-                <button class="btn btn-secondary" style="width: 100px; height: 40px;" >Delete All</button>
+                <button class="btn btn-secondary" style="width: 100px; height: 40px;" onclick="DeleteAllTeacher('{{id_course}}')" >Delete All</button>
             </span>
 
             <h1 class="text-dark" style="margin-top: 25px">List of students</h1>
@@ -79,7 +79,7 @@
                         <th class="text-center" scope="col">Handle</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="list_student">
                     {{#each students}}
                     <tr>
                         <th class="text-center" scope="row">{{this.user_id}}</th>
@@ -93,7 +93,7 @@
             </table>
             <span>
                 <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;">Add</button>
-                <button class="btn btn-secondary" style="width: 100px; height: 40px;" >Delete All</button>
+                <button class="btn btn-secondary" style="width: 100px; height: 40px;" onclick="DeleteAllStudent('{{id_course}}')">Delete All</button>
             </span>
         </div>
 
@@ -114,9 +114,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="../js/course_student.js"></script>
-    <!-- <script src="./myscript.js">
+    <script src="/js/admin_course.js"></script>
 
+    <!-- <script src="./myscript.js">
     </script> -->
 </body>
 
