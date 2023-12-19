@@ -35,4 +35,12 @@ module.exports = class Course {
             throw error;
         }
     }
+    static async delete(course_id) {
+        try {
+            await db.deleteCourse(course_id);
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 };

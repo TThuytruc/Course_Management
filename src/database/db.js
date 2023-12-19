@@ -53,7 +53,29 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `SELECT * FROM ${tbName} WHERE ${tbColum}='${value}'`;
-            console.log(query);
+            // console.log(query);
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+
+            // console.log(data);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+
+    delete: async (tbName, tbColum, value) => {
+        let dbcn = null;
+        try {
+            const query = `DELETE FROM ${tbName} WHERE ${tbColum}='${value}'`;
+            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
@@ -72,19 +94,49 @@ module.exports = {
     },
 
     insert: async (tbName, entity, idreturn) => {
-        const query = pgp.helpers.insert(entity, null, tbName);
-        console.log(query);
+        let dbcn = null;
+        try {
+            const query = pgp.helpers.insert(entity, null, tbName);
+            // console.log(query);
+            dbcn = await db.connect();
+            const data = await dbcn.one(query + ` RETURNING ${idreturn}`);
+            return data
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }      
 
-        const data = await db.one(query + ` RETURNING ${idreturn}`);
-
-        return data;
+    },
+    
+    update: async (tbName, entity, tbColumn, value) => {
+        let dbcn = null;
+        try {
+            const query = pgp.helpers.update(entity, null, tbName);
+            // console.log(query);
+            dbcn = await db.connect();
+            const data = await dbcn.oneOrNone(query + `WHERE ${tbColumn} = '${value}'`);
+            return data
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }  
     },
 
     getAllInforUser: async () => {
         let dbcn = null;
         try {
             const query = `select user_.user_id,account.account_email,user_.user_name  from account  join user_  on account.account_id=user_.account_id`;
-            console.log(query);
+            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
@@ -110,7 +162,7 @@ module.exports = {
             dbcn = await db.connect();
 
             const data = await dbcn.any(query, [accountId]);
-            console.log(data[0].get_user_with_account_id);
+            // console.log(data[0].get_user_with_account_id);
             const resultString = data[0].get_user_with_account_id;
             const matches = resultString.match(/\(([^)]+)\)/);
             const values = matches[1].split(',');
@@ -121,8 +173,28 @@ module.exports = {
                 user_name: values[2].replace(/"/g, ''), // Remove double quotes from the name
                 user_role: values[3].replace(/"/g, ''), // Remove double quotes from the role
             };
-            console.log(userObject);
+            // console.log(userObject);
             return userObject;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    
+    getAccountWithId: async (id) => {
+        let dbcn = null;
+        try {
+            const query = `SELECT * FROM account WHERE account_id = $1`;
+            // console.log(query);
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query, [id]);
+            return data[0];
         }
         catch (error) {
             throw error;
@@ -138,7 +210,7 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `select count(*) from ${tbName} where ${tbColum}='${tbValue}' `;
-            console.log(query);
+            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
@@ -199,6 +271,27 @@ module.exports = {
         }
     },
 
+    deleteAllInforInCourse: async (courseId, nameTable) => {
+        let dbcn = null;
+
+        try {
+            const query = `delete from ${nameTable} where course_id='${courseId}'`;
+
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+
     getFinalScore: async (courseId, userId) => {
         let dbcn = null;
 
@@ -210,6 +303,24 @@ module.exports = {
 
             const data = await dbcn.any(query);
             return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+
+    deleteCourse: async (courseId) => {
+        let dbcn = null;
+
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT delete_course($1)'
+            await dbcn.any(query, [courseId]);
         }
         catch (error) {
             throw error;

@@ -2,7 +2,7 @@
 CREATE TABLE Account (
     Account_id SERIAL PRIMARY KEY,
     Account_email VARCHAR(50) NOT NULL UNIQUE,
-    Account_password VARCHAR(50) NOT NULL
+    Account_password VARCHAR(255) NOT NULL
 );
 
 -- Tạo bảng User
@@ -140,5 +140,14 @@ BEGIN
     WHERE account_id = account_id_param;
     
     RETURN user_record;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION delete_course(course_id_param integer)
+RETURNS VOID AS $$
+BEGIN   
+    EXECUTE 'DELETE FROM course_student WHERE Course_id = $1' USING course_id_param;
+	EXECUTE 'DELETE FROM course_teacher WHERE Course_id = $1' USING course_id_param;
+	EXECUTE 'DELETE FROM course WHERE Course_id = $1' USING course_id_param;
 END;
 $$ LANGUAGE plpgsql;

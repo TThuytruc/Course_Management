@@ -8,7 +8,7 @@ const Exercise = require('../models/exercise.m');
 
 class TeacherController {
     async home(req, res) {
-        const userid = req.query.user_id;
+        const userid = req.session.user_id;
         const user = await User.getCondition('user_id', userid);
 
         const userAccount = await User.getAccount(userid);
@@ -27,7 +27,7 @@ class TeacherController {
 
 
     async course(req, res, next) {
-        const userid = req.query.user_id;
+        const userid = req.session.user_id;
         const user = await User.getCondition('user_id', userid);
         const id_course = req.query.course_id;
         const dataUserAccount = await db.getAllInforUser();

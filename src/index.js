@@ -20,6 +20,7 @@ const adminRouter = require('./routers/admin.router');
 const teacherRouter = require('./routers/teacher.router');
 const studentRouter = require('./routers/student.router');
 const listStudentRouter = require('./routers/listStudent.router');
+const courseRouter = require('./routers/course.router')
 
 const siteRouter = require('./routers/site.router');
 
@@ -40,6 +41,7 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 app.use(requireAuth);
+app.use('/course', courseRouter);
 app.use('/list_student', listStudentRouter);
 app.use('/admin', adminRouter);
 app.use('/teacher', teacherRouter);

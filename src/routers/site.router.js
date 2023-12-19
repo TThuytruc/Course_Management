@@ -13,6 +13,8 @@ const db = require('../database/db')
 router.get('/logout', siteController.logout_get)
 router.get('/login', siteController.login_get);
 router.post('/login', siteController.login_post);
+router.get('/password_change', siteController.password_change_get)
+router.post('/password_change', siteController.password_change_post)
 router.get('/',  (req, res) => {
     const token = req.cookies.jwt;
     if (req.url === '/login') {
