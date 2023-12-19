@@ -72,6 +72,28 @@ module.exports = {
             }
         }
     },
+    delete: async (tbName, tbColum, value) => {
+        let dbcn = null;
+        try {
+            const query = `DELETE FROM ${tbName} WHERE ${tbColum}='${value}'`;
+            console.log(query);
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+
+            // console.log(data);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if(dbcn!=null)
+            {
+                dbcn.done();
+            }
+        }
+    },
 
     insert: async (tbName, entity, idreturn) => {
         const query = pgp.helpers.insert(entity, null, tbName);
@@ -215,6 +237,24 @@ module.exports = {
 
             const data = await dbcn.none(query);
             return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if(dbcn!=null)
+            {
+                dbcn.done();
+            }
+        }
+    },
+    deleteCourse: async(courseId) => {
+        let dbcn = null;
+
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT delete_course($1)'
+            await dbcn.any(query,[courseId]);
         }
         catch (error) {
             throw error;

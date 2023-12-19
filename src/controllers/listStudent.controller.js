@@ -2,7 +2,7 @@ const Course_student = require('../models/course_student.m');
 const Course_teacher = require('../models/course_teacher.m')
 const Course = require('../models/course.m');
 const db = require('../database/db')
-class ListStundentController {
+class ListStudentController {
     async index(req, res, next) {
         const id_course = req.query.course_id;
         const dataUserAccount = await db.getAllInforUser();
@@ -44,4 +44,4 @@ class ListStundentController {
     };
 }
 
-module.exports = new ListStundentController();
+module.exports = new ListStudentController();

@@ -27,8 +27,7 @@ class SiteController {
                 const token = createToken(user.user_id);
                 // console.log('token', token);    
                 res.cookie('jwt', token, {httpOnly: false, maxAge: maxAge})
-                req.session.user_id = user.user_id;
-                console.log(req.session);
+                req.session.user_id = user.user_id; //assign session then bring it to auth.middlware
                 res.json(user);
             }
         }
@@ -44,6 +43,17 @@ class SiteController {
     logout_get(req, res) {
         res.cookie('jwt', '', {maxAge: 1});
         res.redirect('/login')
+    }
+    password_change_get(req,res) {
+        console.log('req.session.user_id', req.session.user_id);
+        res.render('password_change');
+    }
+    password_change_post(req,res) {
+        try {
+
+        } catch (e) {
+            throw e;
+        }
     }
 }
 module.exports = new SiteController;

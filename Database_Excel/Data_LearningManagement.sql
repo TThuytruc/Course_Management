@@ -124,8 +124,10 @@ VALUES
 -- Bảng Course
 INSERT INTO Course (Course_name, MaxNumberOfStudent, Schedule)
 VALUES
-('Introduction to Software Engineering', 40, 'T2'),
-('Computer Networks', 30, 'T3');
+('Introduction to Software Engineering', 40, 'Monday'),
+('Computer Networks', 30, 'Tuesday'),
+('Web Development', 70, 'Wednesday'),
+('Operating System', 50, 'Thursday');
 
 -- Bảng Topic
 INSERT INTO Topic (Course_id, Topic_name, Description)
@@ -158,7 +160,11 @@ VALUES
 (2, 23, NULL),
 (2, 24, NULL),
 (2, 25, NULL),
-(2, 29, NULL);
+(2, 29, NULL),
+(3, 7, null),
+(3, 8, null),
+(4, 5, null),
+(4, 4, null);
 
 
 -- Bảng Course_Teacher
@@ -171,7 +177,11 @@ VALUES
 (2, 3),
 (2, 31),
 (2, 32),
-(2, 33);
+(2, 33),
+(3, 32),
+(3, 31),
+(4, 31),
+(4, 33);
 
 -- Bảng Exercise
 INSERT INTO Exercise (Topic_id, Exercise_name, OpenTime, DueTime, Description)

@@ -142,3 +142,12 @@ BEGIN
     RETURN user_record;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION delete_course(course_id_param integer)
+RETURNS VOID AS $$
+BEGIN   
+    EXECUTE 'DELETE FROM course_student WHERE Course_id = $1' USING course_id_param;
+	EXECUTE 'DELETE FROM course_teacher WHERE Course_id = $1' USING course_id_param;
+	EXECUTE 'DELETE FROM course WHERE Course_id = $1' USING course_id_param;
+END;
+$$ LANGUAGE plpgsql;
