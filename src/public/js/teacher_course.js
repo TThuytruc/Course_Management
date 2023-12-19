@@ -61,3 +61,8 @@ $(document).ready(function () {
         selectedElement.append(option);
     }
 });
+
+function submission(id)
+{
+    window.location.href = `/teacher/submission?exercise_id=${encodeURIComponent(id)}`;
+}
