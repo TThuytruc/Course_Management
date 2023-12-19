@@ -2,7 +2,7 @@
 CREATE TABLE Account (
     Account_id SERIAL PRIMARY KEY,
     Account_email VARCHAR(50) NOT NULL UNIQUE,
-    Account_password VARCHAR(50) NOT NULL
+    Account_password VARCHAR(255) NOT NULL
 );
 
 -- Tạo bảng User

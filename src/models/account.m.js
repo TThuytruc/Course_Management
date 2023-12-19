@@ -34,4 +34,13 @@ module.exports = class Account {
             throw error;
         }
     }
+    static async update(account) {
+        try {
+            const data= await db.update(tbName, account, 'account_id', account.account_id);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 };
