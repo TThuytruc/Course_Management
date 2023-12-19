@@ -53,7 +53,7 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `SELECT * FROM ${tbName} WHERE ${tbColum}='${value}'`;
-            console.log(query);
+            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
@@ -74,7 +74,7 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `DELETE FROM ${tbName} WHERE ${tbColum}='${value}'`;
-            console.log(query);
+            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
@@ -96,7 +96,7 @@ module.exports = {
         let dbcn = null;
         try {
             const query = pgp.helpers.insert(entity, null, tbName);
-            console.log(query);
+            // console.log(query);
             dbcn = await db.connect();
             const data = await dbcn.one(query + ` RETURNING ${idreturn}`);
             return data
@@ -115,7 +115,7 @@ module.exports = {
         let dbcn = null;
         try {
             const query = pgp.helpers.update(entity, null, tbName);
-            console.log(query);
+            // console.log(query);
             dbcn = await db.connect();
             const data = await dbcn.oneOrNone(query + `WHERE ${tbColumn} = '${value}'`);
             return data
@@ -134,7 +134,7 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `select user_.user_id,account.account_email,user_.user_name  from account  join user_  on account.account_id=user_.account_id`;
-            console.log(query);
+            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
@@ -160,7 +160,7 @@ module.exports = {
             dbcn = await db.connect();
 
             const data = await dbcn.any(query, [accountId]);
-            console.log(data[0].get_user_with_account_id);
+            // console.log(data[0].get_user_with_account_id);
             const resultString = data[0].get_user_with_account_id;
             const matches = resultString.match(/\(([^)]+)\)/);
             const values = matches[1].split(',');
@@ -171,7 +171,7 @@ module.exports = {
                 user_name: values[2].replace(/"/g, ''), // Remove double quotes from the name
                 user_role: values[3].replace(/"/g, ''), // Remove double quotes from the role
             };
-            console.log(userObject);
+            // console.log(userObject);
             return userObject;
         }
         catch (error) {
@@ -207,7 +207,7 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `select count(*) from ${tbName} where ${tbColum}='${tbValue}' `;
-            console.log(query);
+            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
