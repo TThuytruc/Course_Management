@@ -43,8 +43,7 @@ module.exports = {
             throw error;
         }
         finally {
-            if(dbcn!=null)
-            {
+            if (dbcn != null) {
                 dbcn.done();
             }
         }
@@ -66,8 +65,7 @@ module.exports = {
             throw error;
         }
         finally {
-            if(dbcn!=null)
-            {
+            if (dbcn != null) {
                 dbcn.done();
             }
         }
@@ -82,10 +80,10 @@ module.exports = {
         return data;
     },
 
-    getAllInforUser:async()=>{
+    getAllInforUser: async () => {
         let dbcn = null;
         try {
-            const query=`select user_.user_id,account.account_email,user_.user_name  from account  join user_  on account.account_id=user_.account_id`;
+            const query = `select user_.user_id,account.account_email,user_.user_name  from account  join user_  on account.account_id=user_.account_id`;
             console.log(query);
             dbcn = await db.connect();
 
@@ -98,8 +96,7 @@ module.exports = {
             throw error;
         }
         finally {
-            if(dbcn!=null)
-            {
+            if (dbcn != null) {
                 dbcn.done();
             }
         }
@@ -131,17 +128,16 @@ module.exports = {
             throw error;
         }
         finally {
-            if(dbcn!=null)
-            {
+            if (dbcn != null) {
                 dbcn.done();
             }
         }
     },
 
-    countItem: async(tbName, tbColum,tbValue)=>{
+    countItem: async (tbName, tbColum, tbValue) => {
         let dbcn = null;
         try {
-            const query=`select count(*) from ${tbName} where ${tbColum}='${tbValue}' `;
+            const query = `select count(*) from ${tbName} where ${tbColum}='${tbValue}' `;
             console.log(query);
             dbcn = await db.connect();
 
@@ -154,17 +150,16 @@ module.exports = {
             throw error;
         }
         finally {
-            if(dbcn!=null)
-            {
+            if (dbcn != null) {
                 dbcn.done();
             }
         }
     },
 
-    getByJoin: async(tbName1, tbName2, tbColumn, value)=>{
+    getByJoin: async (tbName1, tbName2, tbColumn, value) => {
         let dbcn = null;
         try {
-            const query=`select * from ${tbName1} natural join ${tbName2} where ${tbName1}.${tbColumn} = ${value}`;
+            const query = `select * from ${tbName1} natural join ${tbName2} where ${tbName1}.${tbColumn} = ${value}`;
 
             dbcn = await db.connect();
 
@@ -175,21 +170,20 @@ module.exports = {
             throw error;
         }
         finally {
-            if(dbcn!=null)
-            {
+            if (dbcn != null) {
                 dbcn.done();
             }
         }
     },
 
-    getUpcommingEvents: async(courseId)=>{
+    getUpcommingEvents: async (courseId) => {
         let dbcn = null;
 
         try {
-            const query=`select * from exercise join topic 
+            const query = `select * from exercise join topic 
             on exercise.topic_id = topic.topic_id
             where duetime > NOW() and topic.course_id = ${courseId}`;
-          
+
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
@@ -199,29 +193,29 @@ module.exports = {
             throw error;
         }
         finally {
-            if(dbcn!=null)
-            {
+            if (dbcn != null) {
                 dbcn.done();
             }
         }
     },
-    deleteAllInforInCourse: async(courseId,nameTable)=>{
+
+    getFinalScore: async (courseId, userId) => {
         let dbcn = null;
 
         try {
-            const query=`delete from ${nameTable} where course_id='${courseId}'`;
-          
+            const query = `select finalscore from course_student 
+            where course_id = ${courseId} and user_id = ${userId}`;
+
             dbcn = await db.connect();
 
-            const data = await dbcn.none(query);
+            const data = await dbcn.any(query);
             return data;
         }
         catch (error) {
             throw error;
         }
         finally {
-            if(dbcn!=null)
-            {
+            if (dbcn != null) {
                 dbcn.done();
             }
         }
