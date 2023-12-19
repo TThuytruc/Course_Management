@@ -11,3 +11,10 @@ window.onload=function()
         list_current_submission.appendChild(clone);
     }   
 }
+
+function submission1(id)
+{
+    window.location.href = `/student/submission?exercise_id=${encodeURIComponent(id)}`;
+}
+
+
