@@ -3,7 +3,7 @@ const router = express.Router();
 const siteController = require('../controllers/site.controller');
 const { requireAuth} = require('../middleware/auth.middleware');
 const studentController = require('../controllers/student.controller')
-const teacherController = require('../controllers/student.controller')
+const teacherController = require('../controllers/teacher.controller')
 const adminController = require('../controllers/admin.controller')
 const jwt = require('jsonwebtoken');
 const db = require('../database/db')
@@ -30,7 +30,8 @@ router.get('/',  (req, res) => {
                 const user_id = decodedToken.user_id;
                 const user = await db.getUserWithAccountId(user_id);
                 console.log(user);
-                if (user.user_role.includes('student')) {
+               
+                if (user.user_role.includes('student')) { 
                     studentController.home(req,res)
                 }
                 else if (user.user_role.includes('teacher')) {

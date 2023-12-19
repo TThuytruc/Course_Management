@@ -73,8 +73,7 @@ class StudentController {
         student = student[0].count;
         let teacher = await db.countItem('course_Teacher', 'course_id', id_course);
         teacher = teacher[0].count;
-
-
+        
         const dataRender = {
             user: user[0],
             course_name: dataCourse.course_name,

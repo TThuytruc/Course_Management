@@ -323,6 +323,11 @@ main
     font-size: 20px;
 }
 
+.topic_description
+{
+    color:#973652;
+}
+
 .parent
 {
     display: flex;

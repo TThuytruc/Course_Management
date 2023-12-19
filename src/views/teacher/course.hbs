@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    {{>header}}
+    {{>header username = user.user_name}}
 
 
     <main>
@@ -31,7 +31,7 @@
 
         <div class="box title_course">
             <div class="name_course">
-                {{course_name}} - {{course_id}}
+                {{course_name}}
             </div>
 
         </div>
@@ -143,13 +143,15 @@
                     <div class="row_content ">
 
                         <p class="title_row">{{topic_name}}</p>
+                        <div class="topic_description">{{description}}</div>
+                        
                         <ul class="list">
                             {{#each exercise}}
                             <li class="row_icon_link " onclick="submission('{{exercise_id}}')">
                                 <div class="icon submission">
                                     <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/assign/1697455118/icon"
                                         alt="">
-                                    <a class="text" href="#">{{exercise_name}}. {{description}}</a>
+                                    <a class="text" href="#">{{exercise_name}}</a>
                                 </div>
                             </li>
                             {{/each}}
@@ -165,13 +167,13 @@
             <div class="side">
                 <div class="box list_people">
                     <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class ID</a>
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course ID</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="id-class">{{course_id}}</a> </strong></h5>
                     </div>
                     <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class name</a>
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course name</a>
                     </div>
 
                     <div class="home_side_inf_box home_side_content_box">

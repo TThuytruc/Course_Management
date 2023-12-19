@@ -10,7 +10,7 @@ class TeacherController {
     async home(req, res) {
         const userid = req.session.user_id;
         const user = await User.getCondition('user_id', userid);
-
+        
         const userAccount = await User.getAccount(userid);
         const userEmail = userAccount[0].account_email;
 
@@ -22,6 +22,7 @@ class TeacherController {
         }
 
         const dataRender = { user: user[0], arrayCourse: courses, userEmail: userEmail };
+        
         res.render('teacher/home', dataRender);
     }
 
