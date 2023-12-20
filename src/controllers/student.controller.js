@@ -1,4 +1,6 @@
 const db = require('../database/db');
+const multer = require('multer');
+const path = require('path');
 const User = require('../models/users.m');
 const Course_Student = require('../models/course_student.m');
 const Course = require('../models/course.m');
@@ -6,8 +8,40 @@ const Exercise = require('../models/exercise.m');
 const moment = require('moment');
 const Course_Teacher = require('../models/course_teacher.m');
 const Topic = require('../models/topic.m');
+const fs = require('fs');
+const Submission= require('../models/submission.m');
+  // Đường dẫn đến thư mục "Submission"
+  const submissionFolder = path.join(__dirname, '../Submission');
 
+  // Kiểm tra và tạo thư mục nếu không tồn tại
+  if (!fs.existsSync(submissionFolder)) {
+      fs.mkdirSync(submissionFolder);
+  }
+// Thiết lập multer để lưu trữ file trong thư mục "Submission"
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
 
+        cb(null, 'Submission');
+    },
+    filename:async function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const stringWithUnderscore = file.originalname.replace(/\s+/g, '_');
+        const submissionfile = uniqueSuffix + '-' + stringWithUnderscore;
+
+        console.log('Uploaded file name:', submissionfile);
+        const user_id=req.body.user_id;
+        const SubmissionTime= req.body.date;
+        const exercise_id= req.body.exercise_id;
+        const Score=0;
+        const data= new Submission({user_id,exercise_id,SubmissionTime,submissionfile,Score});
+        const insert= await Submission.insert(data);
+
+        console.log(user_id);
+        cb(null, submissionfile);
+    },
+});
+
+const upload = multer({ storage: storage });
 
 class StudentController {
     async home(req,res) {
@@ -90,6 +124,19 @@ class StudentController {
 
     async submission(req, res) {
         res.render('student/submission');
+    }
+    upload(req,res)
+    {
+        upload.array('files')(req, res, function (err) {
+
+            if (err) {
+                // Xử lý lỗi khi upload file
+                console.error(err);
+                return res.status(500).json({ error: 'Error uploading files.' });
+            }
+            // Tiếp tục xử lý sau khi upload thành công
+            res.json({ message: 'Files uploaded successfully.' });
+        });
     }
 }
 

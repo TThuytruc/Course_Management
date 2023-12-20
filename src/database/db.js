@@ -330,5 +330,5 @@ module.exports = {
                 dbcn.done();
             }
         }
-    }
+    },
 };

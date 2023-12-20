@@ -74,9 +74,9 @@ CREATE TABLE Submission (
     User_id INTEGER,
     Exercise_id INTEGER,
     SubmissionTime Timestamp without time zone NOT NULL,
-	SubmissionFile BYTEA,
+	SubmissionFile TEXT,
     Score DECIMAL,
-	PRIMARY KEY(User_id, Exercise_id)
+	PRIMARY KEY(User_id, Exercise_id,SubmissionTime,SubmissionFile)
 );
 
 -- Khóa ngoại
