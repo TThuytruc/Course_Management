@@ -5,12 +5,15 @@ const Course_Student = require('../models/course_student.m');
 const Course = require('../models/course.m');
 const Topic = require('../models/topic.m');
 const Exercise = require('../models/exercise.m');
-
+const Submission = require('../models/submission.m');
+const path = require('path');
+const fs = require('fs');
+const archiver = require('archiver');
 class TeacherController {
     async home(req, res) {
         const userid = req.session.user_id;
         const user = await User.getCondition('user_id', userid);
-        
+
         const userAccount = await User.getAccount(userid);
         const userEmail = userAccount[0].account_email;
 
@@ -22,7 +25,7 @@ class TeacherController {
         }
 
         const dataRender = { user: user[0], arrayCourse: courses, userEmail: userEmail };
-        
+
         res.render('teacher/home', dataRender);
     }
 
@@ -64,8 +67,8 @@ class TeacherController {
             course_id: dataCourse.course_id,
             dataTopic: dataTopic,
             teacher: listTeacher,
-            numberofteacher:teacher,
-            numberofstudent:student
+            numberofteacher: teacher,
+            numberofstudent: student
 
         };
         res.render('teacher/course', dataRender);
@@ -73,6 +76,63 @@ class TeacherController {
 
     async submission(req, res) {
         res.render('teacher/submission');
+    }
+    async downloadAll(req, res) {
+        try {
+            const data = await Submission.getCondition('exercise_id', 1);
+            const listFileName = data.map(file => file.submissionfile);
+            console.log(listFileName);
+            const submissionFolder = path.join(__dirname, '../Submission');
+            const zipFilePath = path.join(__dirname, '../demo.zip');
+            const archive = archiver('zip', { zlib: { level: 9 } });
+
+            if (!fs.existsSync(zipFilePath)) {
+                // Nếu file không tồn tại, tạo file mới
+                fs.writeFileSync(zipFilePath, '/demo.zip');
+            }
+            archive.pipe(res);
+
+            // Thêm từng file cụ thể vào tệp ZIP
+            listFileName.forEach(fileName => {
+                const filePath = path.join(submissionFolder, fileName);
+                if (fs.existsSync(filePath)) {
+                    archive.file(filePath, { name: fileName });
+                }
+            });
+
+            // Sự kiện 'end' sẽ được gọi khi quá trình nén hoàn tất
+            archive.on('end', () => {
+                // Gửi file ZIP về client sau khi đã nén
+                res.sendFile(zipFilePath, { root: __dirname }, (downloadError) => {
+                    if (downloadError) {
+                        console.error('Error during download:', downloadError);
+                    }
+                    console.log('ZIP finalization successful');
+                });
+                // Xóa file ZIP sau khi đã gửi về client
+                fs.unlinkSync(zipFilePath);
+
+            });
+
+            // Sự kiện 'error' để theo dõi lỗi trong quá trình nén
+            archive.on('error', (error) => {
+                console.error('Error during archiving:', error);
+                res.status(500).json({ error: 'Internal server error.' });
+            });
+
+            await new Promise((resolve, reject) => {
+                archive.finalize();
+                archive.on('end', resolve);
+                archive.on('error', reject);
+            });
+
+
+
+        } catch (error) {
+            console.error('Error during downloadAll:', error);
+            res.status(500).json({ error: 'Internal server error.' });
+        }
+
     }
 }
 

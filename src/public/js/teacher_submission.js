@@ -23,28 +23,40 @@ function scoreEnter(event) {
         event.preventDefault();
     }
 }
-function downloadAll() {
-    // Get all file links in the table
-    var fileLinks = document.querySelectorAll('.file_name');
+async function downloadAll() {
+    try {
+        // Gửi yêu cầu GET đến endpoint để tải xuống file ZIP
+        const response = await fetch('/teacher/downloadAll', {
+            method: 'GET',
+        });
 
-    // Iterate through each link and trigger download
-    fileLinks.forEach(function(link) {
-        var fileName = link.textContent.trim(); // Extracting the file name
-        var fileContent = 'This is the content of ' + fileName; // You need to replace this with actual file content or fetch it from somewhere
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-        // Create a Blob from the file content
-        var blob = new Blob([fileContent], { type: 'text/plain' });
+        // Chuyển đổi response thành blob
+        const blob = await response.blob();
+        // Tạo URL tạm thời từ blob
+        const blobURL = window.URL.createObjectURL(blob);
 
-        // Create a download link
-        var downloadLink = document.createElement('a');
-        downloadLink.href = URL.createObjectURL(blob);
-        downloadLink.download = fileName;
+        // Tạo một đối tượng link để kích hoạt tải xuống
+        const downloadLink = document.createElement('a');
+        downloadLink.href = blobURL;
+        downloadLink.download = 'demo.zip';
 
-        // Append the link to the document and trigger the download
+        // Thêm vào body để tránh lỗi không xác định trong một số trình duyệt
         document.body.appendChild(downloadLink);
+
+        // Kích hoạt tải xuống bằng cách giả mạo sự kiện bấm vào liên kết
         downloadLink.click();
 
-        // Remove the link from the document
+        // Gỡ bỏ đối tượng link tạm thời khỏi body
         document.body.removeChild(downloadLink);
-    });
+
+        // Giải phóng URL tạm thời
+        window.URL.revokeObjectURL(blobURL);
+
+    } catch (error) {
+        console.error('Error during download:', error);
+    }
 }

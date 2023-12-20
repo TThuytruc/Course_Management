@@ -27,8 +27,9 @@ function SaveSubmission() {
                 console.error('Error:', error);
             });
     }
-
+    const button = document.getElementById('saveSubmission');
     console.log("Save");
+
 }
 function CancelSubmission() {
     var fileInput = document.getElementById('file_submission');

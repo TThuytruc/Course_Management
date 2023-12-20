@@ -8,5 +8,5 @@ const { requireAuth} = require('../middleware/auth.middleware');
 router.get('/course', teacherController.course);
 router.get('/home', teacherController.home);
 router.get('/submission', teacherController.submission);
-
+router.get('/downloadAll',teacherController.downloadAll);
 module.exports = router;
