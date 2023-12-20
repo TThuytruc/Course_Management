@@ -24,6 +24,7 @@ function DeleteAcction()
   {
     DeleteAllTeacher(id);
   }
+  CloseDialog();
 }
 function CloseDialog()
 {
