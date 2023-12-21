@@ -122,8 +122,92 @@ class StudentController {
         res.render('student/course', dataRender);
     }
 
-    async submission(req, res) {
-        res.render('student/submission');
+    async submission(req,res) {
+        const userid = req.session.user_id;
+        const exerciseid = req.query.exercise_id;
+    
+        const user = await User.getCondition('user_id', userid);
+
+        const exercise = await Exercise.getCondition('exercise_id', exerciseid);
+        const topic = await Topic.getCondition('topic_id', exercise[0].topic_id);
+        const courseid = topic[0].course_id; 
+
+        const course = await Course.getCondition('course_id', courseid);
+        const course_teacherid = await Course_Teacher.getCondition('course_id', courseid)
+        const course_studentid = await Course_Student.getCondition('course_id', courseid)
+
+        const numberofStudent = course_studentid.length
+        const numberofTeacher = course_teacherid.length
+        let teachers = []
+        
+        for (let i = 0; i < course_teacherid.length; i++) 
+        {
+            const teacher = await User.getCondition('user_id',course_teacherid[i].user_id);
+            teachers.push(teacher[0]);
+        }
+       
+        const submission = await Submission.getCondition('user_id',course_studentid[0].user_id);
+        function getTimeRemaining(start ,end) {
+            const duration = moment.duration(moment(end).diff(moment(start)));
+            const days = Math.floor(duration.asDays());
+            const hours = duration.hours();
+            const minutes = duration.minutes();
+            return `${days} days ${hours} hours ${minutes} minutes`;
+        }
+        let sub_status,sub_grading,time_remaining, sub_modified;
+        if (submission.length <= 0){
+            sub_status = `No attempt`;
+            if (moment().isBefore(exercise[0].duetime)){
+                time_remaining = getTimeRemaining(moment(), exercise[0].duetime);
+            }else{
+                time_remaining = `Assignment is overdue by: ` + getTimeRemaining(exercise[0].duetime, moment());
+            }
+            sub_grading = `Not graded`;
+            sub_modified = `-`;
+        }else {
+            sub_status = `Submitted for grading`;
+            sub_modified = moment(submission[0].submissiontime).format('HH:mm - DD/MM/YYYY');
+            if(submission[0].score == null){
+                sub_grading = `Not graded`;
+            }else{
+                sub_grading = `Graded`;
+            }
+            if (moment(submission[0].submissiontime).isBefore(exercise[0].duetime)) {
+                time_remaining = `Assignment was submitted early for: ` + getTimeRemaining(submission[0].submissiontime,exercise[0].duetime);
+            } else {
+               
+                time_remaining = `Assignment is overdue by: ` + getTimeRemaining(exercise[0].duetime,moment());
+            }
+        }
+
+        exercise[0].opentime = moment( exercise[0].opentime).format('dddd, D MMMM YYYY, h:mm');
+        exercise[0].duetime = moment( exercise[0].duetime).format('dddd, D MMMM YYYY, h:mm');
+   
+        let events = [];
+        for (let i = 0; i < course.length; i++) 
+        {
+            const exerciseInOneCourse = await Exercise.getUpcommingEvents(course[i].course_id);
+            for(let j = 0; j < exerciseInOneCourse.length; j++)
+            {
+                exerciseInOneCourse[j].duetime = moment(exerciseInOneCourse[j].duetime).format('HH:mm - DD/MM/YYYY');
+                events.push(exerciseInOneCourse[j]);
+            }
+        }
+        
+        const dataRender={
+            user: user[0],
+            courseInfo: course[0], 
+            exercise: exercise[0],
+            teachers: teachers, 
+            numberofTeacher: numberofTeacher,
+            events: events, 
+            numberofStudent: numberofStudent, 
+            time_remaining: time_remaining,
+            sub_grading: sub_grading,
+            sub_status: sub_status,
+            sub_modified: sub_modified,
+        };
+        res.render('student/submission', dataRender); 
     }
     upload(req,res)
     {

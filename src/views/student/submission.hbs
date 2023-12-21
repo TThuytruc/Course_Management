@@ -7,19 +7,15 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
     <title>Submission</title>
 </head>
 
 <body>
-    {{>header}}
+    {{>header username=user.user_name}}
 
 
     <main>
@@ -30,24 +26,11 @@
             </div>
         </div>
 
-
+        
         <!-- Course -->
         <div class="box title_course">
             <div class="name_course">
-                Nhập môn công nghệ phần mềm - 21_3
-            </div>
-
-            <div class="link_current_page">
-                <a class="link_page" href="#">Home</a>
-                <p class="slash"> / </p>
-
-                <a href="#" class="link_page">Nhập môn công nghệ phần mềm - 21_3</a>
-                <p class="slash"> / </p>
-
-                <a href="#" class="link_page">Project</a>
-                <p class="slash"> / </p>
-
-                <a href="#" class="link_page">PA1 - Submission - Filename: GroupID.zip - Ex: Group02.zip3</a>
+                <h1>{{courseInfo.course_name}}<h1>
             </div>
         </div>
 
@@ -58,18 +41,18 @@
                     <!-- Submission Title -->
                     <div class="row_content">
                         <div class="title_submission">
-                            PA1 - Submission - Filename: GroupID.zip - Ex: Group02.zip
+                             {{exercise.exercise_name}}
                         </div>
-
+                
                         <div class="time">
                             <div>
                                 <span style="font-weight: bold; margin-right: 5px;">Opened:</span>
-                                <span>19/09/2023 - 13:00</span>
+                                <span>{{exercise.opentime}}</span>
                             </div>
-
+                
                             <div>
                                 <span style="font-weight: bold; margin-right: 35px;">Due:</span>
-                                <span>28/10/2023 - 23:30</span>
+                                <span>{{exercise.duetime}}</span>
                             </div>
                         </div>
                     </div>
@@ -81,22 +64,22 @@
                         <tbody>
                             <tr>
                                 <th scope="row">Submission status</th>
-                                <td>No attempt</td>
+                                <td>{{sub_status}}</td>
                             </tr>
 
                             <tr>
                                 <th scope="row">Grade</th>
-                                <td>Not graded</td>
+                                <td>{{sub_grading}}</td>
                             </tr>
 
                             <tr>
                                 <th scope="row">Time remaining</th>
-                                <td>1 day</td>
+                                <td>{{time_remaining}}</td>
                             </tr>
 
                             <tr>
                                 <th scope="row">Last modified</th>
-                                <td>06/10/2023 - 08:58</td>
+                                <td>{{sub_modified}}</td>
                             </tr>
 
                             <tr>
@@ -114,23 +97,19 @@
                                 <th scope="row"> <button type="button" class="btn btn-secondary"
                                         onclick="CancelSubmission()">Cancel</button></th>
                                 <td>
-                                    <button type="button" class="btn btn-secondary" id="saveSubmission"
+                                    <button type="button" class="btn btn-secondary"
                                         onclick="SaveSubmission()">Submit</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-secondary"  id="deleteSubmission"
-                                        onclick="CancelSubmission()">Delete</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
+        
             <!-- Side -->
             <div class="side">
                 <div class="box list_people">
-                    <div class="home_side_header_box">
+                    <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Scores</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
@@ -139,94 +118,90 @@
                             <a class="Score">----</a>
                         </strong>
                     </div>
-                    <div class="home_side_header_box">
+                    <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class ID</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="id-class">NMCNPM_21-2</a> </strong></h5>
+                        <h5><strong><a class="id-class">{{courseInfo.course_id}}</a> </strong></h5>
                     </div>
-                    <div class="home_side_header_box">
+                    <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class name</a>
                     </div>
-
+    
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="course_name">Nhập môn Công nghệ phần mềm</a></strong></h5>
+                        <h5><strong><a class="course_name">{{courseInfo.course_name}}</a></strong></h5>
                     </div>
-                    <div class="home_side_header_box">
+                    <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Teachers</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">3</a> </strong></h5>
-                    </div>
+                        <h5><strong><a class="number-lecturers">{{numberofTeacher}}</a> </strong></h5>
+                    </div>  
+                    
                     <div class="list_teacher color_box">
                         <strong class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</strong>
                         <ul class="list">
+                            {{#each teachers}}  
                             <li class="member">
                                 <div class="teacher">
-                                    <img style="margin-left:2%"
-                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
-                                        alt="Teacher">
+                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
                                     <div class="name_teacher">
-                                        <p class="name">Hồ Tuấn Thanh</p>
+                                        <p class="name">{{this.user_name}}</p>
                                     </div>
                                 </div>
                             </li>
-                            <li class="member">
-                                <div class="teacher">
-                                    <img style="margin-left:2%"
-                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
-                                        alt="Teacher">
-                                    <div class="name_teacher">
-                                        <p class="name">Mai Anh Tuấn</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="member">
-                                <div class="teacher">
-                                    <img style="margin-left:2%"
-                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
-                                        alt="Teacher">
-                                    <div class="name_teacher">
-                                        <p class="name">Nguyen Thi Minh Tuyen</p>
-                                    </div>
-                                </div>
-                            </li>
+                            {{/each}}
                         </ul>
                     </div>
-                    <div class="home_side_header_box">
+                    <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">30</a> </strong></h5>
+                        <h5><strong><a class="number-lecturers">{{numberofStudent}}</a> </strong></h5>
                     </div>
-                    <div class="home_side_header_box">
+                    <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">List Students</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <div class="icon title_text">
-                            <a class="text link_group_people" href="#" onclick="showListStudent(1)">Show participants
-                                list</a>
+                            <a class="text link_group_people" href="#" onclick="showListStudent(1)">Show participants list</a>
                         </div>
                     </div>
 
+                    </div>
+                    <div class="home_side_header_box"> 
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Upcomming events</a>
+                    </div>
+                    <div class="home_side_event_box home_side_content_box">
+                        {{#each events}}
+                            <div class="box_upcoming_events">
+                                <div>{{this.duetime}}</div>
+                                <div class="side_deadline">{{this.exercise_name}}</div>
+                            </div>  
+                        {{/each}}
+                    </div>
                 </div>
-                <div class="home_side_header_box">
-                    <a class="title_row title_text" style="color: rgb(151, 184, 85);">Up comming events</a>
-                </div>
-                <div class="home_side_event_box home_side_content_box">
-                    <a class="side_deadline" href="#">PA2 - Submission - Filename: GroupID.zip - Ex: Group02.zip is due
-                    </a>
-                    <br>
-                    <a class="side_deadline_date" href="#">17, November 2023</a><a class="side_deadline_time">,
-                        23:00</a>
-                </div>
-
             </div>
+                <!-- Khi sử dụng js để load các deadliene, có thể dùng đoạn code bên dưới và file student_course.js để load html
+                    Lưu ý phải có dữ liệu đúng thì đoạn code bên dưới mới hiển thị lên.
+                    Khi có dữ liệu, hãy chỉnh sửa file student_course.js để lấy dữ liệu theo đúng yêu cầu (mỗi dòng deadline là 1 thẻ li)
+                    Không bắt buộc dùng đoạn code bên dưới nếu người code có cách tốt hơn.
+                  -->
+                <!-- <div class="box list_exam">
+                    <div class="title_submission">
+                        <p class="title_row title_text" style="color: rgb(151, 184, 85);">Upcoming events</p>
+                        <div class="list_submission color_box">
+                            <ul class="list_current_submission">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div> -->
     </main>
 
-
+    
     {{>footer}}
-
+   
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

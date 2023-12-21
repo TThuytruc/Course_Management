@@ -19,34 +19,21 @@
 </head>
 
 <body>
-    {{>header}}
+    {{>header username = user.user_name}}
 
 
     <main>
         <!-- Logo -->
         <div class="row_content img_language">
             <div class="img_university">
-                <img src="#" alt="Logo">
+                <img src="" alt="Logo">
             </div>
         </div>
 
         <!-- Course -->
         <div class="box title_course">
             <div class="name_course">
-                Nhập môn công nghệ phần mềm - 21_3
-            </div>
-
-            <div class="link_current_page">
-                <a class="link_page" href="#">Home</a>
-                <p class="slash"> / </p>
-
-                <a href="#" class="link_page">Nhập môn công nghệ phần mềm - 21_3</a>
-                <p class="slash"> / </p>
-
-                <a href="#" class="link_page">Project</a>
-                <p class="slash"> / </p>
-
-                <a href="#" class="link_page">PA1 - Submission - Filename: GroupID.zip - Ex: Group02.zip3</a>
+               {{courseInfo.course_name}}              
             </div>
         </div>
 
@@ -57,24 +44,26 @@
                     <!-- Submission Title -->
                     <div class="row_content">
                         <div class="title_submission">
-                            PA1 - Submission - Filename: GroupID.zip - Ex: Group02.zip
+                           {{exercise.exercise_name}}
                         </div>
 
                         <div class="time">
                             <div>
                                 <span style="font-weight: bold; margin-right: 5px;">Opened:</span>
-                                <span>19/09/2023 - 13:00</span>
+                                <span>{{exercise.opentime}}</span>
                             </div>
-
                             <div>
                                 <span style="font-weight: bold; margin-right: 35px;">Due:</span>
-                                <span>28/10/2023 - 23:30</span>
+                                <span>{{exercise.duetime}}</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Submission table -->
                     <div class="submissions">Submissions</div>
+                    <div><strong>Total submissions: {{totalSubmissions}} </strong></div>
+                    <div><strong>Total graded: {{totalGraded}} </strong></div>
+                    <br>
                     <table id="teacher_submission_table" class="table table-striped">
                         <thead class = "thead-dark">
                             <tr>
@@ -85,24 +74,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a class="file_name" href="#" id="downloadLink">test_1.txt</a></td>
-                                <td>Lê Phan Thủy Trúc</td>
-                                <td>20/10/2023 - 20:32</td>
-                                <td>
-                                    <input type="number" id="box_scores" name="score" min="0" max="10" step="0.1"  onkeydown="scoreEnter(event)"
-                                        placeholder="Scores">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a class="file_name" href="#">test_2.txt</a></td>
-                                <td>Trương Tuấn Anh</td>
-                                <td>20/10/2023 - 20:32</td>
-                                <td>
-                                    <input type="number" id="box_scores" name="score" min="0" max="10" step="0.1"  onkeydown="scoreEnter(event)"
-                                        placeholder="Scores">
-                                </td>
-                            </tr>
+                           {{#each submissions}}
+
+                                <tr>
+                                    <td><a class="file_name" href="#" id="downloadLink">{{this.submissionfile}}</a></td>
+                                    <td>{{this.user_name}}</td>
+                                    <td>{{this.submissiontime}}</td>
+                                    <td>
+                                        <input type="number" id="box_scores" name="score" min="0" max="10" step="0.1" onkeydown="scoreEnter(event)" placeholder="Scores">
+                                    </td>
+                                </tr>
+                            {{/each}}
                         </tbody>
                     </table>
                     <div class="btn_dowload ">
@@ -115,67 +97,45 @@
             <div class="side">
                 <div class="box list_people">
                     <div class="home_side_header_box"> 
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Scores</a>
-                    </div>
-                    <div class="home_side_inf_box home_side_content_box">
-                        <strong>
-                            <a>Điểm:</a>
-                            <a class="Score">----</a>
-                        </strong>
-                    </div>
-                    <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class ID</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="id-class">NMCNPM_21-2</a> </strong></h5>
+                        <h5><strong><a class="id-class">{{courseInfo.course_id}}</a> </strong></h5>
                     </div>
                     <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class name</a>
                     </div>
     
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="course_name">Nhập môn Công nghệ phần mềm</a></strong></h5>
+                        <h5><strong><a class="course_name">{{courseInfo.course_name}}</a></strong></h5>
                     </div>
                     <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Teachers</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">3</a> </strong></h5>
-                    </div>    
+                        <h5><strong><a class="number-lecturers">{{numberofTeacher}}</a> </strong></h5>
+                    </div>  
+                    
                     <div class="list_teacher color_box">
                         <strong class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</strong>
                         <ul class="list">
+                            {{#each teachers}}  
                             <li class="member">
                                 <div class="teacher">
                                     <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
                                     <div class="name_teacher">
-                                        <p class="name">Hồ Tuấn Thanh</p>
+                                        <p class="name">{{this.user_name}}</p>
                                     </div>
                                 </div>
                             </li>
-                            <li class="member">
-                                <div class="teacher">
-                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
-                                    <div class="name_teacher">
-                                        <p class="name">Mai Anh Tuấn</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="member">
-                                <div class="teacher">
-                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
-                                    <div class="name_teacher">
-                                        <p class="name">Nguyen Thi Minh Tuyen</p>
-                                    </div>
-                                </div>
-                            </li>
+                            {{/each}}
                         </ul>
                     </div>
                     <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">30</a> </strong></h5>
+                        <h5><strong><a class="number-lecturers">{{numberofStudent}}</a> </strong></h5>
                     </div>
                     <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">List Students</a>
@@ -208,7 +168,7 @@
     <script src="../js/teacher_submission.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="/js/list_student.js"></script>
-    <!-- <script src="./myscript.js">
+        <!-- <script src="./myscript.js">
 
     </script> -->
 </body>
