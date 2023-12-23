@@ -8,7 +8,7 @@ const { requireAuth} = require('../middleware/auth.middleware');
 router.get('/course', studentController.course);
 router.get('/home', studentController.home);
 router.get('/submission', studentController.submission);
-
+router.post('/upload',studentController.upload);
 // req.params.slug
 
 module.exports = router;
