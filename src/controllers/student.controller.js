@@ -209,6 +209,7 @@ class StudentController {
         };
         res.render('student/submission', dataRender); 
     }
+    
     upload(req,res)
     {
         upload.array('files')(req, res, function (err) {
