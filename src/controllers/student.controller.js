@@ -180,8 +180,8 @@ class StudentController {
             }
         }
 
-        exercise[0].opentime = moment( exercise[0].opentime).format('dddd, D MMMM YYYY, h:mm');
-        exercise[0].duetime = moment( exercise[0].duetime).format('dddd, D MMMM YYYY, h:mm');
+        exercise[0].opentime = moment( exercise[0].opentime).format('dddd, D MMMM YYYY, HH:mm');
+        exercise[0].duetime = moment( exercise[0].duetime).format('dddd, D MMMM YYYY, HH:mm');
    
         let events = [];
         for (let i = 0; i < course.length; i++) 
@@ -198,6 +198,7 @@ class StudentController {
             user: user[0],
             courseInfo: course[0], 
             exercise: exercise[0],
+            submission: submission[0],
             teachers: teachers, 
             numberofTeacher: numberofTeacher,
             events: events, 
@@ -205,7 +206,7 @@ class StudentController {
             time_remaining: time_remaining,
             sub_grading: sub_grading,
             sub_status: sub_status,
-            sub_modified: sub_modified,
+            sub_modified: sub_modified
         };
         res.render('student/submission', dataRender); 
     }

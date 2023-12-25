@@ -115,7 +115,7 @@
                     <div class="home_side_inf_box home_side_content_box">
                         <strong>
                             <a>Điểm:</a>
-                            <a class="Score">----</a>
+                            <a class="Score">{{submission.score}}</a>
                         </strong>
                     </div>
                     <div class="home_side_header_box"> 
@@ -140,18 +140,20 @@
                     
                     <div class="list_teacher color_box">
                         <strong class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</strong>
+                        {{#each teachers}}
                         <ul class="list">
-                            {{#each teachers}}  
                             <li class="member">
                                 <div class="teacher">
-                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
+                                    <img style="margin-left:2%"
+                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
+                                        alt="Teacher">
                                     <div class="name_teacher">
                                         <p class="name">{{this.user_name}}</p>
                                     </div>
                                 </div>
                             </li>
-                            {{/each}}
                         </ul>
+                        {{/each}}
                     </div>
                     <div class="home_side_header_box"> 
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
