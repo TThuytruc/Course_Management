@@ -16,14 +16,18 @@ const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         // console.log(req.body);
         // var sanitizedString = inputString.replace(/[\/\\:*?"<>|]/g, '');
+        const course_id=req.body.course_id;
+        const exercise_id=req.body.exercise_id;
         let course_name = req.body.course_name;
         course_name = course_name.replace(/\s+/g, '_');
         course_name = course_name.replace(/[\/\\:*?"<>|]/g, '');
+        course_name=course_name+ `-${course_id}`;
 
 
         let exercise_name = req.body.exercise_name;
         exercise_name = exercise_name.replace(/\s+/g, '_');
         exercise_name = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
+        exercise_name=exercise_name+`-${exercise_id}`
 
         const linkFileSubmission =path.join(__dirname, `../Submission/${course_name}/${exercise_name}`) ;
         // console.log(linkFileSubmission);
@@ -255,17 +259,21 @@ class StudentController {
         const user_id=req.body.user_id;
         const exercise_id=req.body.exercise_id;
         const nameFileSubmit=req.body.nameFileSubmit;
+        const course_id=req.body.course_id;
         console.log(nameFileSubmit);
         const data= await db.deleteTwoCOndition('submission','user_id','exercise_id',user_id,exercise_id);
 
         let course_name = req.body.course_name;
         course_name = course_name.replace(/\s+/g, '_');
         course_name = course_name.replace(/[\/\\:*?"<>|]/g, '');
+        course_name=course_name+ `-${course_id}`;
 
 
         let exercise_name = req.body.exercise_name;
         exercise_name = exercise_name.replace(/\s+/g, '_');
         exercise_name = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
+        exercise_name=exercise_name+`-${exercise_id}`
+
 
         const linkFileSubmission =path.join(__dirname, `../Submission/${course_name}/${exercise_name}/${nameFileSubmit}`) ;
         fs.unlink(linkFileSubmission, (err) => {

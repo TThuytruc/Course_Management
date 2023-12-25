@@ -146,15 +146,17 @@ class TeacherController {
     async downloadAll(req, res) {
         const user_id = req.body.user_id;
         const exercise_id = req.body.exercise_id;
-
+        const course_id=req.body.course_id;
         let course_name = req.body.course_name;
         course_name = course_name.replace(/\s+/g, '_');
         course_name = course_name.replace(/[\/\\:*?"<>|]/g, '');
+        course_name=course_name+ `-${course_id}`;
 
 
         let exercise_name = req.body.exercise_name;
         exercise_name = exercise_name.replace(/\s+/g, '_');
         exercise_name = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
+        exercise_name=exercise_name+`-${exercise_id}`
 
         const submissionFolder = path.join(__dirname, `../Submission/${course_name}/${exercise_name}`);
         try {

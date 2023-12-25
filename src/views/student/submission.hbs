@@ -108,7 +108,7 @@
                                         style="display: none;" onclick="RemoveSubmission()">Remove</button>
                                     <button type="button" class="btn btn-secondary" id="buttonSave"
                                         style="display: none;"
-                                        onclick="SaveSubmission('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}')">Submit</button>
+                                        onclick="SaveSubmission('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{courseInfo.course_id}}')">Submit</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -236,7 +236,7 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                 onclick="CloseDialog()">Close</button>
                             <button type="button" class="btn btn-primary" style="background-color: red;"
-                                onclick="DeleteAcction('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{nameFileSubmit}}')">Remove</button>
+                                onclick="DeleteAcction('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{nameFileSubmit}}','{{courseInfo.course_id}}')">Remove</button>
                         </div>
                     </form>
                 </div>

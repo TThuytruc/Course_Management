@@ -23,13 +23,13 @@ function scoreEnter(event) {
         event.preventDefault();
     }
 }
-async function downloadAll(user_id,exercise_id,exercise_name,course_name) {
+async function downloadAll(user_id,exercise_id,exercise_name,course_name,course_id) {
     // console.log(user_id);
     // console.log(exercise_id);
     // console.log(exercise_name);
     // console.log(course_name);
     
-        const data={user_id:user_id,exercise_id:exercise_id,exercise_name:exercise_name,course_name:course_name}
+        const data={user_id:user_id,exercise_id:exercise_id,exercise_name:exercise_name,course_name:course_name,course_id:course_id}
         
         const jsonData = JSON.stringify(data);
         try {
@@ -58,7 +58,7 @@ async function downloadAll(user_id,exercise_id,exercise_name,course_name) {
         let name_zip= exercise_name.replace(/\s+/g, '_');
         name_zip = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
         console.log(name_zip);
-        downloadLink.download = `${name_zip}.zip`;
+        downloadLink.download = `${name_zip}-${exercise_id}.zip`;
 
         // Thêm vào body để tránh lỗi không xác định trong một số trình duyệt
         document.body.appendChild(downloadLink);

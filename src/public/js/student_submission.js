@@ -15,7 +15,7 @@ window.onload = function () {
 
     }
 };
-function SaveSubmission(user_id, exercise_id, exercise_name, course_name) {
+function SaveSubmission(user_id, exercise_id, exercise_name, course_name,course_id) {
     var fileInput = document.getElementById('file_submission');
     var date = getTime();
     // console.log(date);
@@ -28,6 +28,7 @@ function SaveSubmission(user_id, exercise_id, exercise_name, course_name) {
         formData.append('exercise_id', exercise_id);
         formData.append('course_name', course_name);
         formData.append('exercise_name', exercise_name);
+        formData.append('course_id', course_id);
 
         for (var i = 0; i < fileInput.files.length; i++) {
             formData.append('files', fileInput.files[i]);
@@ -107,7 +108,7 @@ function CloseDialog()
 {
   $('#modal-course-delete').modal('hide');
 }
-async function DeleteAcction(user_id,exercise_id,exercise_name,course_name,nameFileSubmit)
+async function DeleteAcction(user_id,exercise_id,exercise_name,course_name,nameFileSubmit,course_id)
 {
     // Đặt giá trị của input file về rỗng để xóa tất cả các file đã chọn
     fileInput.value = "";
@@ -119,7 +120,7 @@ async function DeleteAcction(user_id,exercise_id,exercise_name,course_name,nameF
     buttonSave.style.display = "block";
     inputFile.style.display="block";
     $('#modal-course-delete').modal('hide');
-    const data={user_id:user_id,exercise_id:exercise_id,exercise_name:exercise_name,course_name:course_name,nameFileSubmit:nameFileSubmit}
+    const data={user_id:user_id,exercise_id:exercise_id,exercise_name:exercise_name,course_name:course_name,nameFileSubmit:nameFileSubmit,course_id:course_id}
         
     const jsonData = JSON.stringify(data);
     try {
