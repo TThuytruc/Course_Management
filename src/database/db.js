@@ -331,4 +331,46 @@ module.exports = {
             }
         }
     },
+    getTwoCondition: async (tbName, tbColum1,tbColum2, value1,value2) => {
+        let dbcn = null;
+        try {
+            const query = `SELECT * FROM ${tbName} WHERE ${tbColum1}='${value1}' and ${tbColum2}='${value2}' `;
+            // console.log(query);
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+
+            // console.log(data);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    deleteTwoCOndition: async (tbName, tbColum1,tbColum2, value1,value2) => {
+        let dbcn = null;
+        try {
+            const query = `DELETE FROM ${tbName} WHERE ${tbColum1}='${value1}' and ${tbColum2}='${value2}' `;
+            // console.log(query);
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+
+            // console.log(data);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
 };

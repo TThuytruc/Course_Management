@@ -135,7 +135,6 @@ class StudentController {
         const exerciseid = req.query.exercise_id;
 
         const user = await User.getCondition('user_id', userid);
-
         const exercise = await Exercise.getCondition('exercise_id', exerciseid);
         const topic = await Topic.getCondition('topic_id', exercise[0].topic_id);
         const courseid = topic[0].course_id;
@@ -143,6 +142,24 @@ class StudentController {
         const course = await Course.getCondition('course_id', courseid);
         const course_teacherid = await Course_Teacher.getCondition('course_id', courseid)
         const course_studentid = await Course_Student.getCondition('course_id', courseid)
+
+        //add by quan
+        const fileSubmission= await db.getTwoCondition('submission','user_id','exercise_id',userid,exerciseid)
+        console.log(fileSubmission);
+        let nameFileSubmit='No files selected';
+        let isSubmit=false;
+        if(fileSubmission.length>0)
+        {
+            nameFileSubmit= fileSubmission[0].submissionfile;
+            isSubmit=true;
+        }
+        else
+        {
+            nameFileSubmit= 'No files selected';
+            isSubmit=false;
+        }
+        // finish add.
+
 
         const numberofStudent = course_studentid.length
         const numberofTeacher = course_teacherid.length
@@ -152,8 +169,9 @@ class StudentController {
             const teacher = await User.getCondition('user_id', course_teacherid[i].user_id);
             teachers.push(teacher[0]);
         }
-
+       
         const submission = await Submission.getCondition('user_id', course_studentid[0].user_id);
+        
         function getTimeRemaining(start, end) {
             const duration = moment.duration(moment(end).diff(moment(start)));
             const days = Math.floor(duration.asDays());
@@ -185,6 +203,7 @@ class StudentController {
 
                 time_remaining = `Assignment is overdue by: ` + getTimeRemaining(exercise[0].duetime, moment());
             }
+            
         }
 
         exercise[0].opentime = moment(exercise[0].opentime).format('dddd, D MMMM YYYY, HH:mm');
@@ -198,10 +217,6 @@ class StudentController {
                 events.push(exerciseInOneCourse[j]);
             }
         }
-        // console.log(user[0]);
-        // console.log(exercise[0]);   
-        // console.log(course[0]);
-        // console.log(submission[0]);
         const dataRender = {
             user: user[0],
             courseInfo: course[0],
@@ -214,7 +229,11 @@ class StudentController {
             time_remaining: time_remaining,
             sub_grading: sub_grading,
             sub_status: sub_status,
-            sub_modified: sub_modified
+            sub_modified: sub_modified,
+            //add by quan
+            nameFileSubmit:nameFileSubmit,
+            isSubmit:isSubmit
+            // finish
         };
         res.render('student/submission', dataRender);
     }
@@ -230,6 +249,35 @@ class StudentController {
             // Tiếp tục xử lý sau khi upload thành công
             res.json({ message: 'Files uploaded successfully.' });
         });
+    }
+    async removeFile(req,res)
+    {
+        const user_id=req.body.user_id;
+        const exercise_id=req.body.exercise_id;
+        const nameFileSubmit=req.body.nameFileSubmit;
+        console.log(nameFileSubmit);
+        const data= await db.deleteTwoCOndition('submission','user_id','exercise_id',user_id,exercise_id);
+
+        let course_name = req.body.course_name;
+        course_name = course_name.replace(/\s+/g, '_');
+        course_name = course_name.replace(/[\/\\:*?"<>|]/g, '');
+
+
+        let exercise_name = req.body.exercise_name;
+        exercise_name = exercise_name.replace(/\s+/g, '_');
+        exercise_name = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
+
+        const linkFileSubmission =path.join(__dirname, `../Submission/${course_name}/${exercise_name}/${nameFileSubmit}`) ;
+        fs.unlink(linkFileSubmission, (err) => {
+            if (err) {
+              console.error('Lỗi khi xóa tệp tin:', err);
+              res.json({ message: 'Files remove error.' });
+              return;
+            }
+            console.log('Tệp tin đã được xóa thành công.');
+            res.json({ message: 'Files remove successfully.' });
+          });
+       
     }
 }
 

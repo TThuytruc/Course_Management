@@ -7,10 +7,14 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Submission</title>
 </head>
 
@@ -26,7 +30,7 @@
             </div>
         </div>
 
-        
+
         <!-- Course -->
         <div class="box title_course">
             <div class="name_course">
@@ -41,15 +45,15 @@
                     <!-- Submission Title -->
                     <div class="row_content">
                         <div class="title_submission">
-                             {{exercise.exercise_name}}
+                            {{exercise.exercise_name}}
                         </div>
-                
+
                         <div class="time">
                             <div>
                                 <span style="font-weight: bold; margin-right: 5px;">Opened:</span>
                                 <span>{{exercise.opentime}}</span>
                             </div>
-                
+
                             <div>
                                 <span style="font-weight: bold; margin-right: 35px;">Due:</span>
                                 <span>{{exercise.duetime}}</span>
@@ -87,9 +91,12 @@
                                 <td>
                                     <!-- <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/f/archive" alt="zip">
                                     <a href="#" download>Group10.zip</a> -->
-                                    <input type="file" id="file_submission" onchange="displayFileNames()">
-                                    <label for="file_submission" id="add_submission">+ Add submission</label>
-                                    <p id="file_names">No files selected</p>
+                                    <div id="inputFile">
+                                        <input type="file" id="file_submission" onchange="displayFileNames()">
+                                        <label for="file_submission" id="add_submission">+ Add submission</label>
+                                    </div>
+
+                                    <p id="file_names"> {{nameFileSubmit}}</p>
 
                                 </td>
                             </tr>
@@ -97,22 +104,23 @@
                                 <th scope="row"> <button type="button" class="btn btn-secondary"
                                         onclick="CancelSubmission()">Cancel</button></th>
                                 <td>
-                                    <button type="button" class="btn btn-secondary"
+                                    <button type="button" class="btn btn-secondary" id="buttonRemove"
+                                        style="display: none;" onclick="RemoveSubmission()">Remove</button>
+                                    <button type="button" class="btn btn-secondary" id="buttonSave"
+                                        style="display: none;"
                                         onclick="SaveSubmission('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}')">Submit</button>
-                                    <button type="button" class="btn btn-secondary"
-                                        onclick="CancelSubmission()">Remove</button>
                                 </td>
-                                
                             </tr>
                         </tbody>
                     </table>
+                    <input type="hidden" id="isSubmit" value="{{isSubmit}}">
                 </div>
             </div>
-        
+
             <!-- Side -->
             <div class="side">
                 <div class="box list_people">
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Final Score</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
@@ -121,26 +129,26 @@
                             <a class="Score">{{submission.score}}</a>
                         </strong>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class ID</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="id-class">{{courseInfo.course_id}}</a> </strong></h5>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Class name</a>
                     </div>
-    
+
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="course_name">{{courseInfo.course_name}}</a></strong></h5>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Teachers</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="number-lecturers">{{numberofTeacher}}</a> </strong></h5>
-                    </div>  
-                    
+                    </div>
+
                     <div class="list_teacher color_box">
                         <strong class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</strong>
                         {{#each teachers}}
@@ -158,41 +166,42 @@
                         </ul>
                         {{/each}}
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="number-lecturers">{{numberofStudent}}</a> </strong></h5>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">List Students</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <div class="icon title_text">
-                            <a class="text link_group_people" href="#" onclick="showListStudent(1)">Show participants list</a>
+                            <a class="text link_group_people" href="#" onclick="showListStudent(1)">Show participants
+                                list</a>
                         </div>
                     </div>
 
+                </div>
+                <div class="home_side_header_box">
+                    <a class="title_row title_text" style="color: rgb(151, 184, 85);">Upcomming events</a>
+                </div>
+                <div class="home_side_event_box home_side_content_box">
+                    {{#each events}}
+                    <div class="box_upcoming_events">
+                        <div>{{this.duetime}}</div>
+                        <div class="side_deadline">{{this.exercise_name}}</div>
                     </div>
-                    <div class="home_side_header_box"> 
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Upcomming events</a>
-                    </div>
-                    <div class="home_side_event_box home_side_content_box">
-                        {{#each events}}
-                            <div class="box_upcoming_events">
-                                <div>{{this.duetime}}</div>
-                                <div class="side_deadline">{{this.exercise_name}}</div>
-                            </div>  
-                        {{/each}}
-                    </div>
+                    {{/each}}
                 </div>
             </div>
-                <!-- Khi sử dụng js để load các deadliene, có thể dùng đoạn code bên dưới và file student_course.js để load html
+        </div>
+        <!-- Khi sử dụng js để load các deadliene, có thể dùng đoạn code bên dưới và file student_course.js để load html
                     Lưu ý phải có dữ liệu đúng thì đoạn code bên dưới mới hiển thị lên.
                     Khi có dữ liệu, hãy chỉnh sửa file student_course.js để lấy dữ liệu theo đúng yêu cầu (mỗi dòng deadline là 1 thẻ li)
                     Không bắt buộc dùng đoạn code bên dưới nếu người code có cách tốt hơn.
                   -->
-                <!-- <div class="box list_exam">
+        <!-- <div class="box list_exam">
                     <div class="title_submission">
                         <p class="title_row title_text" style="color: rgb(151, 184, 85);">Upcoming events</p>
                         <div class="list_submission color_box">
@@ -204,9 +213,37 @@
                 </div> -->
     </main>
 
-    
+
     {{>footer}}
-   
+
+
+
+    <div class="modal fade" id="modal-course-delete" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="CloseDialog()" style="border:0; background-color:white">X</button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="deleteForm">
+                        <p id="delete_description">Are you sure to remove file submitted?</p>
+                        <input type="hidden" id="courseIdInput" name="id_course" value="">
+                        <input type="hidden" id="personIdInput" name="name_Person" value="">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                onclick="CloseDialog()">Close</button>
+                            <button type="button" class="btn btn-primary" style="background-color: red;"
+                                onclick="DeleteAcction('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{nameFileSubmit}}')">Remove</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
