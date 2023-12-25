@@ -87,7 +87,7 @@
                                 <td>
                                     <!-- <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/f/archive" alt="zip">
                                     <a href="#" download>Group10.zip</a> -->
-                                    <input type="file" id="file_submission" multiple onchange="displayFileNames()">
+                                    <input type="file" id="file_submission" onchange="displayFileNames()">
                                     <label for="file_submission" id="add_submission">+ Add submission</label>
                                     <p id="file_names">No files selected</p>
 
@@ -98,8 +98,11 @@
                                         onclick="CancelSubmission()">Cancel</button></th>
                                 <td>
                                     <button type="button" class="btn btn-secondary"
-                                        onclick="SaveSubmission()">Submit</button>
+                                        onclick="SaveSubmission('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}')">Submit</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="CancelSubmission()">Remove</button>
                                 </td>
+                                
                             </tr>
                         </tbody>
                     </table>

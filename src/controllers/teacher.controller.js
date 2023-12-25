@@ -79,15 +79,15 @@ class TeacherController {
     async submission(req, res) {
         const userid = req.session.user_id;
         const exerciseid = req.query.exercise_id;
-    
+
         const user = await User.getCondition('user_id', userid);
 
         const exercise = await Exercise.getCondition('exercise_id', exerciseid);
-        exercise[0].opentime = moment( exercise[0].opentime).format('dddd, D MMMM YYYY, h:mm');
-        exercise[0].duetime = moment( exercise[0].duetime).format('dddd, D MMMM YYYY, h:mm');
+        exercise[0].opentime = moment(exercise[0].opentime).format('dddd, D MMMM YYYY, h:mm');
+        exercise[0].duetime = moment(exercise[0].duetime).format('dddd, D MMMM YYYY, h:mm');
 
         const topic = await Topic.getCondition('topic_id', exercise[0].topic_id);
-        const courseid = topic[0].course_id; 
+        const courseid = topic[0].course_id;
 
         const course = await Course.getCondition('course_id', courseid);
         const course_teacherid = await Course_Teacher.getCondition('course_id', courseid)
@@ -96,66 +96,77 @@ class TeacherController {
         const numberofStudent = course_studentid.length
         const numberofTeacher = course_teacherid.length
         let teachers = []
-        
-        for (let i = 0; i < course_teacherid.length; i++) 
-        {
-            const teacher = await User.getCondition('user_id',course_teacherid[i].user_id);
+
+        for (let i = 0; i < course_teacherid.length; i++) {
+            const teacher = await User.getCondition('user_id', course_teacherid[i].user_id);
             teachers.push(teacher[0]);
         }
-        
-        const exercise_sub = await Submission.getCondition('exercise_id',exerciseid);
+
+        const exercise_sub = await Submission.getCondition('exercise_id', exerciseid);
 
         let submissions = [];
         let student_submissions = [];
-        for (let j = 0; j < exercise_sub.length; j++) 
-        {
+        for (let j = 0; j < exercise_sub.length; j++) {
             const submission = await Submission.getCondition('exercise_id', exercise_sub[j].exercise_id);
             submission[j].submissiontime = moment(submission[j].submissiontime).format('DD/MM/YYYY - HH:mm');
-            const student = await User.getCondition('user_id',exercise_sub[j].user_id );
+            const student = await User.getCondition('user_id', exercise_sub[j].user_id);
             student_submissions.push(student[0]);
             submissions.push(submission[j]);
         }
         const totalSubmissions = exercise_sub.length
         const mergedArray = [];
-  
+
         submissions.forEach(item1 => {
-        const matchingItem = student_submissions.find(item2 => item2.user_id === item1.user_id);
-        if (matchingItem) {
-            const mergedItem = { ...item1, ...matchingItem };
-            mergedArray.push(mergedItem);
-        }
+            const matchingItem = student_submissions.find(item2 => item2.user_id === item1.user_id);
+            if (matchingItem) {
+                const mergedItem = { ...item1, ...matchingItem };
+                mergedArray.push(mergedItem);
+            }
         });
         let totalGraded = 0;
-        for(let j = 0; j < submissions.length ; j++){
-            if(submissions[j].score !== null)
+        for (let j = 0; j < submissions.length; j++) {
+            if (submissions[j].score !== null)
                 totalGraded++;
         }
-        const dataRender={
+        const dataRender = {
             user: user[0],
             courseInfo: course[0],
             exercise: exercise[0],
             submissionArray: submissions,
             teachers: teachers,
-            numberofTeacher: numberofTeacher, 
-            students: student_submissions, 
-            numberofStudent: numberofStudent, 
-            submissions:mergedArray, 
-            totalSubmissions: totalSubmissions, 
-            totalGraded: totalGraded};
-        res.render('teacher/submission', dataRender); 
+            numberofTeacher: numberofTeacher,
+            students: student_submissions,
+            numberofStudent: numberofStudent,
+            submissions: mergedArray,
+            totalSubmissions: totalSubmissions,
+            totalGraded: totalGraded
+        };
+        res.render('teacher/submission', dataRender);
     }
     async downloadAll(req, res) {
+        const user_id = req.body.user_id;
+        const exercise_id = req.body.exercise_id;
+
+        let course_name = req.body.course_name;
+        course_name = course_name.replace(/\s+/g, '_');
+        course_name = course_name.replace(/[\/\\:*?"<>|]/g, '');
+
+
+        let exercise_name = req.body.exercise_name;
+        exercise_name = exercise_name.replace(/\s+/g, '_');
+        exercise_name = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
+
+        const submissionFolder = path.join(__dirname, `../Submission/${course_name}/${exercise_name}`);
         try {
-            const data = await Submission.getCondition('exercise_id', 1);
+            const data = await Submission.getCondition('exercise_id', exercise_id);
             const listFileName = data.map(file => file.submissionfile);
             console.log(listFileName);
-            const submissionFolder = path.join(__dirname, '../Submission');
-            const zipFilePath = path.join(__dirname, '../demo.zip');
+            const zipFilePath = path.join(__dirname, `../${exercise_name}.zip`);
             const archive = archiver('zip', { zlib: { level: 9 } });
 
             if (!fs.existsSync(zipFilePath)) {
                 // Nếu file không tồn tại, tạo file mới
-                fs.writeFileSync(zipFilePath, '/demo.zip');
+                fs.writeFileSync(zipFilePath, `/${exercise_name}.zip`);
             }
             archive.pipe(res);
 
@@ -192,8 +203,6 @@ class TeacherController {
                 archive.on('end', resolve);
                 archive.on('error', reject);
             });
-
-
 
         } catch (error) {
             console.error('Error during downloadAll:', error);

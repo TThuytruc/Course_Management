@@ -1,14 +1,20 @@
-function SaveSubmission() {
+function SaveSubmission(user_id,exercise_id,exercise_name,course_name) {
     var fileInput = document.getElementById('file_submission');
     var date= getTime();
-    console.log(date);
-    
+    // console.log(date);
+    // console.log(`${user}  ${exercise}  ${course_name}`);
     if (fileInput.files.length > 0) {
         var formData = new FormData();
         // Thêm user_id vào FormData
-        formData.append('user_id', 4);
+        // console.log(user_id);
+        // console.log(exercise_id);
+        // console.log('course_ name :'+course_name);
+        // console.log(exercise_name);
+        formData.append('user_id', user_id);
         formData.append('date', date);
-        formData.append('exercise_id', 1);
+        formData.append('exercise_id',exercise_id);
+        formData.append('course_name',course_name);
+        formData.append('exercise_name',exercise_name);
 
         for (var i = 0; i < fileInput.files.length; i++) {
             formData.append('files', fileInput.files[i]);
@@ -27,7 +33,6 @@ function SaveSubmission() {
                 console.error('Error:', error);
             });
     }
-    const button = document.getElementById('saveSubmission');
     console.log("Save");
 
 }

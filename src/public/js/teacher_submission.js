@@ -23,11 +23,24 @@ function scoreEnter(event) {
         event.preventDefault();
     }
 }
-async function downloadAll() {
-    try {
-        // Gửi yêu cầu GET đến endpoint để tải xuống file ZIP
+async function downloadAll(user_id,exercise_id,exercise_name,course_name) {
+    // console.log(user_id);
+    // console.log(exercise_id);
+    // console.log(exercise_name);
+    // console.log(course_name);
+    
+        const data={user_id:user_id,exercise_id:exercise_id,exercise_name:exercise_name,course_name:course_name}
+        
+        const jsonData = JSON.stringify(data);
+        try {
+        
+        // Gửi yêu cầu POST đến endpoint để tải xuống file ZIP
         const response = await fetch('/teacher/downloadAll', {
-            method: 'GET',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' 
+              },
+              body: jsonData
         });
 
         if (!response.ok) {
@@ -42,7 +55,10 @@ async function downloadAll() {
         // Tạo một đối tượng link để kích hoạt tải xuống
         const downloadLink = document.createElement('a');
         downloadLink.href = blobURL;
-        downloadLink.download = 'demo.zip';
+        let name_zip= exercise_name.replace(/\s+/g, '_');
+        name_zip = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
+        console.log(name_zip);
+        downloadLink.download = `${name_zip}.zip`;
 
         // Thêm vào body để tránh lỗi không xác định trong một số trình duyệt
         document.body.appendChild(downloadLink);
