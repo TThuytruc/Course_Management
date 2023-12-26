@@ -1,18 +1,20 @@
 const buttonRemove = document.getElementById("buttonRemove");
 const buttonSave = document.getElementById("buttonSave");
 const inputFile=document.getElementById("inputFile");
+const buttonCancel= document.getElementById('buttonCancel');
 window.onload = function () {
     const isSubmit = document.getElementById("isSubmit").value;
     if (isSubmit==='true') {
         buttonRemove.style.display = "block";
         buttonSave.style.display = "none";
         inputFile.style.display="none";
+        buttonCancel.disabled =true;
     }
     else {
         buttonRemove.style.display = "none";
         buttonSave.style.display = "block";
         inputFile.style.display="block";
-
+        buttonCancel.disabled =false;
     }
 };
 function SaveSubmission(user_id, exercise_id, exercise_name, course_name,course_id) {
@@ -45,6 +47,7 @@ function SaveSubmission(user_id, exercise_id, exercise_name, course_name,course_
                 buttonRemove.style.display = "block";
                 buttonSave.style.display = "none";
                 inputFile.style.display="none";
+                buttonCancel.disabled =true;
 
                 alert("submitted successfully")
             })
@@ -119,6 +122,8 @@ async function DeleteAcction(user_id,exercise_id,exercise_name,course_name,nameF
     buttonRemove.style.display = "none";
     buttonSave.style.display = "block";
     inputFile.style.display="block";
+    buttonCancel.disabled =false;
+
     $('#modal-course-delete').modal('hide');
     const data={user_id:user_id,exercise_id:exercise_id,exercise_name:exercise_name,course_name:course_name,nameFileSubmit:nameFileSubmit,course_id:course_id}
         
