@@ -9,6 +9,7 @@ router.get('/course', studentController.course);
 router.get('/home', studentController.home);
 router.get('/submission', studentController.submission);
 router.post('/upload',studentController.upload);
+router.post('/removeFile',studentController.removeFile);
 // req.params.slug
 
 module.exports = router;

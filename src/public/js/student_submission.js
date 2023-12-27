@@ -1,14 +1,36 @@
-function SaveSubmission() {
+const buttonRemove = document.getElementById("buttonRemove");
+const buttonSave = document.getElementById("buttonSave");
+const inputFile=document.getElementById("inputFile");
+const buttonCancel= document.getElementById('buttonCancel');
+window.onload = function () {
+    const isSubmit = document.getElementById("isSubmit").value;
+    if (isSubmit==='true') {
+        buttonRemove.style.display = "block";
+        buttonSave.style.display = "none";
+        inputFile.style.display="none";
+        buttonCancel.disabled =true;
+    }
+    else {
+        buttonRemove.style.display = "none";
+        buttonSave.style.display = "block";
+        inputFile.style.display="block";
+        buttonCancel.disabled =false;
+    }
+};
+function SaveSubmission(user_id, exercise_id, exercise_name, course_name,course_id) {
     var fileInput = document.getElementById('file_submission');
-    var date= getTime();
-    console.log(date);
-    
+    var date = getTime();
+    // console.log(date);
+    // console.log(`${user}  ${exercise}  ${course_name}`);
     if (fileInput.files.length > 0) {
         var formData = new FormData();
-        // Thêm user_id vào FormData
-        formData.append('user_id', 4);
+
+        formData.append('user_id', user_id);
         formData.append('date', date);
-        formData.append('exercise_id', 1);
+        formData.append('exercise_id', exercise_id);
+        formData.append('course_name', course_name);
+        formData.append('exercise_name', exercise_name);
+        formData.append('course_id', course_id);
 
         for (var i = 0; i < fileInput.files.length; i++) {
             formData.append('files', fileInput.files[i]);
@@ -22,15 +44,21 @@ function SaveSubmission() {
             .then(data => {
                 // Xử lý kết quả từ server nếu cần
                 console.log(data);
+                buttonRemove.style.display = "block";
+                buttonSave.style.display = "none";
+                inputFile.style.display="none";
+                buttonCancel.disabled =true;
+
+                alert("submitted successfully")
             })
             .catch(error => {
                 console.error('Error:', error);
             });
     }
-    const button = document.getElementById('saveSubmission');
     console.log("Save");
 
 }
+
 function CancelSubmission() {
     var fileInput = document.getElementById('file_submission');
 
@@ -71,4 +99,55 @@ function getTime() {
     // Tạo chuỗi theo định dạng mm-dd-yyyy hh:mm:ss
     var formattedDateTime = `${month}-${day}-${year} ${hours}:${minutes}:${seconds}`;
     return formattedDateTime;
+}
+var fileInput = document.getElementById('file_submission');
+
+function RemoveSubmission()
+{
+    $('#modal-course-delete').modal('show');
+ 
+}
+function CloseDialog()
+{
+  $('#modal-course-delete').modal('hide');
+}
+async function DeleteAcction(user_id,exercise_id,exercise_name,course_name,nameFileSubmit,course_id)
+{
+    // Đặt giá trị của input file về rỗng để xóa tất cả các file đã chọn
+    fileInput.value = "";
+
+    // Cập nhật hiển thị tên file
+    displayFileNames();
+    console.log("Cancle");
+    buttonRemove.style.display = "none";
+    buttonSave.style.display = "block";
+    inputFile.style.display="block";
+    buttonCancel.disabled =false;
+
+    $('#modal-course-delete').modal('hide');
+    const data={user_id:user_id,exercise_id:exercise_id,exercise_name:exercise_name,course_name:course_name,nameFileSubmit:nameFileSubmit,course_id:course_id}
+        
+    const jsonData = JSON.stringify(data);
+    try {
+    
+    // Gửi yêu cầu POST đến endpoint để tải xuống file ZIP
+    const response = await fetch('/student/removeFile', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' 
+          },
+          body: jsonData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Xử lý kết quả từ server nếu cần
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+} catch (error) {
+    console.error('Error during download:', error);
+}
 }
