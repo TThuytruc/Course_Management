@@ -93,6 +93,17 @@ class StudentController {
         let finalscore = await db.getFinalScore(id_course, userid);
         finalscore = finalscore[0].finalscore;
 
+        let courses = await Course_Student.getCondition('course_id', id_course);;
+        courses = courses[0].course_id;
+        console.log(courses);
+
+        let exercises = [];
+        const exerciseInOneCourse = await Exercise.getUpcommingEvents(courses);
+        for (let j = 0; j < exerciseInOneCourse.length; j++) {
+            exerciseInOneCourse[j].duetime = moment(exerciseInOneCourse[j].duetime).format('HH:mm - DD/MM/YYYY');
+            exercises.push(exerciseInOneCourse[j]);
+        }
+
 
         const listIDTeacher = await Course_Teacher.getCondition('course_id', id_course);
         const inforTeacher = dataUserAccount.filter(objA => listIDTeacher.some(objB => objB.user_id === objA.user_id));
@@ -116,7 +127,8 @@ class StudentController {
             teacher: listTeacher,
             numberofteacher: teacher,
             numberofstudent: student,
-            finalscore: finalscore
+            finalscore: finalscore, 
+            exercises: exercises
 
         };
         res.render('student/course', dataRender);
