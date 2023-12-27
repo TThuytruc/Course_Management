@@ -187,6 +187,6 @@ VALUES
 INSERT INTO Exercise (Topic_id, Exercise_name, OpenTime, DueTime, Description)
 VALUES
 (1, 'Exercise 01: Risk analysis', '2023-11-01 06:00:00', '2023-11-01 23:00:00', 'All files must be compressed into zip. File name: <StudentID>.zip'),
-(1, 'Exercise 02: Estimate', '2023-11-08 09:00:00', '2023-12-25 23:59:00', NULL),
+(1, 'Exercise 02: Estimate', '2023-11-08 09:00:00', '2024-01-14 23:59:00', NULL),
 (2, 'Use case', '2023-11-02 14:15:00', '2024-01-03 10:00:00', 'Create use-case specification for the exercise in slide 42.'),
 (3, 'Project 01 - Socket', '2023-11-02 07:00:00', '2024-01-05 22:30:00', 'If files are too large, upload to Google Drive and submit the .txt file containing the link');

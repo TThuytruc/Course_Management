@@ -105,7 +105,7 @@ class StudentController {
         let finalscore = await db.getFinalScore(id_course, userid);
         finalscore = finalscore[0].finalscore;
 
-        let courses = await Course_Student.getCondition('course_id', id_course);;
+        let courses = await Course_Student.getCondition('course_id', id_course);
         courses = courses[0].course_id;
         console.log(courses);
 

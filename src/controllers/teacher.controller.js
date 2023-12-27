@@ -165,7 +165,7 @@ class TeacherController {
             console.log(listFileName);
             const zipFilePath = path.join(__dirname, `../${exercise_name}.zip`);
             const archive = archiver('zip', { zlib: { level: 9 } });
-
+            
             if (!fs.existsSync(zipFilePath)) {
                 // Nếu file không tồn tại, tạo file mới
                 fs.writeFileSync(zipFilePath, `/${exercise_name}.zip`);
