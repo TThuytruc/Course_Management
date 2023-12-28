@@ -38,7 +38,7 @@ const storage = multer.diskStorage({
         const user_id = req.body.user_id;
         const SubmissionTime = req.body.date;
         const exercise_id = req.body.exercise_id;
-        const Score = 0;
+        const Score = null;
 
         const stringWithUnderscore = file.originalname.replace(/\s+/g, '-');
         const submissionfile = stringWithUnderscore;
