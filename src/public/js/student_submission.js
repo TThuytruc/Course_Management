@@ -4,6 +4,7 @@ const inputFile=document.getElementById("inputFile");
 const buttonCancel= document.getElementById('buttonCancel');
 window.onload = function () {
     const isSubmit = document.getElementById("isSubmit").value;
+    const isValid= document.getElementById('isValid').value;
     if (isSubmit==='true') {
         buttonRemove.style.display = "block";
         buttonSave.style.display = "none";
@@ -15,6 +16,11 @@ window.onload = function () {
         buttonSave.style.display = "block";
         inputFile.style.display="block";
         buttonCancel.disabled =false;
+        if(isValid==='true')
+        {
+            buttonSave.disabled=true;
+            buttonCancel.disabled =true;
+        }
     }
 };
 function SaveSubmission(user_id, exercise_id, exercise_name, course_name,course_id) {
