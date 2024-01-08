@@ -1,0 +1,2 @@
+- Chỉnh sửa Package Diagram và các Class Diagram trong phần 4 (Logical View).
+- Bổ sung phần 5 (Deployment) và phần 6 (Implementation View).
