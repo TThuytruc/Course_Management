@@ -38,7 +38,7 @@ const storage = multer.diskStorage({
         const user_id = req.body.user_id;
         const SubmissionTime = req.body.date;
         const exercise_id = req.body.exercise_id;
-        const Score = 0;
+        const Score = null;
 
         const stringWithUnderscore = file.originalname.replace(/\s+/g, '-');
         const submissionfile = stringWithUnderscore;
@@ -164,6 +164,7 @@ class StudentController {
         console.log(fileSubmission);
         let nameFileSubmit='No files selected';
         let isSubmit=false;
+        let isValid=false;
         if(fileSubmission.length>0)
         {
             nameFileSubmit= fileSubmission[0].submissionfile;
@@ -200,8 +201,10 @@ class StudentController {
             sub_status = `No attempt`;
             if (moment().isBefore(exercise[0].duetime)) {
                 time_remaining = getTimeRemaining(moment(), exercise[0].duetime);
+                isValid=false;
             } else {
                 time_remaining = `Assignment is overdue by: ` + getTimeRemaining(exercise[0].duetime, moment());
+                isValid=true;
             }
             sub_grading = `Not graded`;
             sub_modified = `-`;
@@ -248,7 +251,8 @@ class StudentController {
             sub_modified: sub_modified,
             //add by quan
             nameFileSubmit:nameFileSubmit,
-            isSubmit:isSubmit
+            isSubmit:isSubmit,
+            isValid:isValid
             // finish
         };
         res.render('student/submission', dataRender);
