@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 
-const maxAge = 60 * 60 * 1000;
+const maxAge = 60*60*1000;
 const createToken = (user_id) => {
     return jwt.sign({ user_id }, 'mySecretKey', {
         expiresIn: maxAge
@@ -28,7 +28,7 @@ class SiteController {
                     auth = false
                 }
             }
-            else { //Changed password more than once
+            else { //Changed password more than once, password was hashed
                 if (await bcrypt.compare(account_password, account.account_password)) {
                     auth = true;
                 }

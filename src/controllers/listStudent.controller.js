@@ -25,7 +25,7 @@ class ListStudentController {
             listTeacher.push(obj);
         }
         let student = await db.countItem('course_student', 'course_id', id_course);
-        console.log(student);
+        // console.log(student);
         student = student[0].count;
         let teacher = await db.countItem('course_teacher', 'course_id', id_course);
         teacher = teacher[0].count;
