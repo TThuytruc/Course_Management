@@ -43,12 +43,12 @@ const storage = multer.diskStorage({
         const stringWithUnderscore = file.originalname.replace(/\s+/g, '-');
         const submissionfile = stringWithUnderscore;
 
-        console.log('Uploaded file name:', submissionfile);
+        // console.log('Uploaded file name:', submissionfile);
 
         const data = new Submission({ user_id, exercise_id, SubmissionTime, submissionfile, Score });
         const insert = await Submission.insert(data);
 
-        console.log(user_id);
+        // console.log(user_id);
         cb(null, submissionfile);
     },
 });
@@ -107,7 +107,7 @@ class StudentController {
 
         let courses = await Course_Student.getCondition('course_id', id_course);
         courses = courses[0].course_id;
-        console.log(courses);
+        // console.log(courses);
 
         let exercises = [];
         const exerciseInOneCourse = await Exercise.getUpcommingEvents(courses);
@@ -126,7 +126,7 @@ class StudentController {
         }
 
         let student = await db.countItem('course_Student', 'course_id', id_course);
-        console.log(student);
+        // console.log(student);
         student = student[0].count;
         let teacher = await db.countItem('course_Teacher', 'course_id', id_course);
         teacher = teacher[0].count;
@@ -161,7 +161,7 @@ class StudentController {
 
         //add by quan
         const fileSubmission= await db.getTwoCondition('submission','user_id','exercise_id',userid,exerciseid)
-        console.log(fileSubmission);
+        // console.log(fileSubmission);
         let nameFileSubmit='No files selected';
         let isSubmit=false;
         if(fileSubmission.length>0)
@@ -272,7 +272,7 @@ class StudentController {
         const exercise_id=req.body.exercise_id;
         const nameFileSubmit=req.body.nameFileSubmit;
         const course_id=req.body.course_id;
-        console.log(nameFileSubmit);
+        // console.log(nameFileSubmit);
         const data= await db.deleteTwoCOndition('submission','user_id','exercise_id',user_id,exercise_id);
 
         let course_name = req.body.course_name;

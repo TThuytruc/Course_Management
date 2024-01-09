@@ -15,7 +15,7 @@ class CourseController {
     async delete(req, res, next){ 
         try {
             const course_id = req.params.id;
-            console.log(course_id); 
+            // console.log(course_id); 
             await Course.delete(course_id);
             res.redirect('back')
         }
