@@ -33,7 +33,7 @@ module.exports = class Exercise {
 
     static async insert(exercise) {
         try {
-            const data=await db.insert(tbName, exercise,'topic_id');
+            const data=await db.insert(tbName, exercise,'exercise_id');
             return data;
         }
         catch (error) {

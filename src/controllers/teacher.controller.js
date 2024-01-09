@@ -45,7 +45,6 @@ class TeacherController {
         dataTopic.forEach(async (topic) => {
             const data = await Exercise.getCondition('topic_id', topic.topic_id);
             topic['exercise'] = data;
-            console.log(topic);
         });
 
 
@@ -83,8 +82,8 @@ class TeacherController {
         const user = await User.getCondition('user_id', userid);
 
         const exercise = await Exercise.getCondition('exercise_id', exerciseid);
-        exercise[0].opentime = moment(exercise[0].opentime).format('dddd, D MMMM YYYY, h:mm');
-        exercise[0].duetime = moment(exercise[0].duetime).format('dddd, D MMMM YYYY, h:mm');
+        exercise[0].opentime = moment(exercise[0].opentime).format('dddd, D MMMM YYYY, HH:mm');
+        exercise[0].duetime = moment(exercise[0].duetime).format('dddd, D MMMM YYYY, HH:mm');
 
         const topic = await Topic.getCondition('topic_id', exercise[0].topic_id);
         const courseid = topic[0].course_id;

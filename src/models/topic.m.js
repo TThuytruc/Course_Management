@@ -28,7 +28,7 @@ module.exports = class Topic {
     }
     static async insert(topic) {
         try {
-            const data=await db.insert(tbName, topic,'course_id');
+            const data=await db.insert(tbName, topic,'topic_id');
             return data;
         }
         catch (error) {

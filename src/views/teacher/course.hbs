@@ -57,7 +57,7 @@
                     <div id="window_background"></div>
 
                     <!-- Add topic window -->
-                    <form id="form_add_topic">
+                    <form id="form_add_topic" method="post" action="/course/insertTopic" onsubmit="return validateAddTopic()">
                         <div id="window__add_topic">
                             <!-- Window header -->
                             <div class="window_header">
@@ -70,14 +70,22 @@
 
                             <!-- Window body -->
                             <div class="window_body">
+                                <input type="hidden" name="course_id" value={{course_id}}>
+
                                 <div id="table_add_topic">
                                     <!-- Topic name -->
                                     <label for="topic_name">Topic name</label>
-                                    <input id="topic_name" type="text" required />
-
+                                    <input name="topic_name" id="topic_name" type="text"/>
+                                   
                                     <!-- Topic description -->
-                                    <label for="topic_description">Description</label>
-                                    <textarea id="topic_description"></textarea>
+                                    <label id="label_topic_description" for="topic_description">Description</label>
+                                    <textarea name="Description" id="topic_description"></textarea>
+
+                                    <!-- Error message -->
+                                    <div id="topic_error_container">
+                                        <span>Error: </span>
+                                        <span id="topic_error_message"></span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -91,7 +99,7 @@
 
 
                     <!-- Add assignment window -->
-                    <form id="form_add_assignment">
+                    <form id="form_add_assignment" method="post" action="/course/insertExercise" onsubmit="return validateAddAssignment()">
                         <div id="window__add_assignment">
                             <!-- Window header -->
                             <div class="window_header">
@@ -104,30 +112,39 @@
 
                             <!-- Window body -->
                             <div class="window_body">
+                                <input name="assignment_open_time" type="hidden">
+                                <input name="assignment_due_time" type="hidden">
+
                                 <div id="table_add_assignment">
                                     <!-- Assigment name -->
                                     <label for="assignment_name">Assignment name</label>
-                                    <input id="assignment_name" type="text" required />
+                                    <input name="assignment_name" id="assignment_name" type="text"/>
 
                                     <!-- Assignment topic -->
                                     <label for="assignment_topic">Topic</label>
-                                    <select id="assignment_topic"></select>
+                                    <select name="assignment_topic" name id="assignment_topic"></select>
 
                                     <!-- Assignment open -->
                                     <label for="assignment_open_date">Open</label>
-                                    <input id="assignment_open_date" type="date" required />
-                                    <select id="assignment_open_hour"></select>
-                                    <select id="assignment_open_minute"></select>
-
+                                    <input id="assignment_open_date" type="date"/>
+                                    <input id="assignment_open_hour" type="number" min="0" max="23" step="1" onchange="timeChange(this)" onkeydown="hourEnter(event, this)" placeholder="00">
+                                    <input id="assignment_open_minute" type="number" min="0" max="59" step="1" onchange="timeChange(this)" onkeydown="minuteEnter(event, this)" placeholder="00">
+                                   
                                     <!-- Assignment due -->
                                     <label for="assignment_due_date">Due</label>
-                                    <input id="assignment_due_date" type="date" required />
-                                    <select id="assignment_due_hour"></select>
-                                    <select id="assignment_due_minute"></select>
-
+                                    <input id="assignment_due_date" type="date"/>
+                                    <input id="assignment_due_hour" type="number" min="0" max="23" step="1" onchange="timeChange(this)" onkeydown="hourEnter(event, this)" placeholder="00">
+                                    <input id="assignment_due_minute" type="number" min="0" max="59" step="1" onchange="timeChange(this)" onkeydown="minuteEnter(event, this)" placeholder="00">
+                                   
                                     <!-- Assignment description -->
                                     <label for="assignment_description">Description</label>
-                                    <textarea id="assignment_description"></textarea>
+                                    <textarea name="assignment_description" id="assignment_description"></textarea>
+                                
+                                    <!-- Error message -->
+                                    <div id="assignment_error_container">
+                                        <span>Error: </span>
+                                        <span id="assignment_error_message"></span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -148,9 +165,8 @@
                         <ul class="list">
                             {{#each exercise}}
                             <li class="row_icon_link " onclick="submission('{{exercise_id}}')">
-                                <div class="icon submission">
-                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/assign/1697455118/icon"
-                                        alt="">
+                                <div>
+                                    <img class="icon_exercise" src="/images/icon_exercise.png" alt="" height="32px">
                                     <a class="text" href="#">{{exercise_name}}</a>
                                 </div>
                             </li>
@@ -188,7 +204,6 @@
                     </div>
 
                     <div class="list_teacher color_box">
-
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</a>
                         {{#each teacher}}
                         <ul class="list">

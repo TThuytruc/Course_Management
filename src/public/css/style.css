@@ -313,6 +313,12 @@ main
     flex-direction: row;
     width: 100%;
     margin: 8px 0;
+    padding-left: 15px;
+}
+
+.icon_exercise
+{
+    margin-right:-12px;
 }
 
 .title_row
@@ -326,6 +332,7 @@ main
 .topic_description
 {
     color:#973652;
+    white-space: pre-line;
 }
 
 .parent
@@ -455,6 +462,12 @@ li
 {
     margin-top:10px;
     margin-bottom:20px;
+}
+
+.exercise_description
+{
+    font-weight: bold;
+    white-space: pre-line;
 }
 
 .submission_status
@@ -828,21 +841,23 @@ a[download]:hover
 #window__add_topic
 {
     width: 620px;
-    height: 400px;
+    height: 415px;
 }
 
 #table_add_topic
 {
+    margin-top: 15px;
     width:85%;
     display: grid;
     grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 6fr 1fr;
     gap: 9px;
 }
 
 #window__add_assignment
 {
     width: 620px;
-    height: 500px;
+    height: 535px;
 }
 
 #table_add_assignment
@@ -850,6 +865,7 @@ a[download]:hover
     width:85%;
     display: grid;
     grid-template-columns: 2fr 3fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 6fr 1fr;
     gap: 9px;
 }
 
@@ -872,7 +888,6 @@ a[download]:hover
 
 #assignment_description, #topic_description
 {
-    grid-row: span 20;
     padding:10px;
     resize: none;
 }
@@ -881,6 +896,38 @@ a[download]:hover
 {
     outline: none;
 }
+
+#assignment_open_hour, #assignment_open_minute, #assignment_due_hour, #assignment_due_minute
+{
+    text-align: center;
+}
+
+#assignment_open_hour::placeholder, #assignment_open_minute::placeholder, #assignment_due_hour::placeholder, #assignment_due_minute::placeholder
+{
+    color: black;
+}
+
+#assignment_open_hour:focus, #assignment_open_minute:focus, #assignment_due_hour:focus, #assignment_due_minute:focus
+{
+    outline: none;
+}
+
+#topic_error_container, #assignment_error_container
+{
+    color: red;
+    font-size: 14px;
+}
+
+#topic_error_container
+{
+    grid-column: span 2;
+}
+
+#assignment_error_container
+{
+    grid-column: span 4;
+}
+
 #box_scores
 {
     border: 0 solid black;
