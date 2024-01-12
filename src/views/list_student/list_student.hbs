@@ -54,10 +54,21 @@
             <div class="content">
                 <div class="box last_box">
                     <!-- Submission Title -->
-                    <div class="row_content">
+                    <div class="row_content" style="display: flex;   flex-direction: row;justify-content: space-between;">
                         <div class="title_submission">
                             List Student
                         </div>
+                        <div class="dropdown" style=" margin-top: 30px;">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   Sort
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <p class="dropdown-item" onclick="update('mssv')">mssv</p>
+                                    <p class="dropdown-item" onclick="update('name')">name</p>
+                                    <p class="dropdown-item" onclick="update('finalscore')">finalscore</p>
+                                </div>
+                            </div>
                     </div>
                     <!-- Student table -->
                     <table id="teacher_submission_table" class="table table-striped">
