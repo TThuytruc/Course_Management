@@ -78,3 +78,122 @@ async function DeleteAllStudent(id_course)
       }
     console.log("Delete Student");
 }
+async function deleteUser(user_id, course_id, userType){
+  var message = 'Are you sure to delete this ' + userType + '?';
+  document.getElementById('del_description').textContent = message;
+
+  document.getElementById('dl_user_id').value = user_id;
+  document.getElementById('dl_course_id').value = course_id;
+    
+  $('#modal-user-delete').modal('show');
+}
+async function DeleteOneUser(){
+  const user_id = document.getElementById('dl_user_id').value;
+  const course_id = document.getElementById('dl_course_id').value;
+  console.log(course_id);
+  console.log(user_id);
+  const response = await fetch('/admin/deleteUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({course_id:course_id, user_id:user_id})
+    });
+  
+  if (response.ok) {
+    const result = await response.json();
+    console.log('Server response:', result);
+
+    // Remove the user from the teacher table
+    var userRowInTeacherTable = document.getElementById('teacher-' + user_id);
+    if (userRowInTeacherTable) {
+      userRowInTeacherTable.remove();
+    }
+
+    // Remove the user from the student table
+    var userRowInStudentTable = document.getElementById('student-' + user_id);
+    if (userRowInStudentTable) {
+      userRowInStudentTable.remove();
+    }
+  } else {
+    console.error('Failed to send data to server');
+  }
+  console.log("Delete User");
+  CloseDialog();
+  location.reload();
+}
+async function addUser(currentCount, maxCount, userType) {
+  // Update the user type, current count and max count
+  if(userType=='student'){
+  document.getElementById('userType').value = 'student';
+  document.getElementById('currentCount').textContent = 'Number of students: ' + currentCount;
+  document.getElementById('maxCount').textContent = 'Max number of students: ' + maxCount;
+  }
+  else{
+    document.getElementById('currentCount').textContent = 'Number of teachers: ' + currentCount;
+    document.getElementById('userType').textContent = 'teacher';
+  }
+  
+  // Show the modal
+  $('#modal-user-add').modal('show');
+}
+
+async function addTeacher(course_id, user_id)
+{   
+  const response = await fetch('/admin/addTeacher', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({course_id:course_id, user_id:user_id})
+    });
+  
+    if (response.ok) {
+      const result = await response.json();
+      console.log('Server response:', result);
+    } else {
+      console.error('Failed to send data to server');
+    }
+  console.log("Add Teacher");
+}
+async function addStudent(course_id, user_id)
+{   
+
+  const response = await fetch('/admin/addStudent', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({course_id:course_id, user_id:user_id})
+    });
+  
+    if (response.ok) {
+      const result = await response.json();
+      console.log('Server response:', result);
+    } else {
+      console.error('Failed to send data to server');
+    }
+  console.log("Add Student");
+}
+async function Add(course_id){
+  event.preventDefault();
+  const user_id_string = document.getElementById('userIdInput').value;
+  const user_id = parseInt(user_id_string, 10);
+  if (isNaN(user_id)) {
+      console.error('Invalid user ID');
+      return;
+  }
+  console.log(user_id);
+  const userType = document.getElementById('userType').value;
+  if(userType == 'student'){
+    addStudent(course_id,user_id);
+    console.log("student");
+  }else if(userType == 'teacher'){
+    addTeacher(course_id,user_id);
+    console.log("teacher");
+  }else{
+    console.error('Invalid user type');
+  }
+  CloseDialog();
+  location.reload();
+}

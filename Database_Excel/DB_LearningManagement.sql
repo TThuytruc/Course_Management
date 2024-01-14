@@ -163,3 +163,24 @@ BEGIN
     DELETE FROM Course WHERE Course_id = course_id_param;
 END;
 $$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION delete_user(course_id_param INTEGER, user_id_param INTEGER)
+RETURNS VOID AS $$
+BEGIN
+    EXECUTE 'DELETE FROM Course_Student WHERE Course_id = $1 AND User_id = $2' USING course_id_param, user_id_param;
+    EXECUTE 'DELETE FROM Course_Teacher WHERE Course_id = $1 AND User_id = $2' USING course_id_param, user_id_param;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION add_teacher(course_id_param INTEGER, user_id_param INTEGER)
+RETURNS VOID AS $$
+BEGIN
+    EXECUTE 'INSERT INTO Course_Teacher (Course_id, User_id) VALUES ($1, $2)' USING course_id_param, user_id_param;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION add_student(course_id_param INTEGER, user_id_param INTEGER)
+RETURNS VOID AS $$
+BEGIN
+    EXECUTE 'INSERT INTO Course_Student (Course_id, User_id) VALUES ($1, $2)' USING course_id_param, user_id_param;
+END;
+$$ LANGUAGE plpgsql;

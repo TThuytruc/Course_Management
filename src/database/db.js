@@ -373,4 +373,55 @@ module.exports = {
             }
         }
     },
+    DeleteUser:async(courseId, userId)=>{
+        let dbcn = null;
+
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT delete_user($1, $2)'
+            await dbcn.any(query, [courseId, userId]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    addStudent:async(courseId, userId)=>{
+        let dbcn = null;
+        
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT add_student($1, $2)'
+            await dbcn.any(query, [courseId, userId]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    addTeacher:async(courseId, userId)=>{
+        let dbcn = null;
+
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT add_teacher($1, $2)'
+            await dbcn.any(query, [courseId, userId]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    }
 };
