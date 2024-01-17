@@ -37,4 +37,12 @@ module.exports = class Submission {
             throw error;
         }
     }
+    static async update_score_for_submission(user_id, exercise_id, score) {
+        try {
+            await db.updateScoreForSubmission(user_id,exercise_id, score);
+        }
+        catch (error) {
+             throw error;
+        }
+    }
 };

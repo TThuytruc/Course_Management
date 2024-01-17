@@ -190,3 +190,12 @@ VALUES
 (1, 'Exercise 02: Estimate', '2023-11-08 09:00:00', '2024-01-14 23:59:00', NULL),
 (2, 'Use case', '2023-11-02 14:15:00', '2024-01-03 10:00:00', 'Create use-case specification for the exercise in slide 42.'),
 (3, 'Project 01 - Socket', '2023-11-02 07:00:00', '2024-01-05 22:30:00', 'If files are too large, upload to Google Drive and submit the .txt file containing the link');
+
+INSERT INTO Submission (User_id, Exercise_id, SubmissionTime, SubmissionFile)
+VALUES
+('4', '4','2024-01-05 22:00:00', 'test1.txt'),
+('5', '4','2024-01-05 22:00:00', 'test2.txt'),
+('6', '4','2024-01-05 22:00:00', 'test3.txt'),
+('7', '4','2024-01-05 22:00:00', 'test4.txt'),
+('8', '4','2024-01-05 22:00:00', 'test5.txt'),
+('9', '4','2024-01-05 22:00:00', 'test6.txt');

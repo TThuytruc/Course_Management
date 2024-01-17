@@ -122,11 +122,13 @@ class TeacherController {
                 mergedArray.push(mergedItem);
             }
         });
+        // console.log('mergedArray', mergedArray); //mergedArray is array of Submission object
         let totalGraded = 0;
         for (let j = 0; j < submissions.length; j++) {
             if (submissions[j].score !== null)
                 totalGraded++;
         }
+        mergedArray.sort((a,b) => a.user_id - b.user_id)
         const dataRender = {
             user: user[0],
             courseInfo: course[0],
@@ -138,7 +140,8 @@ class TeacherController {
             numberofStudent: numberofStudent,
             submissions: mergedArray,
             totalSubmissions: totalSubmissions,
-            totalGraded: totalGraded
+            totalGraded: totalGraded,
+            exerciseid,
         };
         res.render('teacher/submission', dataRender);
     }
@@ -210,6 +213,24 @@ class TeacherController {
             res.status(500).json({ error: 'Internal server error.' });
         }
 
+    }
+
+    async submissionImportScore(req, res) {
+        try {
+            //user_id, exercise_id, score
+            const submissions = req.body;
+            submissions.forEach(async (submisison) =>  {
+                const user_id = submisison.user_id;
+                const exercise_id = submisison.exercise_id;
+                const score = submisison.score;
+                await Submission.update_score_for_submission(user_id,exercise_id,score);
+            })
+            res.status(200).json(submissions);
+        } catch (error) {
+        // console.log('req.body', req.body);
+            res.status(500).json({status: 'Invalid information'});
+            throw error;
+        }
     }
 }
 

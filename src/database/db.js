@@ -423,5 +423,22 @@ module.exports = {
                 dbcn.done();
             }
         }
+    },
+    updateScoreForSubmission: async(user_id, exercise_id, score) => {
+        let dbcn = null;
+
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT update_score_for_submission($1, $2, $3)'
+            await dbcn.any(query, [user_id, exercise_id, score]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
     }
 };
