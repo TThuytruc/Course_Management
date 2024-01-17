@@ -70,6 +70,9 @@
                 <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;" onclick="addUser('{{numberofteacher}}','','teacher')">Add</button>
                 <button class="btn btn-secondary" style="width: 100px; height: 40px;"
                     onclick="DeleteAll('teacher','{{id_course}}')">Delete All</button>
+                <input type="file" id="file_listTeacher" name="excelFileTeacher" accept=".xlsx, .xls" onchange="importExcelTeacher()" style="display:none">
+                <label for="file_listTeacher" class="btn btn-secondary" 
+                    style="width: 100px; height: 40px; margin-bottom: 1.5px">Import</label>
             </span>
 
             <h1 class="text-dark" style="margin-top: 25px">List of students</h1>
@@ -98,6 +101,10 @@
                 <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;" onclick="addUser('{{numberofstudent}}','{{maxnumberofstudent}}','student')">Add</button>
                 <button class="btn btn-secondary" style="width: 100px; height: 40px;"
                     onclick="DeleteAll('student','{{id_course}}')">Delete All</button>
+                <input type="file" id="file_submission" name="excelFile" accept=".xlsx, .xls" onchange="importExcel()">
+                <label for="file_submission" class="btn btn-secondary" 
+                    style="width: 100px; height: 40px; margin-bottom: 1.5px">Import</label>
+
             </span>
         </div>
     </main>
@@ -110,17 +117,20 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="CloseDialog()" style="border:0; background-color:white">X</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="CloseDialog()" style="border:0; background-color:white">X</button>
                 </div>
                 <div class="modal-body">
                     <form method="post" id="deleteForm">
                         <p id="delete_description">Are you sure to delete this course?</p>
-                        <input type="hidden" id="courseIdInput" name="id_course" value="">
+                        <input type="hidden" id="courseIdInput" name="id_course" value="{{id_course}}">
                         <input type="hidden" id="personIdInput" name="name_Person" value="">
                       
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="CloseDialog()">Close</button>
-                            <button type="button" class="btn btn-primary" style="background-color: red;" onclick="DeleteAcction()">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                onclick="CloseDialog()">Close</button>
+                            <button type="button" class="btn btn-primary" style="background-color: red;"
+                                onclick="DeleteAcction()">Delete</button>
                         </div>
                     </form>
                 </div>
@@ -185,10 +195,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
     <script src="/js/admin_course.js"></script>
-
-    <!-- <script src="./myscript.js">
-    </script> -->
 </body>
 
 </html>

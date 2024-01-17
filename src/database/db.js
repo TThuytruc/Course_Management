@@ -1,5 +1,6 @@
 require('dotenv').config();
 const fs = require('fs');
+const XLSX = require('xlsx');
 // const { as } = require('pg-promise');
 const pgp = require('pg-promise')({
     capSQL: true
@@ -53,29 +54,7 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `SELECT * FROM ${tbName} WHERE ${tbColum}='${value}'`;
-            // console.log(query);
-            dbcn = await db.connect();
-
-            const data = await dbcn.any(query);
-
-            // console.log(data);
-            return data;
-        }
-        catch (error) {
-            throw error;
-        }
-        finally {
-            if (dbcn != null) {
-                dbcn.done();
-            }
-        }
-    },
-
-    delete: async (tbName, tbColum, value) => {
-        let dbcn = null;
-        try {
-            const query = `DELETE FROM ${tbName} WHERE ${tbColum}='${value}'`;
-            // console.log(query);
+            console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
@@ -94,42 +73,12 @@ module.exports = {
     },
 
     insert: async (tbName, entity, idreturn) => {
-        let dbcn = null;
-        try {
-            const query = pgp.helpers.insert(entity, null, tbName);
-            // console.log(query);
-            dbcn = await db.connect();
-            const data = await dbcn.one(query + ` RETURNING ${idreturn}`);
-            return data
-        }
-        catch (error) {
-            throw error;
-        }
-        finally {
-            if (dbcn != null) {
-                dbcn.done();
-            }
-        }      
+        const query = pgp.helpers.insert(entity, null, tbName);
+        // console.log(query);
 
-    },
-    
-    update: async (tbName, entity, tbColumn, value) => {
-        let dbcn = null;
-        try {
-            const query = pgp.helpers.update(entity, null, tbName);
-            // console.log(query);
-            dbcn = await db.connect();
-            const data = await dbcn.oneOrNone(query + `WHERE ${tbColumn} = '${value}'`);
-            return data
-        }
-        catch (error) {
-            throw error;
-        }
-        finally {
-            if (dbcn != null) {
-                dbcn.done();
-            }
-        }  
+        const data = await db.one(query + ` RETURNING ${idreturn}`);
+
+        return data;
     },
 
     getAllInforUser: async () => {
@@ -162,7 +111,7 @@ module.exports = {
             dbcn = await db.connect();
 
             const data = await dbcn.any(query, [accountId]);
-            // console.log(data[0].get_user_with_account_id);
+            console.log(data[0].get_user_with_account_id);
             const resultString = data[0].get_user_with_account_id;
             const matches = resultString.match(/\(([^)]+)\)/);
             const values = matches[1].split(',');
@@ -173,28 +122,8 @@ module.exports = {
                 user_name: values[2].replace(/"/g, ''), // Remove double quotes from the name
                 user_role: values[3].replace(/"/g, ''), // Remove double quotes from the role
             };
-            // console.log(userObject);
+            console.log(userObject);
             return userObject;
-        }
-        catch (error) {
-            throw error;
-        }
-        finally {
-            if (dbcn != null) {
-                dbcn.done();
-            }
-        }
-    },
-    
-    getAccountWithId: async (id) => {
-        let dbcn = null;
-        try {
-            const query = `SELECT * FROM account WHERE account_id = $1`;
-            // console.log(query);
-            dbcn = await db.connect();
-
-            const data = await dbcn.any(query, [id]);
-            return data[0];
         }
         catch (error) {
             throw error;
@@ -210,7 +139,7 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `select count(*) from ${tbName} where ${tbColum}='${tbValue}' `;
-            // console.log(query);
+            console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
@@ -271,27 +200,6 @@ module.exports = {
         }
     },
 
-    deleteAllInforInCourse: async (courseId, nameTable) => {
-        let dbcn = null;
-
-        try {
-            const query = `delete from ${nameTable} where course_id='${courseId}'`;
-
-            dbcn = await db.connect();
-
-            const data = await dbcn.any(query);
-            return data;
-        }
-        catch (error) {
-            throw error;
-        }
-        finally {
-            if (dbcn != null) {
-                dbcn.done();
-            }
-        }
-    },
-
     getFinalScore: async (courseId, userId) => {
         let dbcn = null;
 
@@ -314,14 +222,17 @@ module.exports = {
         }
     },
 
-    deleteCourse: async (courseId) => {
+    importDataFromExcel: async (object) => {
         let dbcn = null;
-
         try {
+        
+          for (const stundet of object.students) {
+            const query = `INSERT INTO Course_Student(Course_id, User_id) VALUES ($1, $2)`;
+            const values = [object.id, stundet]; 
             dbcn = await db.connect();
-            const query = 'SELECT delete_course($1)'
-            await dbcn.any(query, [courseId]);
-        }
+            await dbcn.query(query, values);
+          }
+        } 
         catch (error) {
             throw error;
         }
@@ -330,6 +241,7 @@ module.exports = {
                 dbcn.done();
             }
         }
+<<<<<<< HEAD
     },
     getTwoCondition: async (tbName, tbColum1,tbColum2, value1,value2) => {
         let dbcn = null;
@@ -441,4 +353,7 @@ module.exports = {
             }
         }
     }
+=======
+      },
+>>>>>>> 4cc285fc60211952c19b17b3852d96c3ec894f30
 };
