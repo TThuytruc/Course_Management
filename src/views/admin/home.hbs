@@ -119,18 +119,29 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/course/insert" method="post">
+                    <form id="form-course-insert" action="/course/insert" method="post">
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Course name:</label>
                             <input type="text" name="course_name" class="form-control" id="recipient-name">
                         </div>
+                        <div id="course_name-error" class="alert alert-danger"></div>
                         <div class="mb-3">
                             <label for="quaty" class="col-form-label">Max Number Of Student:</label>
                             <input type="text" name="maxnumberofstudent" class="form-control" id="quaty">
                         </div>
+                        <div id="maxnumberofstudent-error" class="alert alert-danger">Max Number Of Student should be greater than zero!</div>
+
                         <div class="mb-3">
                             <label for="quaty" class="col-form-label">Schedule:</label>
-                            <input type="text" name="schedule" class="form-control" id="quaty">
+                            {{!-- <input type="text" name="schedule" class="form-control" id="quaty"> --}}
+                            <select style="text-align: center;" name="schedule" id="">
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                            </select>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -154,6 +165,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="/js/course_student.js"></script>
+    <script src="/js/admin_home.js"></script>
     <!-- <script src="./myscript.js">
     </script> -->
 
@@ -161,7 +173,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <script src="/js/admin_home.js"></script>
 </body>
 
 </html>
