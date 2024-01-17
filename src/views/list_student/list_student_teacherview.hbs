@@ -19,21 +19,32 @@
 </head>
 
 <body>
-    {{>header username = user.user_name}}
+    {{>header}}
 
 
     <main>
         <!-- Logo -->
         <div class="row_content img_language">
             <div class="img_university">
-                <img src="" alt="Logo">
+                <img src="#" alt="Logo">
             </div>
         </div>
-
         <!-- Course -->
         <div class="box title_course">
             <div class="name_course">
-               {{courseInfo.course_name}}              
+                {{course_name}} </div>
+
+            <div class="link_current_page">
+                <a class="link_page" href="#">Home</a>
+                <p class="slash"> / </p>
+
+                <a href="#" class="link_page">{{course_name}}</a>
+                <p class="slash"> / </p>
+
+                <a href="#" class="link_page">Project</a>
+                <p class="slash"> / </p>
+
+                <a href="#" class="link_page">PA1 - Submission - Filename: GroupID.zip - Ex: Group02.zip3</a>
             </div>
         </div>
 
@@ -44,87 +55,71 @@
                     <!-- Submission Title -->
                     <div class="row_content">
                         <div class="title_submission">
-                           {{exercise.exercise_name}}
+                            List Student
                         </div>
-
-                        <div class="time">
-                            <div>
-                                <span style="font-weight: bold; margin-right: 5px;">Opened:</span>
-                                <span>{{exercise.opentime}}</span>
-                            </div>
-                            <div>
-                                <span style="font-weight: bold; margin-right: 35px;">Due:</span>
-                                <span>{{exercise.duetime}}</span>
-                            </div>
-                        </div>
-
-                        <div class="exercise_description">{{exercise.description}}</div>
                     </div>
-
-                    <!-- Submission table -->
-                    <div class="submissions">Submissions</div>
-                    <div><strong>Total submissions: {{totalSubmissions}} </strong></div>
-                    <div><strong>Total graded: {{totalGraded}} </strong></div>
-                    <br>
+                    <!-- Student table -->
                     <table id="teacher_submission_table" class="table table-striped">
-                        <thead class = "thead-dark">
+                        <thead>
                             <tr>
-                                <th>File submission</th>
+                                <th>MSSV</th>
                                 <th>Student name</th>
-                                <th>Last modified</th>
-                                <th>Grade</th>
+                                <th>Email</th>
+                                <th>Final Score</th>
                             </tr>
                         </thead>
-                        <tbody>
-                           {{#each submissions}}
-
-                                <tr>
-                                    <td><a class="file_name" href="#" id="downloadLink">{{this.submissionfile}}</a></td>
-                                    <td>{{this.user_name}}</td>
-                                    <td>{{this.submissiontime}}</td>
-                                    <td>
-                                        <input type="number" class="score"   data-finalscore="{{this.score}}" data-student-id="{{this.user_id}}" data-exercise-id="{{../exercise.exercise_id}}" name="score" min="0" max="10" step="0.1" onkeydown="updateAllScores(event)" value="{{this.score}}"></input>
-                                    </td>
-                                </tr>
+                        <tbody id="list_student">
+                            {{#each array}}
+                            <tr>
+                                <td>{{this.user_id}}</td>
+                                <td>{{this.user_name}}</td>
+                                <td>{{this.account_email}}</td>
+                                <td><input type="number" class="score" data-score="{{this.finalscore}}" data-student-id="{{this.user_id}}" data-course-id="{{../course_id}}" name="score" min="0" max="10" step="0.1" onkeydown="updateAllScores(event)" value="{{this.finalscore}}"></input></td>
+                            </tr>
                             {{/each}}
                         </tbody>
                     </table>
-                    <div class="btn_dowload ">
-                        <button id="btn_download-all" class="btn-secondary" onclick="downloadAll('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{courseInfo.course_id}}')">Download All</button>
-                    </div>
                 </div>
             </div>
 
             <!-- Side -->
+
             <div class="side">
                 <div class="box list_people">
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course ID</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="id-class">{{courseInfo.course_id}}</a> </strong></h5>
+                        <h5><strong><a class="id-class">{{course_id}}</a> </strong></h5>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course name</a>
                     </div>
-    
+
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="course_name">{{courseInfo.course_name}}</a></strong></h5>
+                        <h5><strong><a class="course_name">{{course_name}}</a></strong></h5>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Schedule</a>
+                    </div>
+                    <div class="home_side_inf_box home_side_content_box">
+                        <h5><strong><a class="schedule">{{schedule}}</a> </strong></h5>
+                    </div>
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Teachers</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">{{numberofTeacher}}</a> </strong></h5>
-                    </div>  
-                    
+                        <h5><strong><a class="number-lecturers">{{numberofteacher}}</a> </strong></h5>
+                    </div>
                     <div class="list_teacher color_box">
                         <strong class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</strong>
                         <ul class="list">
-                            {{#each teachers}}  
+                            {{#each teachers}}
                             <li class="member">
                                 <div class="teacher">
-                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
+                                    <img style="margin-left:2%"
+                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
+                                        alt="Teacher">
                                     <div class="name_teacher">
                                         <p class="name">{{this.user_name}}</p>
                                     </div>
@@ -133,30 +128,19 @@
                             {{/each}}
                         </ul>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">{{numberofStudent}}</a> </strong></h5>
+                        <h5><strong><a class="number-lecturers">{{numberofstudent}}</a> </strong></h5>
                     </div>
-                    <div class="home_side_header_box"> 
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">List Students</a>
-                    </div>
-                    <div class="home_side_inf_box home_side_content_box">
-                        <div class="icon title_text">
-                            <a class="text link_group_people" href="#" onclick="showListStudent(1)">Show participants list</a>
-                        </div>
-                    </div>
-                    
                 </div>
-                
             </div>
         </div>
     </main>
 
 
     {{>footer}}
-
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -167,10 +151,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="../js/teacher_submission.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="/js/list_student.js"></script>
-        <!-- <script src="./myscript.js">
+    <!-- <script src="./myscript.js">
 
     </script> -->
 </body>

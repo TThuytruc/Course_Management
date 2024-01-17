@@ -184,3 +184,19 @@ BEGIN
     EXECUTE 'INSERT INTO Course_Student (Course_id, User_id) VALUES ($1, $2)' USING course_id_param, user_id_param;
 END;
 $$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION update_score(exercise_id_param INTEGER, user_id_param INTEGER, score_param DECIMAL)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE Submission 
+    SET Score = score_param
+    WHERE Exercise_id = exercise_id_param AND  User_id = user_id_param;
+END;
+$$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION update_finalscore(course_id_param INTEGER, user_id_param INTEGER, score_param DECIMAL)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE Course_Student 
+    SET FinalScore = score_param
+    WHERE Course_id = course_id_param AND  User_id = user_id_param;
+END;
+$$ LANGUAGE plpgsql;
