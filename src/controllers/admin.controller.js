@@ -62,22 +62,35 @@ class AdminController {
     }
 
     async importExcelFile(req, res) {
-        upload.single('file')(req, res, function (err) {
-            if (err) {
-                console.error('Lỗi khi tải lên file:', err);
-                return res.status(500).json({ error: 'Error uploading files.' });
+        const receivedArray = req.body.data;
+        console.log(receivedArray.id);
+         try {
+            for (const student of receivedArray.students) {
+                // console.log(student[0]);
+               const dataInsert= new Course_Student({ course_id:receivedArray.id, user_id:student[0],FinalScore:null})
+               await Course_Student.insert(dataInsert);
             }
-        })
-
-        const filePath = req.file.path; // Đường dẫn tới file Excel đã được tải lên
-        try {
-            await db.importDataFromExcel(filePath);
+            console.log("Success");
             res.json({ success: true });
         } catch (error) {
             res.status(500).json({ success: false, error: error.message });
         }
     }
-
+    async importExcelFileTeacher(req, res) {
+        const receivedArray = req.body.data;
+        console.log(receivedArray.id);
+         try {
+            for (const student of receivedArray.students) {
+                // console.log(student[0]);
+               const dataInsert= new Course_Teacher({ course_id:receivedArray.id, user_id:student[0]})
+               await Course_Teacher.insert(dataInsert);
+            }
+            console.log("Success");
+            res.json({ success: true });
+        } catch (error) {
+            res.status(500).json({ success: false, error: error.message });
+        }
+    }
 }
 
 module.exports = new AdminController;

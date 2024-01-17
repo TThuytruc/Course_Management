@@ -10,6 +10,8 @@ router.get('/home', adminController.home);
 router.post('/deleteAllTeacher',adminController.DeleteAllTeacher);
 router.post('/deleteAllStudent',adminController.DeleteAllStudent);
 router.post('/import', adminController.importExcelFile);
+router.post('/importTeacher', adminController.importExcelFileTeacher);
+
 
 // req.params.slug
 

@@ -74,7 +74,7 @@ module.exports = {
 
     insert: async (tbName, entity, idreturn) => {
         const query = pgp.helpers.insert(entity, null, tbName);
-        console.log(query);
+        // console.log(query);
 
         const data = await db.one(query + ` RETURNING ${idreturn}`);
 
@@ -85,7 +85,7 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `select user_.user_id,account.account_email,user_.user_name  from account  join user_  on account.account_id=user_.account_id`;
-            console.log(query);
+            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
@@ -222,18 +222,13 @@ module.exports = {
         }
     },
 
-    importDataFromExcel: async (filePath) => {
+    importDataFromExcel: async (object) => {
         let dbcn = null;
         try {
-          const workbook = XLSX.readFile(filePath);
-          const firstSheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[firstSheetName];
-          const jsonData = XLSX.utils.sheet_to_json(worksheet);
-      
-          for (let i = 0; i < jsonData.length; i++) {
-            const row = jsonData[i];
+        
+          for (const stundet of object.students) {
             const query = `INSERT INTO Course_Student(Course_id, User_id) VALUES ($1, $2)`;
-            const values = [row.column1, row.column2]; 
+            const values = [object.id, stundet]; 
             dbcn = await db.connect();
             await dbcn.query(query, values);
           }

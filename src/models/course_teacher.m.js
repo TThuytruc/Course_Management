@@ -2,7 +2,7 @@ const db = require('../database/db');
 const tbName = 'course_teacher';
 module.exports = class Course_Teacher {
 
-    constructor({ user_id, course_id }) {
+    constructor({  course_id,user_id }) {
         this.user_id = user_id;
         this.course_id = course_id;
     }

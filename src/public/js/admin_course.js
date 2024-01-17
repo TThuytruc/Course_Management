@@ -76,20 +76,88 @@ async function DeleteAllStudent(id_course) {
 async function importExcel() {
   const input = document.getElementById('file_submission');
   const file = input.files[0];
+  if (file) {
+    const reader = new FileReader();
 
-  const formData = new FormData();
-  formData.append('excelFile', file);
+    reader.onload = function (e) {
+      const data = e.target.result;
+      const workbook = XLSX.read(data, { type: 'binary' });
 
-  fetch('/import', {
-    method: 'POST',
-    body: formData
-  })
-    .then(response => response.json())
-    .then(data => {
-      // Xử lý dữ liệu trả về từ server (nếu có)
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+      // Lấy thông tin từ sheet đầu tiên
+      const sheetName = workbook.SheetNames[0];
+      const sheet = workbook.Sheets[sheetName];
+      // Chuyển đổi dữ liệu từ sheet sang JSON
+      const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+      // Bỏ qua dòng header (nếu có) và in ra dữ liệu
+      const dataWithoutHeader = jsonData.slice(1);
+      const id = document.getElementById('courseIdInput').value;
+
+      const dataSendSever = {
+        id: id,
+        students: dataWithoutHeader
+      };
+      fetch('/admin/import', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: dataSendSever }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Xử lý dữ liệu trả về từ server (nếu có)
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
+    };
+    reader.readAsBinaryString(file);
+  }
+
 }
 
+async function importExcelTeacher()
+{
+  const input = document.getElementById('file_listTeacher');
+  const file = input.files[0];
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const data = e.target.result;
+      const workbook = XLSX.read(data, { type: 'binary' });
+
+      // Lấy thông tin từ sheet đầu tiên
+      const sheetName = workbook.SheetNames[0];
+      const sheet = workbook.Sheets[sheetName];
+      // Chuyển đổi dữ liệu từ sheet sang JSON
+      const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+      // Bỏ qua dòng header (nếu có) và in ra dữ liệu
+      const dataWithoutHeader = jsonData.slice(1);
+      const id = document.getElementById('courseIdInput').value;
+
+      const dataSendSever = {
+        id: id,
+        students: dataWithoutHeader
+      };
+      fetch('/admin/importTeacher', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: dataSendSever }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Xử lý dữ liệu trả về từ server (nếu có)
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
+    };
+    reader.readAsBinaryString(file);
+  }
+
+}
