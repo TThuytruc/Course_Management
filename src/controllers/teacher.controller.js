@@ -45,6 +45,7 @@ class TeacherController {
         dataTopic.forEach(async (topic) => {
             const data = await Exercise.getCondition('topic_id', topic.topic_id);
             topic['exercise'] = data;
+            console.log(topic);
         });
 
 
@@ -82,8 +83,8 @@ class TeacherController {
         const user = await User.getCondition('user_id', userid);
 
         const exercise = await Exercise.getCondition('exercise_id', exerciseid);
-        exercise[0].opentime = moment(exercise[0].opentime).format('dddd, D MMMM YYYY, HH:mm');
-        exercise[0].duetime = moment(exercise[0].duetime).format('dddd, D MMMM YYYY, HH:mm');
+        exercise[0].opentime = moment(exercise[0].opentime).format('dddd, D MMMM YYYY, h:mm');
+        exercise[0].duetime = moment(exercise[0].duetime).format('dddd, D MMMM YYYY, h:mm');
 
         const topic = await Topic.getCondition('topic_id', exercise[0].topic_id);
         const courseid = topic[0].course_id;
@@ -112,7 +113,7 @@ class TeacherController {
             student_submissions.push(student[0]);
             submissions.push(submission[j]);
         }
-        const totalSubmissions = exercise_sub.length
+        const totalSubmissions = exercise_sub.length;
         const mergedArray = [];
 
         submissions.forEach(item1 => {
@@ -122,6 +123,7 @@ class TeacherController {
                 mergedArray.push(mergedItem);
             }
         });
+        submissions.sort((a, b) => a.user_id - b.user_id);
         let totalGraded = 0;
         for (let j = 0; j < submissions.length; j++) {
             if (submissions[j].score !== null)
@@ -210,6 +212,13 @@ class TeacherController {
             res.status(500).json({ error: 'Internal server error.' });
         }
 
+    }
+    async updateScore(req,res,next){
+        const exercise_id = req.body.data.exercise_id;
+        const user_id = req.body.data.user_id;
+        const score = req.body.data.score;
+        await db.UpdateScore(exercise_id,user_id,score);
+        res.json({message: 'ok'});
     }
 }
 

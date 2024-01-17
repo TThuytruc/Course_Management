@@ -373,4 +373,88 @@ module.exports = {
             }
         }
     },
+    DeleteUser:async(courseId, userId)=>{
+        let dbcn = null;
+
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT delete_user($1, $2)'
+            await dbcn.any(query, [courseId, userId]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    addStudent:async(courseId, userId)=>{
+        let dbcn = null;
+        
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT add_student($1, $2)'
+            await dbcn.any(query, [courseId, userId]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    addTeacher:async(courseId, userId)=>{
+        let dbcn = null;
+
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT add_teacher($1, $2)'
+            await dbcn.any(query, [courseId, userId]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    UpdateScore: async (excercise_id, user_id, score) =>{
+        let dbcn = null;
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT update_score($1, $2, $3)';
+            await dbcn.any(query, [excercise_id, user_id, score]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    UpdateFinalScore: async (course_id, user_id, score) =>{
+        let dbcn = null;
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT update_finalscore($1, $2, $3)';
+            console.log(user_id);
+            await dbcn.any(query, [course_id, user_id, score]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    }
 };

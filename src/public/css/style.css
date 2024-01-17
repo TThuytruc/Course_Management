@@ -949,3 +949,6 @@ a[download]:hover
     display:flex;
     width: 100%;
 }
+.score {
+    text-align: center;
+}
