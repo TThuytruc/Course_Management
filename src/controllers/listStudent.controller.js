@@ -8,14 +8,20 @@ class ListStudentController {
         const id_course = req.query.course_id;
         const id_user = req.session.user_id;
         const user = await User.getCondition('user_id',id_user);
-        console.log(user[0].user_name);
+        // console.log(user[0]);
         const dataUserAccount = await db.getAllInforUser();
         const listIDStudent = await Course_student.getCondition('course_id', id_course);
+        // console.log(listIDStudent);
         const dataReturn = dataUserAccount.filter(objA => listIDStudent.some(objB => objB.user_id === objA.user_id));
         let count = 0;
         for (const item of dataReturn) {
-            item['finalscore'] = listIDStudent[count].finalscore;
-            ++count;
+            for(const student of listIDStudent)
+            {
+                if(item.user_id===student.user_id)
+                {
+                    item['finalscore'] = student.finalscore;
+                }
+            }
         }
         // console.log(dataReturn);
         count = 0;
@@ -29,7 +35,7 @@ class ListStudentController {
             listTeacher.push(obj);
         }
         let student = await db.countItem('course_student', 'course_id', id_course);
-        console.log(student);
+        // console.log(student);
         student = student[0].count;
         let teacher = await db.countItem('course_teacher', 'course_id', id_course);
         teacher = teacher[0].count;
@@ -52,7 +58,7 @@ class ListStudentController {
     async updateFinalScore(req,res,next){
         const course_id = req.body.data.course_id;
         const user_id = req.body.data.user_id;
-        console.log(user_id);
+        // console.log(user_id);
         const score = req.body.data.score;
         await db.UpdateFinalScore(course_id,user_id,score);
         res.json({message: 'ok'});
