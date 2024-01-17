@@ -91,7 +91,7 @@ async function importExcel() {
       // Bỏ qua dòng header (nếu có) và in ra dữ liệu
       const dataWithoutHeader = jsonData.slice(1);
       const id = document.getElementById('courseIdInput').value;
-
+      const list_student= document.getElementById('list_student');
       const dataSendSever = {
         id: id,
         students: dataWithoutHeader
@@ -105,6 +105,7 @@ async function importExcel() {
       })
         .then(response => response.json())
         .then(data => {
+          location.reload();
           // Xử lý dữ liệu trả về từ server (nếu có)
         })
         .catch(error => {
@@ -150,6 +151,7 @@ async function importExcelTeacher()
       })
         .then(response => response.json())
         .then(data => {
+          location.reload();
           // Xử lý dữ liệu trả về từ server (nếu có)
         })
         .catch(error => {
