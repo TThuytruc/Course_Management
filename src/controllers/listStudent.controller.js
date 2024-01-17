@@ -1,14 +1,10 @@
 const Course_student = require('../models/course_student.m');
 const Course_teacher = require('../models/course_teacher.m')
 const Course = require('../models/course.m');
-const User = require('../models/users.m')
 const db = require('../database/db')
 class ListStudentController {
     async index(req, res, next) {
         const id_course = req.query.course_id;
-        const id_user = req.session.user_id;
-        const user = await User.getCondition('user_id',id_user);
-        console.log(user[0].user_name);
         const dataUserAccount = await db.getAllInforUser();
         const listIDStudent = await Course_student.getCondition('course_id', id_course);
         const dataReturn = dataUserAccount.filter(objA => listIDStudent.some(objB => objB.user_id === objA.user_id));
@@ -29,34 +25,23 @@ class ListStudentController {
             listTeacher.push(obj);
         }
         let student = await db.countItem('course_student', 'course_id', id_course);
-        console.log(student);
+        // console.log(student);
         student = student[0].count;
         let teacher = await db.countItem('course_teacher', 'course_id', id_course);
         teacher = teacher[0].count;
         
         const listStudent = {
-            user:user[0],
             array: dataReturn,
             course_id: dataCourse.course_id,
             course_name: dataCourse.course_name,
             numberofteacher:teacher,
             numberofstudent:student,
             schedule: dataCourse.schedule,
-            teachers: listTeacher
+            teachers: listTeacher,
+            username:'Admin'
         };
-        if(user[0].user_role == 'student'){
-            res.render('list_student/list_student_studentview', listStudent);
-        } else res.render('list_student/list_student_teacherview', listStudent);
-       
+        res.render('list_student/list_student', listStudent);
     };
-    async updateFinalScore(req,res,next){
-        const course_id = req.body.data.course_id;
-        const user_id = req.body.data.user_id;
-        console.log(user_id);
-        const score = req.body.data.score;
-        await db.UpdateFinalScore(course_id,user_id,score);
-        res.json({message: 'ok'});
-    }
 }
 
 module.exports = new ListStudentController();

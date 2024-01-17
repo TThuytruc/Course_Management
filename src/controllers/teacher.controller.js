@@ -45,7 +45,6 @@ class TeacherController {
         dataTopic.forEach(async (topic) => {
             const data = await Exercise.getCondition('topic_id', topic.topic_id);
             topic['exercise'] = data;
-            console.log(topic);
         });
 
 
@@ -83,8 +82,8 @@ class TeacherController {
         const user = await User.getCondition('user_id', userid);
 
         const exercise = await Exercise.getCondition('exercise_id', exerciseid);
-        exercise[0].opentime = moment(exercise[0].opentime).format('dddd, D MMMM YYYY, h:mm');
-        exercise[0].duetime = moment(exercise[0].duetime).format('dddd, D MMMM YYYY, h:mm');
+        exercise[0].opentime = moment(exercise[0].opentime).format('dddd, D MMMM YYYY, HH:mm');
+        exercise[0].duetime = moment(exercise[0].duetime).format('dddd, D MMMM YYYY, HH:mm');
 
         const topic = await Topic.getCondition('topic_id', exercise[0].topic_id);
         const courseid = topic[0].course_id;
@@ -113,7 +112,7 @@ class TeacherController {
             student_submissions.push(student[0]);
             submissions.push(submission[j]);
         }
-        const totalSubmissions = exercise_sub.length;
+        const totalSubmissions = exercise_sub.length
         const mergedArray = [];
 
         submissions.forEach(item1 => {
@@ -123,12 +122,13 @@ class TeacherController {
                 mergedArray.push(mergedItem);
             }
         });
-        submissions.sort((a, b) => a.user_id - b.user_id);
+        // console.log('mergedArray', mergedArray); //mergedArray is array of Submission object
         let totalGraded = 0;
         for (let j = 0; j < submissions.length; j++) {
             if (submissions[j].score !== null)
                 totalGraded++;
         }
+        mergedArray.sort((a,b) => a.user_id - b.user_id)
         const dataRender = {
             user: user[0],
             courseInfo: course[0],
@@ -140,7 +140,8 @@ class TeacherController {
             numberofStudent: numberofStudent,
             submissions: mergedArray,
             totalSubmissions: totalSubmissions,
-            totalGraded: totalGraded
+            totalGraded: totalGraded,
+            exerciseid,
         };
         res.render('teacher/submission', dataRender);
     }
@@ -213,12 +214,23 @@ class TeacherController {
         }
 
     }
-    async updateScore(req,res,next){
-        const exercise_id = req.body.data.exercise_id;
-        const user_id = req.body.data.user_id;
-        const score = req.body.data.score;
-        await db.UpdateScore(exercise_id,user_id,score);
-        res.json({message: 'ok'});
+
+    async submissionImportScore(req, res) {
+        try {
+            //user_id, exercise_id, score
+            const submissions = req.body;
+            submissions.forEach(async (submisison) =>  {
+                const user_id = submisison.user_id;
+                const exercise_id = submisison.exercise_id;
+                const score = submisison.score;
+                await Submission.update_score_for_submission(user_id,exercise_id,score);
+            })
+            res.status(200).json(submissions);
+        } catch (error) {
+        // console.log('req.body', req.body);
+            res.status(500).json({status: 'Invalid information'});
+            throw error;
+        }
     }
 }
 
