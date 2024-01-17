@@ -70,10 +70,10 @@ function update(selectedItem) {
         var cellEmail = document.createElement("td");
         cellEmail.textContent = student.email;
 
+        console.log(student);
         var cellScore = document.createElement("td");
-        cellScore.textContent = student.finalScore;
-
-        // Thêm các ô vào hàng
+        cellScore.textContent = (student.finalscore);
+                // Thêm các ô vào hàng
         newRow.appendChild(cellId);
         newRow.appendChild(cellName);
         newRow.appendChild(cellEmail);
