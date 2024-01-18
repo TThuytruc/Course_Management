@@ -94,10 +94,10 @@
                             {{/each}}
                         </tbody>
                     </table>
-                    <div class="btn_download ">
+                    <div class="btn_download">
                         <div id="import-score-label">Import score</div>
                         <input type="file" id="file-input" accept=".xlsx" value="Import Score"
-                            class="btn-secondary btn-in-submission mr-2"></button>
+                            class="btn-secondary btn-in-submission mr-2">
                         <button id="btn_download-all" class="btn-secondary btn-in-submission"
                             onclick="downloadAll('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{courseInfo.course_id}}')">Download
                             All</button>
@@ -175,7 +175,6 @@
         const exerciseId = {{ exerciseid }}
         document.addEventListener('DOMContentLoaded', function () {
             const input = document.getElementById('file-input');
-            const table = document.getElementById('excel-table');
             input.addEventListener('change', (event) => {
 
                 const file = event.target.files[0];
@@ -195,9 +194,11 @@
                         body: JSON.stringify(submissions),
                         headers: { 'Content-Type': 'application/json' }
                     });
-                    const data = await res.json();
                     if (res.ok) {
+                        const data = await res.json();
+                        setTimeout(() => {
                         window.location.reload();
+                        }, 200)
                     }
                 })
 

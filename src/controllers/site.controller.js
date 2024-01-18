@@ -1,4 +1,5 @@
 const Account = require('../models/account.m');
+const User = require('../models/users.m')
 const db = require('../database/db');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
@@ -63,20 +64,20 @@ class SiteController {
         res.redirect('/login')
     }
     async password_change_get(req, res) {
+        const user_id = req.session.user_id;
+        const user = await User.getAccount(user_id);
+        // console.log(user)
         // console.log('req.session.user_id', req.session.user_id);
-
-        res.render('password_change');
+        res.render('password_change', {username: user[0].user_name});
     }
     async password_change_post(req, res) {
         try {
             const user_id = req.session.user_id;
-            const account = await db.getAccountWithId(user_id);
-            // console.log(account);
-            // console.log(req.body);
+            let account = await Account.getCondition('account_id', user_id);
+            account = account[0];
             const { currentPassword, newPassword, confirmNewPassword } = req.body;
 
             let isHashedPassword = account.account_password !== '123';
-            console.log('isHashedPassword', isHashedPassword);
 
             //The first time changepassword
             let regex = /^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$/;

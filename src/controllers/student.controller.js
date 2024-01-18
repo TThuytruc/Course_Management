@@ -66,6 +66,7 @@ class StudentController {
         const userAccount = await User.getAccount(userid);
         const userEmail = userAccount[0].account_email;
 
+
         const course_student = await Course_Student.getCondition('user_id', userid);
         let courses = [];
         for (let i = 0; i < course_student.length; i++) {
@@ -82,7 +83,7 @@ class StudentController {
             }
         }
 
-        const dataRender = { user: user[0], arrayCourse: courses, userEmail: userEmail, exercises: exercises };
+        const dataRender = { user: user[0], arrayCourse: courses, userEmail: userEmail, exercises: exercises, username: user[0].user_name };
         res.render('student/home', dataRender);
     }
 

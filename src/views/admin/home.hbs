@@ -21,6 +21,11 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Bootstrap -->
     <title>Course</title>
+    <style>
+        #courses-list:hover {
+            background-color: rgba(208, 196, 196, 0.13);
+        }
+    </style>
 </head>
 
 <body>
@@ -55,7 +60,7 @@
                 </thead>
                 <tbody>
                     {{#each arrayCourse}}
-                    <tr>
+                    <tr id="courses-list" style="cursor: pointer;">
                         <th scope="row" class="text-center" onclick="adminLoadCourse('{{this.course_id}}')">
                             {{this.course_id}}</th>
                         <td onclick="adminLoadCourse('{{this.course_id}}')" class="text-center">{{this.course_name}}

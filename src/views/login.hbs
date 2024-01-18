@@ -114,7 +114,6 @@
 
                 })
                 const data = await res.json();
-                console.log('data', data);
 
                 const conditionOne = data.account_email && data.account_email.includes('Wrong');
                 const conditionTwo = data.account_password && data.account_password.includes('Wrong');

@@ -57,7 +57,7 @@ class TeacherController {
         }
 
         let student = await db.countItem('course_Student', 'course_id', id_course);
-        console.log(student);
+        // console.log(student);
         student = student[0].count;
         let teacher = await db.countItem('course_Teacher', 'course_id', id_course);
         teacher = teacher[0].count;
@@ -226,6 +226,23 @@ class TeacherController {
                 await Submission.update_score_for_submission(user_id,exercise_id,score);
             })
             res.status(200).json(submissions);
+        } catch (error) {
+        // console.log('req.body', req.body);
+            res.status(500).json({status: 'Invalid information'});
+            throw error;
+        }
+    }
+    async submissionImportFinalScore(req, res) {
+        try {
+            console.log(req.body);
+            const finalScores = req.body;
+            finalScores.forEach(async (finalScore) => {
+                const user_id = finalScore.user_id;
+                const course_id = finalScore.course_id;
+                const finalscore = finalScore.finalscore;
+                await Course_Student.updateFinalScore(user_id, course_id, finalscore);
+            })
+            res.status(200).json({msg: 'Successfully'})
         } catch (error) {
         // console.log('req.body', req.body);
             res.status(500).json({status: 'Invalid information'});

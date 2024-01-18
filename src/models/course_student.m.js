@@ -30,10 +30,17 @@ module.exports = class Course_Student {
     
     static async insert(course_student) {
         try {
-            const data=await db.insert(tbName, course_student,'course_id');
+            const data = await db.insert(tbName, course_student,'course_id');
             return data;
         }
         catch (error) {
+            throw error;
+        }
+    }
+    static async updateFinalScore(user_id, course_id, finalscore) {
+        try {
+            await db.updateFinalScoreForCourseStudent(user_id, course_id, finalscore);
+        } catch (error) {
             throw error;
         }
     }

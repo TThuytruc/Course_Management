@@ -95,7 +95,7 @@ body
     padding: 0;
     margin: 0;
     right: 0;
-    width: 140%;
+    width: 200px;
     display: none;
     z-index: 1;
 }
@@ -951,7 +951,7 @@ a[download]:hover
 }
 
 
-#import-score-label {
+#import-score-label, #import-finalscore-label {
     font-family: inherit;
     font-size: 15px;
     font-weight: bolder;
