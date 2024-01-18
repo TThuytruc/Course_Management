@@ -399,5 +399,25 @@ module.exports = {
                 dbcn.done();
             }
         }
-    }
+    },
+    deleteAllInforInCourse: async (courseId, nameTable) => {
+        let dbcn = null;
+
+        try {
+            const query = `delete from ${nameTable} where course_id='${courseId}'`;
+
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
 };
