@@ -73,12 +73,16 @@ module.exports = {
     },
 
     insert: async (tbName, entity, idreturn) => {
-        const query = pgp.helpers.insert(entity, null, tbName);
-        // console.log(query);
+        try {
+            const query = pgp.helpers.insert(entity, null, tbName);
 
-        const data = await db.one(query + ` RETURNING ${idreturn}`);
+            const data = await db.one(query + ` RETURNING ${idreturn};`);
 
-        return data;
+            return data;
+        } catch (err) {
+            console.log(err);
+        }
+
     },
     update: async (tbName, entity, tbColumn, value) => {
         let dbcn = null;
@@ -237,14 +241,14 @@ module.exports = {
     importDataFromExcel: async (object) => {
         let dbcn = null;
         try {
-        
-          for (const stundet of object.students) {
-            const query = `INSERT INTO Course_Student(Course_id, User_id) VALUES ($1, $2)`;
-            const values = [object.id, stundet]; 
-            dbcn = await db.connect();
-            await dbcn.query(query, values);
-          }
-        } 
+
+            for (const stundet of object.students) {
+                const query = `INSERT INTO Course_Student(Course_id, User_id) VALUES ($1, $2)`;
+                const values = [object.id, stundet];
+                dbcn = await db.connect();
+                await dbcn.query(query, values);
+            }
+        }
         catch (error) {
             throw error;
         }
@@ -254,6 +258,7 @@ module.exports = {
             }
         }
     },
+
     getTwoCondition: async (tbName, tbColum1,tbColum2, value1,value2) => {
         let dbcn = null;
         try {

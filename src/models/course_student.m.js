@@ -27,10 +27,9 @@ module.exports = class Course_Student {
         }
 
     }
-    
     static async insert(course_student) {
         try {
-            const data = await db.insert(tbName, course_student,'course_id');
+            const data=await db.insert(tbName, course_student,'"course_id","user_id"');
             return data;
         }
         catch (error) {
