@@ -106,8 +106,12 @@ class AdminController {
         try {
             for (const student of receivedArray.students) {
                 // console.log(student[0]);
-                const dataInsert = new Course_Teacher({ course_id: receivedArray.id, user_id: student[0] })
-                await Course_Teacher.insert(dataInsert);
+                const user = await Teacher.getCondition('user_id', student[0]);
+                if (user.length > 0) {
+                    const dataInsert = new Course_Teacher({ course_id: receivedArray.id, user_id: student[0] })
+                    await Course_Teacher.insert(dataInsert);
+                }
+             
             }
             console.log("Success");
             res.json({ success: true });
