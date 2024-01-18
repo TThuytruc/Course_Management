@@ -219,12 +219,12 @@ class TeacherController {
         try {
             //user_id, exercise_id, score
             const submissions = req.body;
-            submissions.forEach(async (submisison) =>  {
-                const user_id = submisison.user_id;
-                const exercise_id = submisison.exercise_id;
-                const score = submisison.score;
+            for (const submission of submissions) {
+                const user_id = submission.user_id;
+                const exercise_id = submission.exercise_id;
+                const score = submission.score;
                 await Submission.update_score_for_submission(user_id,exercise_id,score);
-            })
+            }
             res.status(200).json(submissions);
         } catch (error) {
         // console.log('req.body', req.body);
@@ -234,14 +234,14 @@ class TeacherController {
     }
     async submissionImportFinalScore(req, res) {
         try {
-            console.log(req.body);
             const finalScores = req.body;
-            finalScores.forEach(async (finalScore) => {
+            for (const finalScore of finalScores) {
                 const user_id = finalScore.user_id;
                 const course_id = finalScore.course_id;
                 const finalscore = finalScore.finalscore;
                 await Course_Student.updateFinalScore(user_id, course_id, finalscore);
-            })
+            
+            }
             res.status(200).json({msg: 'Successfully'})
         } catch (error) {
         // console.log('req.body', req.body);

@@ -175,19 +175,44 @@
         const exerciseId = {{ exerciseid }}
         document.addEventListener('DOMContentLoaded', function () {
             const input = document.getElementById('file-input');
-            input.addEventListener('change', (event) => {
-
+            input.addEventListener('change', async (event) => {
                 const file = event.target.files[0];
                 const submissions = [];
-                readXlsxFile(file).then(function (rows) {
+                let isValid = true;
+                try {
+                    const rows = await readXlsxFile(file);
+                    const attributes = rows[0];
+                    if (attributes[0] !== 'user_id' || attributes[1] !== 'score') {
+                        alert('Invalid file!');
+                        isValid = false;
+                        return;
+                    }
                     for (let i = 1; i < rows.length; ++i) {
+                        if (!Number.isInteger(rows[i][0])){
+                            alert('Id has to be an integer, please check your file!');
+                            isValid = false;
+                            return;
+                        }
+                        if (rows[i][1] < 0){
+                            alert('Score has to be a positive integer, please check your file!');
+                            isValid = false;
+                            return;;
+                        }
+
                         let submissionObject = { user_id: rows[i][0], exercise_id: exerciseId, score: rows[i][1] };
                         submissions.push(submissionObject);
                     }
-                })
+                } catch (error) {
+                    console.error('Error reading the file:', error);
+                    isValid = false;
+                    alert('Error reading the file. Please try again.');
+                }
+                if (!isValid) {
+                    console.log('is valid');
+                    return;
+                }
                 document.getElementById('import-score-info').style.display = 'block';
                 const importScoreLabel = document.getElementById('import-score-label')
-                console.log(importScoreLabel)
                 importScoreLabel.addEventListener('click', async function (event) {
                     const res = await fetch('/teacher/submission/import_score', {
                         method: 'POST',
@@ -196,9 +221,7 @@
                     });
                     if (res.ok) {
                         const data = await res.json();
-                        setTimeout(() => {
                         window.location.reload();
-                        }, 200)
                     }
                 })
 
