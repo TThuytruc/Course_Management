@@ -30,7 +30,20 @@ function update(selectedItem) {
         list_student.sort(function (a, b) {
             var nameA = a.name.toUpperCase();
             var nameB = b.name.toUpperCase();
-
+            nameA = nameA.split(' ');
+            nameB = nameB.split(' ');
+            if (nameA.length > 0) {
+                nameA = nameA[nameA.length - 1];
+            }
+            else {
+                nameA = '';
+            }
+            if (nameB.length > 0) {
+                nameB = nameB[nameB.length - 1];
+            }
+            else {
+                nameB = '';
+            }
             if (nameA < nameB) {
                 return -1;
             }
@@ -74,7 +87,7 @@ function update(selectedItem) {
         console.log(student);
         var cellScore = document.createElement("td");
         cellScore.textContent = (student.finalscore);
-                // Thêm các ô vào hàng
+        // Thêm các ô vào hàng
         newRow.appendChild(cellId);
         newRow.appendChild(cellName);
         newRow.appendChild(cellEmail);
@@ -95,17 +108,17 @@ async function updateFinalScore(course_id, user_id, score) {
     const response = await fetch('/list_student/updateFinalScore', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({data})
+        body: JSON.stringify({ data })
     });
-  
-      if (response.ok) {
+
+    if (response.ok) {
         const result = await response.json();
         console.log('Server response:', result);
-      } else {
+    } else {
         console.error('Failed to send data to server');
-      }
+    }
     console.log("Update Score");
 }
 function updateAllScores(event) {
