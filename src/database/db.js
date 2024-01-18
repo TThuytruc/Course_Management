@@ -248,7 +248,7 @@ module.exports = {
             }
         }
       },
-      getTwoCondition: async (tbName, tbColum1, value1,tbColum2, value2) => {
+      getTwoCondition: async (tbName, tbColum1,tbColum2,  value1,value2) => {
         let dbcn = null;
         try {
             const query = `SELECT * FROM ${tbName} WHERE ${tbColum1}='${value1}' and ${tbColum2}='${value2}'`;
