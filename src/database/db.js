@@ -73,18 +73,16 @@ module.exports = {
     },
 
     insert: async (tbName, entity, idreturn) => {
-        try
-        {
+        try {
             const query = pgp.helpers.insert(entity, null, tbName);
-    
+
             const data = await db.one(query + ` RETURNING ${idreturn};`);
-    
+
             return data;
-        }catch(err)
-        {
+        } catch (err) {
             console.log(err);
         }
-       
+
     },
 
     getAllInforUser: async () => {
@@ -231,14 +229,14 @@ module.exports = {
     importDataFromExcel: async (object) => {
         let dbcn = null;
         try {
-        
-          for (const stundet of object.students) {
-            const query = `INSERT INTO Course_Student(Course_id, User_id) VALUES ($1, $2)`;
-            const values = [object.id, stundet]; 
-            dbcn = await db.connect();
-            await dbcn.query(query, values);
-          }
-        } 
+
+            for (const stundet of object.students) {
+                const query = `INSERT INTO Course_Student(Course_id, User_id) VALUES ($1, $2)`;
+                const values = [object.id, stundet];
+                dbcn = await db.connect();
+                await dbcn.query(query, values);
+            }
+        }
         catch (error) {
             throw error;
         }
@@ -247,8 +245,8 @@ module.exports = {
                 dbcn.done();
             }
         }
-      },
-      getTwoCondition: async (tbName, tbColum1,tbColum2,  value1,value2) => {
+    },
+    getTwoCondition: async (tbName, tbColum1, tbColum2, value1, value2) => {
         let dbcn = null;
         try {
             const query = `SELECT * FROM ${tbName} WHERE ${tbColum1}='${value1}' and ${tbColum2}='${value2}'`;
