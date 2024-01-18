@@ -89,7 +89,7 @@ class AdminController {
                 // console.log(student[0]);
                 const user = await Student.getCondition('user_id', student[0]);
                 if (user.length > 0) {
-                    const checkInsert= await db.getTwoCondition('course_student','course_id',receivedArray.id,'user_id',student[0]);
+                    const checkInsert= await db.getTwoCondition('course_student','course_id','user_id',receivedArray.id,student[0]);
                     if(checkInsert.length==0)
                     {
                         const dataInsert = new Course_Student({ course_id: receivedArray.id, user_id: student[0], FinalScore: null })
@@ -113,7 +113,7 @@ class AdminController {
                 // console.log(student[0]);
                 const user = await Teacher.getCondition('user_id', student[0]);
                 if (user.length > 0) {
-                    const checkInsert= await db.getTwoCondition('course_teacher','course_id',receivedArray.id,'user_id',student[0]);
+                    const checkInsert= await db.getTwoCondition('course_teacher','course_id','user_id',receivedArray.id,student[0]);
                     if(checkInsert.length==0)
                     {
                         const dataInsert = new Course_Teacher({ course_id: receivedArray.id, user_id: student[0] })
