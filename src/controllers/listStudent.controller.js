@@ -1,6 +1,7 @@
 const Course_student = require('../models/course_student.m');
 const Course_teacher = require('../models/course_teacher.m')
 const Course = require('../models/course.m');
+const User = require('../models/users.m')
 const db = require('../database/db')
 class ListStudentController {
     async index(req, res, next) {

@@ -241,7 +241,6 @@ module.exports = {
                 dbcn.done();
             }
         }
-<<<<<<< HEAD
     },
     getTwoCondition: async (tbName, tbColum1,tbColum2, value1,value2) => {
         let dbcn = null;
@@ -353,7 +352,4 @@ module.exports = {
             }
         }
     }
-=======
-      },
->>>>>>> 4cc285fc60211952c19b17b3852d96c3ec894f30
 };
