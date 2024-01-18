@@ -132,14 +132,13 @@ async function DeleteAcction(user_id,exercise_id,exercise_name,course_name,nameF
 
     // Cập nhật hiển thị tên file
     displayFileNames();
-    console.log("Cancle");
+    console.log("Cancel");
     buttonRemove.style.display = "none";
     buttonSave.style.display = "block";
     inputFile.style.display="block";
     buttonCancel.disabled =false;
 
     $('#modal-course-delete').modal('hide');
-    window.location.reload();
     const data={user_id:user_id,exercise_id:exercise_id,exercise_name:exercise_name,course_name:course_name,nameFileSubmit:nameFileSubmit,course_id:course_id}
         
     const jsonData = JSON.stringify(data);
@@ -161,7 +160,7 @@ async function DeleteAcction(user_id,exercise_id,exercise_name,course_name,nameF
     .catch(error => {
         console.error('Error:', error);
     });
-
+    location.reload();
 } catch (error) {
     console.error('Error during download:', error);
 }

@@ -129,6 +129,7 @@ class TeacherController {
                 totalGraded++;
         }
         mergedArray.sort((a,b) => a.user_id - b.user_id)
+        var checkDownload= mergedArray.length>0;
         const dataRender = {
             user: user[0],
             courseInfo: course[0],
@@ -142,6 +143,7 @@ class TeacherController {
             totalSubmissions: totalSubmissions,
             totalGraded: totalGraded,
             exerciseid,
+            checkDownload:checkDownload,
         };
         res.render('teacher/submission', dataRender);
     }

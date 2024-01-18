@@ -2,10 +2,11 @@ window.onload = function () {
     var downloadLink = document.querySelector('.file_name');
     var fileName = downloadLink.textContent || downloadLink.innerText;
     var filePath = "" + fileName;
-
     downloadLink.href = filePath;
     downloadLink.download = fileName;
+   
 };
+
 function scoreEnter(event) {
     if (event.key === 'Enter') {
         var scoreInput = document.getElementById('box_scores');

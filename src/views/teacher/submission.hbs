@@ -37,7 +37,7 @@
                 {{courseInfo.course_name}}
             </div>
         </div>
-
+        <input type="hidden" id="checkDownload" value="{{checkDownload}}">
         <!-- Content -->
         <div class="content_body">
             <div class="content">
@@ -102,8 +102,8 @@
                             onclick="downloadAll('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{courseInfo.course_id}}')">Download
                             All</button>
                     </div>
-                    <div id="import-score-info" class="alert alert-info"
-                     style="display: none; text-align: center">After selecting file, press "Import Score" to execute</div>
+                    <div id="import-score-info" class="alert alert-info" style="display: none; text-align: center">After
+                        selecting file, press "Import Score" to execute</div>
                 </div>
             </div>
 
@@ -172,6 +172,17 @@
     {{>footer}}
 
     <script>
+        const checkDownload = document.getElementById('checkDownload');
+        const button_download = document.getElementById('btn_download-all');
+        if (checkDownload.value === 'false') {
+            console.log("true");
+            button_download.disabled = true;
+        }
+        else {
+            console.log("false");
+
+            button_download.disabled = false;
+        }
         const exerciseId = {{ exerciseid }}
         document.addEventListener('DOMContentLoaded', function () {
             const input = document.getElementById('file-input');
@@ -188,12 +199,12 @@
                         return;
                     }
                     for (let i = 1; i < rows.length; ++i) {
-                        if (!Number.isInteger(rows[i][0])){
+                        if (!Number.isInteger(rows[i][0])) {
                             alert('Id has to be an integer, please check your file!');
                             isValid = false;
                             return;
                         }
-                        if (rows[i][1] < 0){
+                        if (rows[i][1] < 0) {
                             alert('Score has to be a positive integer, please check your file!');
                             isValid = false;
                             return;;
