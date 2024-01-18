@@ -1,6 +1,8 @@
 const Course = require('../models/course.m');
 const Course_Student = require('../models/course_student.m');
 const Course_Teacher = require('../models/course_teacher.m');
+const Student = require('../models/students.m');
+const Teacher = require('../models/teacher.m');
 const db = require('../database/db')
 const xlsx = require('xlsx');
 const fs = require('fs');
@@ -81,12 +83,39 @@ class AdminController {
     }
     async importExcelFile(req, res) {
         const receivedArray = req.body.data;
-        console.log(receivedArray.id);
-         try {
+        // console.log(receivedArray.id);
+
+        const list_Student = await Course_Student.getCondition('course_id', receivedArray.id);
+        // console.log(list_Student);
+        if (list_Student.length > 0) {
+            const current_number_student = list_Student.length;
+            let total_student = await Course.getCondition('course_id', receivedArray.id);
+            total_student = total_student[0].maxnumberofstudent;
+            console.log(current_number_student + receivedArray.students.length > total_student);
+            if (current_number_student + receivedArray.students.length > total_student) {
+                console.log("So luong vuot qua gioi han");
+                res.status(500).json({ success: "So luong vuot qua gioi han" });
+                return;
+            }
+            else
+            {
+                console.log("Chua");
+            }
+        }
+        try {
             for (const student of receivedArray.students) {
                 // console.log(student[0]);
-               const dataInsert= new Course_Student({ course_id:receivedArray.id, user_id:student[0],FinalScore:null})
-               await Course_Student.insert(dataInsert);
+                const user = await Student.getCondition('user_id', student[0]);
+                if (user.length > 0) {
+                    const checkInsert= await db.getTwoCondition('course_student','course_id','user_id',receivedArray.id,student[0]);
+                    if(checkInsert.length==0)
+                    {
+                        const dataInsert = new Course_Student({ course_id: receivedArray.id, user_id: student[0], FinalScore: null })
+                        await Course_Student.insert(dataInsert);
+                    }
+                  
+                }
+
             }
             console.log("Success");
             res.json({ success: true });
@@ -96,12 +125,20 @@ class AdminController {
     }
     async importExcelFileTeacher(req, res) {
         const receivedArray = req.body.data;
-        console.log(receivedArray.id);
-         try {
+        // console.log(receivedArray.id);
+        try {
             for (const student of receivedArray.students) {
                 // console.log(student[0]);
-               const dataInsert= new Course_Teacher({ course_id:receivedArray.id, user_id:student[0]})
-               await Course_Teacher.insert(dataInsert);
+                const user = await Teacher.getCondition('user_id', student[0]);
+                if (user.length > 0) {
+                    const checkInsert= await db.getTwoCondition('course_teacher','course_id','user_id',receivedArray.id,student[0]);
+                    if(checkInsert.length==0)
+                    {
+                        const dataInsert = new Course_Teacher({ course_id: receivedArray.id, user_id: student[0] })
+                        await Course_Teacher.insert(dataInsert);
+                    }
+                }
+             
             }
             console.log("Success");
             res.json({ success: true });
