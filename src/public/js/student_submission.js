@@ -10,6 +10,12 @@ window.onload = function () {
         buttonSave.style.display = "none";
         inputFile.style.display="none";
         buttonCancel.disabled =true;
+        if(isValid==='true')
+        {
+            buttonSave.disabled=true;
+            buttonCancel.disabled =true;
+            buttonRemove.disabled = true;
+        }
     }
     else {
         buttonRemove.style.display = "none";
@@ -20,6 +26,7 @@ window.onload = function () {
         {
             buttonSave.disabled=true;
             buttonCancel.disabled =true;
+            buttonRemove.disabled = true;
         }
     }
 };
