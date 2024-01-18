@@ -77,7 +77,7 @@ module.exports = {
         {
             const query = pgp.helpers.insert(entity, null, tbName);
     
-            const data = await db.one(query + ` ON CONFLICT (${idreturn}) DO NOTHING RETURNING ${idreturn};`);
+            const data = await db.one(query + ` RETURNING ${idreturn};`);
     
             return data;
         }catch(err)
@@ -248,4 +248,25 @@ module.exports = {
             }
         }
       },
+      getTwoCondition: async (tbName, tbColum1, value1,tbColum2, value2) => {
+        let dbcn = null;
+        try {
+            const query = `SELECT * FROM ${tbName} WHERE ${tbColum1}='${value1}' and ${tbColum2}='${value2}'`;
+            // console.log(query);
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+
+            // console.log(data);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
 };
