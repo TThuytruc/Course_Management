@@ -62,24 +62,23 @@ class AdminController {
         await db.deleteAllInforInCourse(courseId, 'course_student');
         res.send('ok');
     }
-    async DeleteUserInCourse(req,res,next)
-    {
+    async DeleteUserInCourse(req, res, next) {
         const courseId = req.body.course_id;
         const userId = req.body.user_id;
-        await db.DeleteUser(courseId,userId);
-        res.json({message: 'ok'});
+        await db.DeleteUser(courseId, userId);
+        res.json({ message: 'ok' });
     }
-    async AddTeacherToCourse(req,res,next){
+    async AddTeacherToCourse(req, res, next) {
         const courseId = req.body.course_id;
         const userId = req.body.user_id;
-        await db.addTeacher(courseId,userId);
-        res.json({message: 'ok'});
+        await db.addTeacher(courseId, userId);
+        res.json({ message: 'ok' });
     }
-    async AddStudentToCourse(req,res,next){
+    async AddStudentToCourse(req, res, next) {
         const courseId = req.body.course_id;
         const userId = req.body.user_id;
-        await db.addStudent(courseId,userId);
-        res.json({message: 'ok'});
+        await db.addStudent(courseId, userId);
+        res.json({ message: 'ok' });
     }
     async importExcelFile(req, res) {
         const receivedArray = req.body.data;
@@ -87,38 +86,35 @@ class AdminController {
 
         const list_Student = await Course_Student.getCondition('course_id', receivedArray.id);
         // console.log(list_Student);
-        if (list_Student.length > 0) {
-            const current_number_student = list_Student.length;
-            let total_student = await Course.getCondition('course_id', receivedArray.id);
-            total_student = total_student[0].maxnumberofstudent;
-            console.log(current_number_student + receivedArray.students.length > total_student);
-            if (current_number_student + receivedArray.students.length > total_student) {
-                console.log("So luong vuot qua gioi han");
-                res.status(500).json({ success: "So luong vuot qua gioi han" });
-                return;
-            }
-            else
-            {
-                console.log("Chua");
-            }
+        const current_number_student = list_Student.length > 0 ? list_Student.length : 0;
+        let total_student = await Course.getCondition('course_id', receivedArray.id);
+        total_student = total_student[0].maxnumberofstudent;
+        console.log(current_number_student + receivedArray.students.length > total_student);
+        if (current_number_student + receivedArray.students.length > total_student) {
+            console.log("So luong vuot qua gioi han");
+            res.status(500).json({ message: "So luong vuot qua gioi han" });
+            return;
         }
+        else {
+            console.log("Chua");
+        }
+
         try {
             for (const student of receivedArray.students) {
                 // console.log(student[0]);
                 const user = await Student.getCondition('user_id', student[0]);
                 if (user.length > 0) {
-                    const checkInsert= await db.getTwoCondition('course_student','course_id','user_id',receivedArray.id,student[0]);
-                    if(checkInsert.length==0)
-                    {
+                    const checkInsert = await db.getTwoCondition('course_student', 'course_id', 'user_id', receivedArray.id, student[0]);
+                    if (checkInsert.length == 0) {
                         const dataInsert = new Course_Student({ course_id: receivedArray.id, user_id: student[0], FinalScore: null })
                         await Course_Student.insert(dataInsert);
                     }
-                  
+
                 }
 
             }
             console.log("Success");
-            res.json({ success: true });
+            res.status(200).json({ success: true });
         } catch (error) {
             res.status(500).json({ success: false, error: error.message });
         }
@@ -131,19 +127,18 @@ class AdminController {
                 // console.log(student[0]);
                 const user = await Teacher.getCondition('user_id', student[0]);
                 if (user.length > 0) {
-                    const checkInsert= await db.getTwoCondition('course_teacher','course_id','user_id',receivedArray.id,student[0]);
-                    if(checkInsert.length==0)
-                    {
+                    const checkInsert = await db.getTwoCondition('course_teacher', 'course_id', 'user_id', receivedArray.id, student[0]);
+                    if (checkInsert.length == 0) {
                         const dataInsert = new Course_Teacher({ course_id: receivedArray.id, user_id: student[0] })
                         await Course_Teacher.insert(dataInsert);
                     }
                 }
-             
+
             }
             console.log("Success");
-            res.json({ success: true });
+            res.status(200).json({ success: true });
         } catch (error) {
-            res.status(500).json({ success: false, error: error.message });
+            res.status(500).json({ message: false, error: error.message });
         }
     }
 }

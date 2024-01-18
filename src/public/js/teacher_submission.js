@@ -2,10 +2,11 @@ window.onload = function () {
     var downloadLink = document.querySelector('.file_name');
     var fileName = downloadLink.textContent || downloadLink.innerText;
     var filePath = "" + fileName;
-
     downloadLink.href = filePath;
     downloadLink.download = fileName;
+   
 };
+
 function scoreEnter(event) {
     if (event.key === 'Enter') {
         var scoreInput = document.getElementById('box_scores');
@@ -58,7 +59,7 @@ async function downloadAll(user_id,exercise_id,exercise_name,course_name,course_
         let name_zip= exercise_name.replace(/\s+/g, '_');
         name_zip = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
         console.log(name_zip);
-        downloadLink.download = `${name_zip}-${exercise_id}.zip`;
+        downloadLink.download = `${name_zip}.zip`;
 
         // Thêm vào body để tránh lỗi không xác định trong một số trình duyệt
         document.body.appendChild(downloadLink);
