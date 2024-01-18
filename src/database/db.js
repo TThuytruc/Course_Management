@@ -246,10 +246,11 @@ module.exports = {
             }
         }
     },
-    getTwoCondition: async (tbName, tbColum1, value1, tbColum2, value2) => {
+
+    getTwoCondition: async (tbName, tbColum1,tbColum2, value1,value2) => {
         let dbcn = null;
         try {
-            const query = `SELECT * FROM ${tbName} WHERE ${tbColum1}='${value1}' and ${tbColum2}='${value2}'`;
+            const query = `SELECT * FROM ${tbName} WHERE ${tbColum1}='${value1}' and ${tbColum2}='${value2}' `;
             // console.log(query);
             dbcn = await db.connect();
 
@@ -267,4 +268,93 @@ module.exports = {
             }
         }
     },
+    deleteTwoCOndition: async (tbName, tbColum1,tbColum2, value1,value2) => {
+        let dbcn = null;
+        try {
+            const query = `DELETE FROM ${tbName} WHERE ${tbColum1}='${value1}' and ${tbColum2}='${value2}' `;
+            // console.log(query);
+            dbcn = await db.connect();
+
+            const data = await dbcn.any(query);
+
+            // console.log(data);
+            return data;
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    DeleteUser:async(courseId, userId)=>{
+        let dbcn = null;
+
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT delete_user($1, $2)'
+            await dbcn.any(query, [courseId, userId]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    addStudent:async(courseId, userId)=>{
+        let dbcn = null;
+        
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT add_student($1, $2)'
+            await dbcn.any(query, [courseId, userId]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    addTeacher:async(courseId, userId)=>{
+        let dbcn = null;
+
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT add_teacher($1, $2)'
+            await dbcn.any(query, [courseId, userId]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    updateScoreForSubmission: async(user_id, exercise_id, score) => {
+        let dbcn = null;
+
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT update_score_for_submission($1, $2, $3)'
+            await dbcn.any(query, [user_id, exercise_id, score]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    }
 };

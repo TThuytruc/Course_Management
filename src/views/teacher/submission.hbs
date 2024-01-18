@@ -16,6 +16,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Submission</title>
+    <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
 </head>
 
 <body>
@@ -33,7 +34,7 @@
         <!-- Course -->
         <div class="box title_course">
             <div class="name_course">
-               {{courseInfo.course_name}}              
+                {{courseInfo.course_name}}
             </div>
         </div>
 
@@ -44,7 +45,7 @@
                     <!-- Submission Title -->
                     <div class="row_content">
                         <div class="title_submission">
-                           {{exercise.exercise_name}}
+                            {{exercise.exercise_name}}
                         </div>
 
                         <div class="time">
@@ -67,64 +68,76 @@
                     <div><strong>Total graded: {{totalGraded}} </strong></div>
                     <br>
                     <table id="teacher_submission_table" class="table table-striped">
-                        <thead class = "thead-dark">
+                        <thead class="thead-dark">
                             <tr>
                                 <th>File submission</th>
+                                <th>Student id</th>
                                 <th>Student name</th>
                                 <th>Last modified</th>
                                 <th>Grade</th>
                             </tr>
                         </thead>
                         <tbody>
-                           {{#each submissions}}
+                            {{#each submissions}}
 
-                                <tr>
-                                    <td><a class="file_name" href="#" id="downloadLink">{{this.submissionfile}}</a></td>
-                                    <td>{{this.user_name}}</td>
-                                    <td>{{this.submissiontime}}</td>
-                                    <td>
-                                        <input type="number" id="box_scores" name="score" min="0" max="10" step="0.1" onkeydown="scoreEnter(event)" placeholder="Scores">
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td><a class="file_name" href="#" id="downloadLink">{{this.submissionfile}}</a></td>
+                                <td>{{this.user_id}}</td>
+                                <td>{{this.user_name}}</td>
+                                <td>{{this.submissiontime}}</td>
+                                <td>
+                                    <input type="number" id="box_scores" name="score" min="0" max="10" step="0.1"
+                                        onkeydown="scoreEnter(event)" value="{{this.score}}" placeholder="Scores">
+                                </td>
+                                {{!-- <td>{{this.score}}</td> --}}
+                            </tr>
                             {{/each}}
                         </tbody>
                     </table>
-                    <div class="btn_dowload ">
-                        <button id="btn_download-all" class="btn-secondary" onclick="downloadAll('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{courseInfo.course_id}}')">Download All</button>
+                    <div class="btn_download ">
+                        <div id="import-score-label">Import score</div>
+                        <input type="file" id="file-input" accept=".xlsx" value="Import Score"
+                            class="btn-secondary btn-in-submission mr-2"></button>
+                        <button id="btn_download-all" class="btn-secondary btn-in-submission"
+                            onclick="downloadAll('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{courseInfo.course_id}}')">Download
+                            All</button>
                     </div>
+                    <div id="import-score-info" class="alert alert-info"
+                     style="display: none; text-align: center">After selecting file, press "Import Score" to execute</div>
                 </div>
             </div>
 
             <!-- Side -->
             <div class="side">
                 <div class="box list_people">
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course ID</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="id-class">{{courseInfo.course_id}}</a> </strong></h5>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course name</a>
                     </div>
-    
+
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="course_name">{{courseInfo.course_name}}</a></strong></h5>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Teachers</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="number-lecturers">{{numberofTeacher}}</a> </strong></h5>
-                    </div>  
-                    
+                    </div>
+
                     <div class="list_teacher color_box">
                         <strong class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</strong>
                         <ul class="list">
-                            {{#each teachers}}  
+                            {{#each teachers}}
                             <li class="member">
                                 <div class="teacher">
-                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2" alt="Teacher">
+                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
+                                        alt="Teacher">
                                     <div class="name_teacher">
                                         <p class="name">{{this.user_name}}</p>
                                     </div>
@@ -133,23 +146,24 @@
                             {{/each}}
                         </ul>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="number-lecturers">{{numberofStudent}}</a> </strong></h5>
                     </div>
-                    <div class="home_side_header_box"> 
+                    <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">List Students</a>
                     </div>
                     <div class="home_side_inf_box home_side_content_box">
                         <div class="icon title_text">
-                            <a class="text link_group_people" href="#" onclick="showListStudent(1)">Show participants list</a>
+                            <a class="text link_group_people" href="#" onclick="showListStudent(1)">Show participants
+                                list</a>
                         </div>
                     </div>
-                    
+
                 </div>
-                
+
             </div>
         </div>
     </main>
@@ -157,7 +171,40 @@
 
     {{>footer}}
 
+    <script>
+        const exerciseId = {{ exerciseid }}
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('file-input');
+            const table = document.getElementById('excel-table');
+            input.addEventListener('change', (event) => {
 
+                const file = event.target.files[0];
+                const submissions = [];
+                readXlsxFile(file).then(function (rows) {
+                    for (let i = 1; i < rows.length; ++i) {
+                        let submissionObject = { user_id: rows[i][0], exercise_id: exerciseId, score: rows[i][1] };
+                        submissions.push(submissionObject);
+                    }
+                })
+                document.getElementById('import-score-info').style.display = 'block';
+                const importScoreLabel = document.getElementById('import-score-label')
+                console.log(importScoreLabel)
+                importScoreLabel.addEventListener('click', async function (event) {
+                    const res = await fetch('/teacher/submission/import_score', {
+                        method: 'POST',
+                        body: JSON.stringify(submissions),
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    const data = await res.json();
+                    if (res.ok) {
+                        window.location.reload();
+                    }
+                })
+
+            })
+        })
+
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -167,10 +214,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="../js/teacher_submission.js"></script>
+    <script src="/js/teacher_submission.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="/js/list_student.js"></script>
-        <!-- <script src="./myscript.js">
+
+    <!-- <script src="./myscript.js">
 
     </script> -->
 </body>

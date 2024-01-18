@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    {{>header}}
+    {{>header username=user.user_name}}
 
 
     <main>
@@ -34,7 +34,8 @@
 
         <div class="box title_course">
             <div class="name_course">
-                {{namecourse}}
+                {{namecourse}}, {{user.user_id}}
+                
             </div>
             <div class="link_current_page">
 
@@ -54,19 +55,19 @@
                 </thead>
                 <tbody id="list_teacher">
                     {{#each teachers}}
-                    <tr>
+                    <tr id="teacher-{{this.user_id}}">
                         <th class="text-center" scope="row">{{this.user_id}}</th>
                         <td class="text-center">{{this.user_name}}</td>
                         <td class="text-center"><a href="mailto:{{this.account_email}}">{{this.account_email}}</a></td>
                         <td class="text-center" class="text-center"><button
-                                class="btn bg-secondary text-white pd-2 text-center">Delete</button></td>
+                                class="btn bg-secondary text-white pd-2 text-center"onclick="deleteUser('{{this.user_id}}','{{../id_course}}', 'teacher')">Delete</button></td>
                     </tr>
                     {{/each}}
 
                 </tbody>
             </table>
             <span>
-                <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;">Add</button>
+                <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;" onclick="addUser('{{numberofteacher}}','','teacher')">Add</button>
                 <button class="btn btn-secondary" style="width: 100px; height: 40px;"
                     onclick="DeleteAll('teacher','{{id_course}}')">Delete All</button>
                 <input type="file" id="file_listTeacher" name="excelFileTeacher" accept=".xlsx, .xls" onchange="importExcelTeacher()" style="display:none">
@@ -86,18 +87,18 @@
                 </thead>
                 <tbody id="list_student">
                     {{#each students}}
-                    <tr>
+                    <tr id="student-{{this.user_id}}">
                         <th class="text-center" scope="row">{{this.user_id}}</th>
                         <td class="text-center">{{this.user_name}}</td>
                         <td class="text-center"><a href="mailto:{{this.account_email}}">{{this.account_email}}</a></td>
-                        <td class="text-center"><button class="btn bg-secondary text-white text-center">Delete</button>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center" onclick="deleteUser('{{this.user_id}}','{{../id_course}}', 'student')">Delete</button></td>
                         </td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
             <span>
-                <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;">Add</button>
+                <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;" onclick="addUser('{{numberofstudent}}','{{maxnumberofstudent}}','student')">Add</button>
                 <button class="btn btn-secondary" style="width: 100px; height: 40px;"
                     onclick="DeleteAll('student','{{id_course}}')">Delete All</button>
                 <input type="file" id="file_submission" name="excelFile" accept=".xlsx, .xls" onchange="importExcel()">
@@ -106,11 +107,7 @@
 
             </span>
         </div>
-
-
-
     </main>
-
 
     {{> footer}}
 
@@ -128,6 +125,7 @@
                         <p id="delete_description">Are you sure to delete this course?</p>
                         <input type="hidden" id="courseIdInput" name="id_course" value="{{id_course}}">
                         <input type="hidden" id="personIdInput" name="name_Person" value="">
+                      
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                 onclick="CloseDialog()">Close</button>
@@ -139,6 +137,54 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-user-delete" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="CloseDialog()" style="border:0; background-color:white">X</button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="deleteForm">
+                        <p id="del_description"></p>
+                        <input type="hidden" id="dl_user_id" name="course_id" value="">
+                        <input type="hidden" id="dl_course_id" name="user_id" value="">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="CloseDialog()">Close</button>
+                            <button type="button" class="btn btn-primary" style="background-color: red;" onclick="DeleteOneUser()">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for adding a user -->
+    <div class="modal fade" id="modal-user-add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="CloseDialog()" style="border:0; background-color:white">X</button>
+        </div>
+        <div class="modal-body">
+            <form id="addUserForm">
+            <div id="userType" hidden="true"></div>
+            <div id="currentCount"></div>
+            <div id="maxCount"></div>
+            <label >User ID:</label>
+            <input type="text" id="userIdInput" name="userId">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="CloseDialog()">Close</button>
+                <button type="submit" class="btn btn-primary" onclick="Add({{id_course}})">Add</button>
+            </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

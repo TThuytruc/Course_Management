@@ -62,7 +62,25 @@ class AdminController {
         await db.deleteAllInforInCourse(courseId, 'course_student');
         res.send('ok');
     }
-
+    async DeleteUserInCourse(req,res,next)
+    {
+        const courseId = req.body.course_id;
+        const userId = req.body.user_id;
+        await db.DeleteUser(courseId,userId);
+        res.json({message: 'ok'});
+    }
+    async AddTeacherToCourse(req,res,next){
+        const courseId = req.body.course_id;
+        const userId = req.body.user_id;
+        await db.addTeacher(courseId,userId);
+        res.json({message: 'ok'});
+    }
+    async AddStudentToCourse(req,res,next){
+        const courseId = req.body.course_id;
+        const userId = req.body.user_id;
+        await db.addStudent(courseId,userId);
+        res.json({message: 'ok'});
+    }
     async importExcelFile(req, res) {
         const receivedArray = req.body.data;
         // console.log(receivedArray.id);

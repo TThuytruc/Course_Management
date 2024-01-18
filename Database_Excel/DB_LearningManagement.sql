@@ -143,11 +143,54 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION delete_course(course_id_param integer)
+-- CREATE OR REPLACE FUNCTION delete_course(course_id_param integer)
+-- RETURNS VOID AS $$
+-- BEGIN   
+--     EXECUTE 'DELETE FROM course_student WHERE Course_id = $1' USING course_id_param;
+-- 	EXECUTE 'DELETE FROM course_teacher WHERE Course_id = $1' USING course_id_param;
+-- 	EXECUTE 'DELETE FROM course WHERE Course_id = $1' USING course_id_param;
+-- END;
+-- $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION delete_course(course_id_param INTEGER)
 RETURNS VOID AS $$
 BEGIN   
-    EXECUTE 'DELETE FROM course_student WHERE Course_id = $1' USING course_id_param;
-	EXECUTE 'DELETE FROM course_teacher WHERE Course_id = $1' USING course_id_param;
-	EXECUTE 'DELETE FROM course WHERE Course_id = $1' USING course_id_param;
+    DELETE FROM Course_Student WHERE Course_id = course_id_param;
+    DELETE FROM Course_Teacher WHERE Course_id = course_id_param;
+    DELETE FROM Submission WHERE Exercise_id IN (SELECT Exercise_id FROM Exercise ex JOIN Topic t ON ex.Topic_id = t.Topic_id WHERE Course_id = course_id_param);
+    DELETE FROM Exercise WHERE Topic_id IN (SELECT Topic_id FROM Topic WHERE Course_id = course_id_param);
+    DELETE FROM Topic WHERE Course_id = course_id_param;
+    DELETE FROM Course WHERE Course_id = course_id_param;
+END;
+$$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION delete_user(course_id_param INTEGER, user_id_param INTEGER)
+RETURNS VOID AS $$
+BEGIN
+    EXECUTE 'DELETE FROM Course_Student WHERE Course_id = $1 AND User_id = $2' USING course_id_param, user_id_param;
+    EXECUTE 'DELETE FROM Course_Teacher WHERE Course_id = $1 AND User_id = $2' USING course_id_param, user_id_param;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION add_teacher(course_id_param INTEGER, user_id_param INTEGER)
+RETURNS VOID AS $$
+BEGIN
+    EXECUTE 'INSERT INTO Course_Teacher (Course_id, User_id) VALUES ($1, $2)' USING course_id_param, user_id_param;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION add_student(course_id_param INTEGER, user_id_param INTEGER)
+RETURNS VOID AS $$
+BEGIN
+    EXECUTE 'INSERT INTO Course_Student (Course_id, User_id) VALUES ($1, $2)' USING course_id_param, user_id_param;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION update_score_for_submission(user_id_param INTEGER, exercise_id_param INTEGER, score_param DECIMAL)
+RETURNs VOID AS $$
+BEGIN
+	UPDATE Submission 
+	SET Score = score_param
+	WHERE User_id = user_id_param and Exercise_id = exercise_id_param;
+	
 END;
 $$ LANGUAGE plpgsql;
