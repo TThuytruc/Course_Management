@@ -36,4 +36,11 @@ module.exports = class Course_Student {
             throw error;
         }
     }
+    static async updateFinalScore(user_id, course_id, finalscore) {
+        try {
+            await db.updateFinalScoreForCourseStudent(user_id, course_id, finalscore);
+        } catch (error) {
+            throw error;
+        }
+    }
 };

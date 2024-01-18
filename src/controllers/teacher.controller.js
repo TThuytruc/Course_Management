@@ -57,7 +57,7 @@ class TeacherController {
         }
 
         let student = await db.countItem('course_Student', 'course_id', id_course);
-        console.log(student);
+        // console.log(student);
         student = student[0].count;
         let teacher = await db.countItem('course_Teacher', 'course_id', id_course);
         teacher = teacher[0].count;
@@ -219,13 +219,30 @@ class TeacherController {
         try {
             //user_id, exercise_id, score
             const submissions = req.body;
-            submissions.forEach(async (submisison) =>  {
-                const user_id = submisison.user_id;
-                const exercise_id = submisison.exercise_id;
-                const score = submisison.score;
+            for (const submission of submissions) {
+                const user_id = submission.user_id;
+                const exercise_id = submission.exercise_id;
+                const score = submission.score;
                 await Submission.update_score_for_submission(user_id,exercise_id,score);
-            })
+            }
             res.status(200).json(submissions);
+        } catch (error) {
+        // console.log('req.body', req.body);
+            res.status(500).json({status: 'Invalid information'});
+            throw error;
+        }
+    }
+    async submissionImportFinalScore(req, res) {
+        try {
+            const finalScores = req.body;
+            for (const finalScore of finalScores) {
+                const user_id = finalScore.user_id;
+                const course_id = finalScore.course_id;
+                const finalscore = finalScore.finalscore;
+                await Course_Student.updateFinalScore(user_id, course_id, finalscore);
+            
+            }
+            res.status(200).json({msg: 'Successfully'})
         } catch (error) {
         // console.log('req.body', req.body);
             res.status(500).json({status: 'Invalid information'});

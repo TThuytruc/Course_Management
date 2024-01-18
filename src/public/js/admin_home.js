@@ -21,21 +21,23 @@ document.addEventListener('DOMContentLoaded', function(){
         $('#maxnumberofstudent-error').css('display', 'none');
         form.submit(function(event) {
             event.preventDefault();
+            
             let isValid = true;
             const course_name = form.find('input[name="course_name"]').val();
             const maxNumberOfStudent = form.find('input[name="maxnumberofstudent"]').val();
             const schedule = form.find('input[name="schedule"]').val();
            
-            let regex = /^[A-Z][a-z]+( [A-Z][a-z]+){0,}$/;
+            let regex = /^[A-Z][a-z]{0,}( [A-Z][a-z]{0,}){0,}$/;
             if (!course_name.match(regex)) {
                 $('#course_name-error').html('The first character of each word should be uppercase, and the rest should be lowercase, there is a single space between words!');
                 $('#course_name-error').css('display', 'block');
                 isValid = false
             }
-            if (maxNumberOfStudent < 0) {
+            if (maxNumberOfStudent <= 0) {
                 $('#maxnumberofstudent-error').css('display', 'block');
                 isValid = false;
             } 
+            console.log('submit');
             if (isValid) {
                 form.get(0).submit();
             }

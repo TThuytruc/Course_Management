@@ -84,6 +84,18 @@ module.exports = {
         }
 
     },
+    update: async (tbName, entity, tbColumn, value) => {
+        let dbcn = null;
+        try {
+            dbcn = await db.connect();
+            const query = pgp.helpers.update(entity, null, tbName);
+            // console.log(query);
+            await dbcn.any(query + `WHERE ${tbColumn} = ${value}`, );
+        } catch(error) {
+            throw error;
+        }
+      
+    },
 
     getAllInforUser: async () => {
         let dbcn = null;
@@ -115,7 +127,7 @@ module.exports = {
             dbcn = await db.connect();
 
             const data = await dbcn.any(query, [accountId]);
-            console.log(data[0].get_user_with_account_id);
+            // console.log(data[0].get_user_with_account_id);
             const resultString = data[0].get_user_with_account_id;
             const matches = resultString.match(/\(([^)]+)\)/);
             const values = matches[1].split(',');
@@ -126,7 +138,7 @@ module.exports = {
                 user_name: values[2].replace(/"/g, ''), // Remove double quotes from the name
                 user_role: values[3].replace(/"/g, ''), // Remove double quotes from the role
             };
-            console.log(userObject);
+            // console.log(userObject);
             return userObject;
         }
         catch (error) {
@@ -347,6 +359,37 @@ module.exports = {
             dbcn = await db.connect();
             const query = 'SELECT update_score_for_submission($1, $2, $3)'
             await dbcn.any(query, [user_id, exercise_id, score]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    updateFinalScoreForCourseStudent: async(user_id, course_id, finalscore) => {
+        let dbcn = null;
+        try {
+            dbcn = await db.connect();
+            const query = 'SELECT update_final_score_for_course_student($1, $2, $3)'
+            await dbcn.any(query, [user_id, course_id, finalscore]);
+        }
+        catch (error) {
+            throw error;
+        }
+        finally {
+            if (dbcn != null) {
+                dbcn.done();
+            }
+        }
+    },
+    deleteCourse: async(course_id) => {
+        let dbcn = null;
+        try {
+            dbcn = await db.connect();
+            await db.any('SELECT delete_course($1)', [course_id]);
         }
         catch (error) {
             throw error;

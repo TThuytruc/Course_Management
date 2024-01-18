@@ -194,3 +194,13 @@ BEGIN
 	
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION update_final_score_for_course_student(user_id_param INTEGER, course_id_param INTEGER, final_score_param DECIMAL)
+RETURNs VOID AS $$
+BEGIN
+	UPDATE Course_Student 
+	SET FinalScore = final_score_param
+	WHERE User_id = user_id_param and Course_id = course_id_param;
+	
+END;
+$$ LANGUAGE plpgsql;

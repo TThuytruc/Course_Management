@@ -26,10 +26,9 @@ router.get('/',  (req, res) => {
                 console.log(err.message)
                 res.redirect('/login')
             } else {
-                console.log(decodedToken);
+                // console.log(decodedToken);
                 const user_id = decodedToken.user_id;
                 const user = await db.getUserWithAccountId(user_id);
-                console.log(user);
                
                 if (user.user_role.includes('student')) { 
                     studentController.home(req,res)
