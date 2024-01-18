@@ -59,7 +59,7 @@ async function downloadAll(user_id,exercise_id,exercise_name,course_name,course_
         let name_zip= exercise_name.replace(/\s+/g, '_');
         name_zip = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
         console.log(name_zip);
-        downloadLink.download = `${name_zip}-${exercise_id}.zip`;
+        downloadLink.download = `${name_zip}.zip`;
 
         // Thêm vào body để tránh lỗi không xác định trong một số trình duyệt
         document.body.appendChild(downloadLink);
