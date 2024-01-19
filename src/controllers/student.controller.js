@@ -87,6 +87,7 @@ class StudentController {
             user: user[0],
             course_name: dataCourse.course_name,
             course_id: dataCourse.course_id,
+            schedule: dataCourse.schedule,
             dataTopic: dataTopic,
             teacher: listTeacher,
             numberofteacher: teacher,
