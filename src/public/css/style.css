@@ -195,9 +195,7 @@ main
 .img_university 
 {
     display: flex;
-    width: 200px; /* Set the desired width for the div */
-    height: 150px; /* Set the desired height for the div */
-    margin-left: 15px;
+    margin-left: 31px;
 }
 
 .img_university img 
@@ -950,7 +948,6 @@ a[download]:hover
     width: 100%;
 }
 
-
 #import-score-label, #import-finalscore-label {
     font-family: inherit;
     font-size: 15px;
@@ -959,4 +956,9 @@ a[download]:hover
     text-align: center;
     margin: auto 10px auto 0;
     cursor: pointer;
+}
+
+#logo
+{
+    height: 80px;
 }
