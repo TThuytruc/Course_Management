@@ -212,7 +212,7 @@ async function importExcel() {
         id: id,
         students: dataWithoutHeader
       };
-      var status=200;
+      var status = 200;
       fetch('/admin/import', {
         method: 'POST',
         headers: {
@@ -221,18 +221,18 @@ async function importExcel() {
         body: JSON.stringify({ data: dataSendSever }),
       })
         .then(response => {
-          if(response.status!=200)
-          {
-            status=response.status;
+          if (response.status != 200) {
+            status = response.status;
           }
           // console.log(response);
           return response.json();
         })
         .then(data => {
-          // console.log(data);
+          console.log(data);
+          console.log('status', status);
           location.reload();
-          if(status!=200)
-          {
+          if (status != 200) {
+            console.log('failed');
             alert(data.message);
           }
           // Xử lý dữ liệu trả về từ server (nếu có)
@@ -243,8 +243,8 @@ async function importExcel() {
 
     };
     reader.readAsBinaryString(file);
-  }
 
+  }
 }
 
 async function importExcelTeacher() {
