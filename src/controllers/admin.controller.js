@@ -89,14 +89,13 @@ class AdminController {
         const current_number_student = list_Student.length > 0 ? list_Student.length : 0;
         let total_student = await Course.getCondition('course_id', receivedArray.id);
         total_student = total_student[0].maxnumberofstudent;
-        console.log(current_number_student + receivedArray.students.length > total_student);
+        // console.log(current_number_student + receivedArray.students.length > total_student);
         if (current_number_student + receivedArray.students.length > total_student) {
-            console.log("So luong vuot qua gioi han");
-            res.status(500).json({ message: "So luong vuot qua gioi han" });
+            // console.log("So luong vuot qua gioi han");
+            res.status(500).json({ message: "The number of students in file exceeded the limit!" });
             return;
         }
         else {
-            console.log("Chua");
         }
 
         try {
@@ -113,7 +112,6 @@ class AdminController {
                 }
 
             }
-            console.log("Success");
             res.status(200).json({ success: true });
         } catch (error) {
             res.status(500).json({ success: false, error: error.message });
@@ -135,7 +133,6 @@ class AdminController {
                 }
 
             }
-            console.log("Success");
             res.status(200).json({ success: true });
         } catch (error) {
             res.status(500).json({ message: false, error: error.message });

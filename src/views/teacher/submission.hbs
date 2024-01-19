@@ -199,13 +199,14 @@
                         return;
                     }
                     for (let i = 1; i < rows.length; ++i) {
-                        if (!Number.isInteger(rows[i][0])) {
-                            alert('Id has to be an integer, please check your file!');
+                        if (!Number.isInteger(rows[i][0]) || rows[i][0] < 0) {
+                            alert('Id must be a positve integer, please check your file!');
                             isValid = false;
                             return;
                         }
-                        if (rows[i][1] < 0) {
-                            alert('Score has to be a positive integer, please check your file!');
+                        if (isNaN(rows[i][1]) || rows[i][1] < 0) {
+                        
+                            alert('Score must be a positive float, please check your file!');
                             isValid = false;
                             return;;
                         }
@@ -219,7 +220,6 @@
                     alert('Error reading the file. Please try again.');
                 }
                 if (!isValid) {
-                    console.log('is valid');
                     return;
                 }
                 document.getElementById('import-score-info').style.display = 'block';
