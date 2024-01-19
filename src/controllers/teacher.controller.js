@@ -112,7 +112,7 @@ class TeacherController {
             student_submissions.push(student[0]);
             submissions.push(submission[j]);
         }
-        const totalSubmissions = exercise_sub.length
+        const totalSubmissions = exercise_sub.length;
         const mergedArray = [];
 
         submissions.forEach(item1 => {
@@ -122,6 +122,7 @@ class TeacherController {
                 mergedArray.push(mergedItem);
             }
         });
+        submissions.sort((a, b) => a.user_id - b.user_id);
         // console.log('mergedArray', mergedArray); //mergedArray is array of Submission object
         let totalGraded = 0;
         for (let j = 0; j < submissions.length; j++) {
@@ -249,6 +250,41 @@ class TeacherController {
         // console.log('req.body', req.body);
             res.status(500).json({status: 'Invalid information'});
             throw error;
+        }
+    }
+    async updateScore(req,res){
+        const exercise_id = req.body.data.exercise_id;
+        const user_id = req.body.data.user_id;
+        const score = req.body.data.score;
+        await Submission.update_score(exercise_id, user_id, score);
+        res.json({message: 'ok'});
+    }
+    async  downloadSingle(req, res) {
+        const exercise_id = req.body.exercise_id;
+        const course_id = req.body.course_id;
+        let course_name = req.body.course_name;
+        course_name = course_name.replace(/\s+/g, '_');
+        course_name = course_name.replace(/[\/\\:*?"<>|]/g, '');
+        course_name = course_name + `-${course_id}`;
+    
+        let exercise_name = req.body.exercise_name;
+        exercise_name = exercise_name.replace(/\s+/g, '_');
+        exercise_name = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
+        exercise_name = exercise_name + `-${exercise_id}`;
+    
+        const fileName = req.body.fileName; // Giả sử bạn gửi tên tệp qua yêu cầu
+    
+        const filePath = path.join(__dirname, `../Submission/${course_name}/${exercise_name}/${fileName}`);
+    
+        try {
+            if (fs.existsSync(filePath)) {
+                res.download(filePath);
+            } else {
+                res.status(404).json({ error: 'File not found.' });
+            }
+        } catch (error) {
+            console.error('Error during downloadSingle:', error);
+            res.status(500).json({ error: 'Internal server error.' });
         }
     }
 }

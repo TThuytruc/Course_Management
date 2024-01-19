@@ -87,13 +87,13 @@
                             {{#each submissions}}
 
                             <tr>
-                                <td><a class="file_name" href="#" id="downloadLink">{{this.submissionfile}}</a></td>
+                                <td><a class="file_name" href="#" data-course-name="{{../courseInfo.course_name}}" data-exercise-name="{{../exercise.exercise_name}}" id="downloadLink">{{this.submissionfile}}</a></td>
                                 <td>{{this.user_id}}</td>
                                 <td>{{this.user_name}}</td>
                                 <td>{{this.submissiontime}}</td>
                                 <td>
-                                    <input type="number" id="box_scores" name="score" min="0" max="10" step="0.1"
-                                        onkeydown="scoreEnter(event)" value="{{this.score}}" placeholder="Scores">
+                                    <input type="number" class="score"   data-finalscore="{{this.score}}" data-student-id="{{this.user_id}}" data-exercise-id="{{../exercise.exercise_id}}" 
+                                    name="score" min="0" max="10" step="0.1" onkeydown="updateAllScores(event)" value="{{this.score}}" placeholder="Scores"></input>
                                 </td>
                                 {{!-- <td>{{this.score}}</td> --}}
                             </tr>
@@ -262,7 +262,6 @@
         crossorigin="anonymous"></script>
     <script src="/js/teacher_submission.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
-    <script src="/js/list_student.js"></script>
 
     <!-- <script src="./myscript.js">
 

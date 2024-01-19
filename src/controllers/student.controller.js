@@ -179,9 +179,9 @@ class StudentController {
         // finish add.
 
 
-        const numberofStudent = course_studentid.length
-        const numberofTeacher = course_teacherid.length
-        let teachers = []
+        const numberofStudent = course_studentid.length;
+        const numberofTeacher = course_teacherid.length;
+        let teachers = [];
 
         for (let i = 0; i < course_teacherid.length; i++) {
             const teacher = await User.getCondition('user_id', course_teacherid[i].user_id);
@@ -198,7 +198,7 @@ class StudentController {
             return `${days} days ${hours} hours ${minutes} minutes`;
         }
         let sub_status, sub_grading, time_remaining, sub_modified;
-        if (submission.length <= 0) {
+        if (fileSubmission.length <= 0) {
             sub_status = `No attempt`;
             if (moment().isBefore(exercise[0].duetime)) {
                 time_remaining = getTimeRemaining(moment(), exercise[0].duetime);
@@ -211,14 +211,14 @@ class StudentController {
             sub_modified = `-`;
         } else {
             sub_status = `Submitted for grading`;
-            sub_modified = moment(submission[0].submissiontime).format('HH:mm - DD/MM/YYYY');
-            if (submission[0].score == null) {
+            sub_modified = moment(fileSubmission[0].submissiontime).format('HH:mm - DD/MM/YYYY');
+            if (fileSubmission[0].score == null) {
                 sub_grading = `Not graded`;
             } else {
-                sub_grading = `Graded`;
+                sub_grading = fileSubmission[0].score;
             }
-            if (moment(submission[0].submissiontime).isBefore(exercise[0].duetime)) {
-                time_remaining = `Assignment was submitted early for: ` + getTimeRemaining(submission[0].submissiontime, exercise[0].duetime);
+            if (moment(fileSubmission[0].submissiontime).isBefore(exercise[0].duetime)) {
+                time_remaining = `Assignment was submitted early for: ` + getTimeRemaining(fileSubmission[0].submissiontime, exercise[0].duetime);
             } else {
 
                 time_remaining = `Assignment is overdue by: ` + getTimeRemaining(exercise[0].duetime, moment());

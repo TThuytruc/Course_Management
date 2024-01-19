@@ -948,6 +948,10 @@ a[download]:hover
     width: 100%;
 }
 
+.score {
+    text-align: center;
+}
+
 #import-score-button, #import-finalscore-button {
     font-family: inherit;
     font-size: 15px;

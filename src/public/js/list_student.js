@@ -120,6 +120,7 @@ async function updateFinalScore(course_id, user_id, score) {
         console.error('Failed to send data to server');
     }
     console.log("Update Score");
+    location.reload();
 }
 function updateAllScores(event) {
     if (event.key === 'Enter') {
@@ -133,6 +134,6 @@ function updateAllScores(event) {
             }
             updateFinalScore(courseId, userId, score);
         });
-        location.reload();
+        
     }
 }

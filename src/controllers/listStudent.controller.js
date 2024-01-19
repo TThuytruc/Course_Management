@@ -60,6 +60,7 @@ class ListStudentController {
         const user_id = req.body.data.user_id;
         // console.log(user_id);
         const score = req.body.data.score;
+        //await Course_student.update_final_score(course_id,user_id,score);
         await db.UpdateFinalScore(course_id,user_id,score);
         res.json({message: 'ok'});
     }
