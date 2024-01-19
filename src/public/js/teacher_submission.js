@@ -35,6 +35,10 @@ function updateAllScores(event) {
             let score = inputElement.value;
             if (score === '') {
                 score = null;
+            }else if(score <0){
+                score = 0;
+            }else if(score >10){
+                score =10;
             }
             updateScore(exerciseId, userId, score);
         });
