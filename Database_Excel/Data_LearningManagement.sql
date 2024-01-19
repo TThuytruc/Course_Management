@@ -136,8 +136,7 @@ INSERT INTO Topic (Course_id, Topic_name, Description)
 VALUES
 (1, 'Project Management', NULL),
 (1, 'Architectural Design', 'Use package diagram and class diagram to design the architectural in all assignments.'),
-(2, 'Projects', NULL),
-(3, 'Frontend', NULL);
+(2, 'Projects', NULL);
 
 -- Bảng Course_Student
 INSERT INTO Course_Student (Course_id, User_id, FinalScore)
@@ -166,12 +165,6 @@ VALUES
 (2, 29, NULL),
 (3, 7, null),
 (3, 8, null),
-(3, 10, null),
-(3, 15, null),
-(3, 17, null),
-(3, 21, null),
-(3, 22, null),
-(3, 25, null),
 (4, 5, null),
 (4, 4, null),
 (5, 4, null),
@@ -190,6 +183,8 @@ VALUES
 (6, 9, null),
 (6, 10, null),
 (6, 11, null);
+
+
 
 -- Bảng Course_Teacher
 INSERT INTO Course_Teacher (Course_id, User_id)
@@ -219,5 +214,47 @@ VALUES
 (1, 'Exercise 01: Risk analysis', '2023-12-01 06:00:00', '2024-02-01 23:00:00', 'All files must be compressed into zip. File name: <StudentID>.zip'),
 (1, 'Exercise 02: Estimate', '2024-01-15 09:00:00', '2024-02-23 23:59:00', NULL),
 (2, 'Use case', '2023-11-02 14:15:00', '2024-01-03 10:00:00', 'Create use-case specification for the exercise in slide 42.'),
-(3, 'Project 01 - Socket', '2023-11-08 07:00:00', '2024-01-28 22:30:00', 'If files are too large, upload to Google Drive and submit the .txt file containing the link'),
-(4, 'HTML', '2024-01-18 12:00:00', '2024-01-25 23:59:00', NULL);
+(3, 'Project 01 - Socket', '2023-11-08 07:00:00', '2024-01-28 22:30:00', 'If files are too large, upload to Google Drive and submit the .txt file containing the link');
+
+INSERT INTO Submission (User_id, Exercise_id, SubmissionTime, SubmissionFile)
+VALUES
+('4', '1','2024-01-05 22:00:00', 'test1.txt'),
+('5', '1','2024-01-05 22:00:00', 'test2.txt'),
+('6', '1','2024-01-05 22:00:00', 'test3.txt'),
+('7', '1','2024-01-05 22:00:00', 'test4.txt'),
+('8', '1','2024-01-05 22:00:00', 'test5.txt'),
+('10', '1','2024-01-05 22:00:00', 'test6.txt'),
+('11', '1','2024-01-05 22:00:00', 'test6.txt'),
+('12', '1','2024-01-05 22:00:00', 'test6.txt'),
+('13', '1','2024-01-05 22:00:00', 'test6.txt'),
+
+('4', '2','2024-01-05 22:00:00', 'test1.txt'),
+('5', '2','2024-01-05 22:00:00', 'test2.txt'),
+('6', '2','2024-01-05 22:00:00', 'test3.txt'),
+('7', '2','2024-01-05 22:00:00', 'test4.txt'),
+('8', '2','2024-01-05 22:00:00', 'test5.txt'),
+('10', '2','2024-01-05 22:00:00', 'test6.txt'),
+('11', '2','2024-01-05 22:00:00', 'test6.txt'),
+('12', '2','2024-01-05 22:00:00', 'test6.txt'),
+('13', '2','2024-01-05 22:00:00', 'test6.txt'),
+
+('4', '3','2024-01-05 22:00:00', 'test1.txt'),
+('5', '3','2024-01-05 22:00:00', 'test2.txt'),
+('6', '3','2024-01-05 22:00:00', 'test3.txt'),
+('7', '3','2024-01-05 22:00:00', 'test4.txt'),
+('8', '3','2024-01-05 22:00:00', 'test5.txt'),
+('10', '3','2024-01-05 22:00:00', 'test6.txt'),
+('11', '3','2024-01-05 22:00:00', 'test6.txt'),
+('12', '3','2024-01-05 22:00:00', 'test6.txt'),
+('13', '3','2024-01-05 22:00:00', 'test6.txt'),
+
+('4', '4','2024-01-05 22:00:00', 'test1.txt'),
+('5', '4','2024-01-05 22:00:00', 'test2.txt'),
+('6', '4','2024-01-05 22:00:00', 'test3.txt'),
+('7', '4','2024-01-05 22:00:00', 'test4.txt'),
+('8', '4','2024-01-05 22:00:00', 'test5.txt'),
+('10', '4','2024-01-05 22:00:00', 'test6.txt'),
+('11', '4','2024-01-05 22:00:00', 'test6.txt'),
+('12', '4','2024-01-05 22:00:00', 'test6.txt'),
+('13', '4','2024-01-05 22:00:00', 'test6.txt');
+
