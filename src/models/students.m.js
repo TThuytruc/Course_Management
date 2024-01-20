@@ -33,4 +33,12 @@ module.exports = class Student {
             throw error;
         }
     }
+    static async add_student_to_course(courseId,userId) {
+        try {
+            await db.addStudent(courseId, userId);
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 };

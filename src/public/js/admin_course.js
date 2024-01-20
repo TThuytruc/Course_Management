@@ -24,6 +24,8 @@ function DeleteAcction() {
 }
 function CloseDialog() {
   $('#modal-course-delete').modal('hide');
+  $('#modal-user-add').modal('hide');
+  $('#modal-user-delete').modal('hide');
 }
 // Show the Bootstrap modal
 
@@ -124,7 +126,7 @@ async function addUser(currentCount, maxCount, userType) {
   }
   else {
     document.getElementById('currentCount').textContent = 'Number of teachers: ' + currentCount;
-    document.getElementById('userType').textContent = 'teacher';
+    document.getElementById('userType').value = 'teacher';
   }
 
   // Show the modal
@@ -290,9 +292,3 @@ async function importExcelTeacher() {
     reader.readAsBinaryString(file);
   }
 }
-
-$(document).ready(function() {
-  $("#logo").click(function() {
-      window.location.href = `/`;
-  });
-});

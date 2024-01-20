@@ -35,7 +35,7 @@ class AdminController {
 
         const listInforTeacher = dataUserAccount.filter(objA => listTeacher.some(objB => objB.user_id === objA.user_id));
         const listInforStudent = dataUserAccount.filter(objA => listStudent.some(objB => objB.user_id === objA.user_id));
-        const dataRender = { teachers: listInforTeacher, students: listInforStudent, namecourse: course.course_name, username: 'Admin', id_course: id_course };
+        const dataRender = { teachers: listInforTeacher, students: listInforStudent, namecourse: course.course_name, username: 'Admin', id_course: id_course, numberofstudent:listStudent.length, numberofteacher:listTeacher.length };
         res.render('admin/course', dataRender);
     }
     async home(req, res, next) {
@@ -71,13 +71,13 @@ class AdminController {
     async AddTeacherToCourse(req, res, next) {
         const courseId = req.body.course_id;
         const userId = req.body.user_id;
-        await db.addTeacher(courseId, userId);
+        await Teacher.add_teacher_to_course(courseId, userId);
         res.json({ message: 'ok' });
     }
     async AddStudentToCourse(req, res, next) {
         const courseId = req.body.course_id;
         const userId = req.body.user_id;
-        await db.addStudent(courseId, userId);
+        await Student.add_student_to_course(courseId, userId);
         res.json({ message: 'ok' });
     }
     async importExcelFile(req, res) {

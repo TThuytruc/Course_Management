@@ -33,4 +33,12 @@ module.exports = class Teacher {
             throw error;
         }
     }
+    static async add_teacher_to_course(courseId,userId) {
+        try {
+            await db.addTeacher(courseId, userId);
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 };
