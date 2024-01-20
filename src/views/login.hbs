@@ -7,18 +7,24 @@
     <title>School Login</title>
     <style>
         body {
-            background: linear-gradient(to bottom, #854759, #4d2933);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+        }
+
+        #background {     
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-image: url("/images/background_login.jpg"); /
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size:100vw auto;
         }
 
         #sign-in-form {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.87);
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             padding: 15px 30px;
@@ -26,8 +32,11 @@
             /* text-align: center; */
         }
 
-        #sign-in-form h2 {
-            color: #333;
+         #sign-in-form h2 {
+            color: #854759;
+            text-align: center;
+            font-weight:800;
+            font-size: 28px;
         }
 
         .form-group {
@@ -38,6 +47,7 @@
             display: block;
             font-weight: bold;
             margin-bottom: 5px;
+            color: #52504f;
         }
 
         .form-group input {
@@ -63,34 +73,53 @@
             font-weight: bold;
             margin: -10px 0 10px;
         }
+
+        #sign-in-btn {
+            background-color: #854759;
+            font-weight: 550;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            float: right;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            height: 40px;
+            width: 80px;
+        }
+
+        input:focus
+        {
+             outline: none;
+        }
     </style>
 </head>
 
 <body>
-    <div id="sign-in-form">
-        <h2>Log In for School</h2>
-        <form method="post" action="/login">
-            <div class="form-group">
-                <label for="account_email">Email</label>
-                <input class="form-input" type="email" id="account_email" name="account_email" placeholder="Enter email"
-                    required>
-            </div>
-            <div class="email error">
+    <div id="background">
+        <div id="sign-in-form">
+            <h2>Log In for School</h2>
+            <form method="post" action="/login">
+                <div class="form-group">
+                    <label for="account_email">Email</label>
+                    <input class="form-input" type="email" id="account_email" name="account_email" placeholder="Enter email"
+                        required>
+                </div>
+                <div class="email error">
 
-            </div>
-            <div class="form-group">
-                <label for="account_password">Password</label>
-                <input class="form-input" type="password" id="account_password" name="account_password"
-                    placeholder="Enter password" required>
-            </div>
-            <div class="password error">
-            </div>
-            <div class="form-group">
-                <button id="sign-in-btn" type="submit">Log In</button>
-            </div>
-        </form>
-    </div>
-
+                </div>
+                <div class="form-group">
+                    <label for="account_password">Password</label>
+                    <input class="form-input" type="password" id="account_password" name="account_password"
+                        placeholder="Enter password" required>
+                </div>
+                <div class="password error">
+                </div>
+                <div class="form-group">
+                    <button id="sign-in-btn" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+   </div>
     <script>
         const form = document.querySelector('form');
         const emailError = document.querySelector('.email.error');

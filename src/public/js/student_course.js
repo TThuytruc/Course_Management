@@ -17,4 +17,10 @@ function submission1(id)
     window.location.href = `/student/submission?exercise_id=${encodeURIComponent(id)}`;
 }
 
+$(document).ready(function() {
+    $("#logo").click(function() {
+        window.location.href = `/`;
+    });
+});
+
 

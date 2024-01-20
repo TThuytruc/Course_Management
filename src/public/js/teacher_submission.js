@@ -95,4 +95,10 @@ async function downloadAll(user_id,exercise_id,exercise_name,course_name,course_
     }
 }
 
+$(document).ready(function() {
+    $("#logo").click(function() {
+        window.location.href = `/`;
+    });
+});
+
 

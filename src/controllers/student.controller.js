@@ -78,7 +78,7 @@ class StudentController {
         for (let i = 0; i < courses.length; i++) {
             const exerciseInOneCourse = await Exercise.getUpcommingEvents(courses[i].course_id);
             for (let j = 0; j < exerciseInOneCourse.length; j++) {
-                exerciseInOneCourse[j].duetime = moment(exerciseInOneCourse[j].duetime).format('HH:mm - DD/MM/YYYY');
+                exerciseInOneCourse[j].duetime = moment(exerciseInOneCourse[j].duetime).format('DD/MM/YYYY - HH:mm');
                 exercises.push(exerciseInOneCourse[j]);
             }
         }
@@ -113,7 +113,7 @@ class StudentController {
         let exercises = [];
         const exerciseInOneCourse = await Exercise.getUpcommingEvents(courses);
         for (let j = 0; j < exerciseInOneCourse.length; j++) {
-            exerciseInOneCourse[j].duetime = moment(exerciseInOneCourse[j].duetime).format('HH:mm - DD/MM/YYYY');
+            exerciseInOneCourse[j].duetime = moment(exerciseInOneCourse[j].duetime).format('DD/MM/YYYY - HH:mm');
             exercises.push(exerciseInOneCourse[j]);
         }
 
@@ -212,7 +212,7 @@ class StudentController {
             sub_modified = `-`;
         } else {
             sub_status = `Submitted for grading`;
-            sub_modified = moment(fileSubmission[0].submissiontime).format('HH:mm - DD/MM/YYYY');
+            sub_modified = moment(fileSubmission[0].submissiontime).format('DD/MM/YYYY - HH:mm');
             if (fileSubmission[0].score == null) {
                 sub_grading = `Not graded`;
             } else {

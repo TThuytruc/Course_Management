@@ -165,3 +165,9 @@ async function DeleteAcction(user_id,exercise_id,exercise_name,course_name,nameF
     console.error('Error during download:', error);
 }
 }
+
+$(document).ready(function() {
+    $("#logo").click(function() {
+        window.location.href = `/`;
+    });
+});

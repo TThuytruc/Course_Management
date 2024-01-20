@@ -31,6 +31,7 @@ body
 
 .header__container 
 {
+    margin-left:100px;
     height: 100%;
     width: 80%;
     display: flex;
@@ -89,7 +90,8 @@ body
     position: absolute;
     top: 130%;
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid #707070;
+    border-radius: 5px;
     position: absolute;
     list-style: none;
     padding: 0;
@@ -124,12 +126,23 @@ body
     align-items: center;
     font-size: 14px;
     padding: 10px 0;
-    border-top: 1px solid black;
+    border-top: 1px solid #707070;
 }
 
 .header__user-item:hover 
 {
-    background-color: azure;
+    background-color: rgb(223, 220, 220); 
+}
+
+.header__user-item a, .header__user-item a:hover
+{
+    width: 100%; 
+    color:#e91e63;
+}
+
+.header__user-item i, .header__user-item i:hover
+{
+    color:#4d4d4d;
 }
 
 .header__user-logout 
@@ -170,6 +183,8 @@ main
 .content_body
 {
     display: flex;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
 .content
@@ -182,7 +197,9 @@ main
     flex: 30%;
     display: flex;
     flex-direction: column;
-    margin-top: 0.8%;
+    margin-top: 0.5%;
+    margin-right: 10px;
+    margin-bottom: 25px;
 }
 
 .img_language
@@ -231,6 +248,7 @@ main
 {
     display: flex;
     flex-direction: column;
+    margin-left: 30px;
 }
 
 .name_course
@@ -286,6 +304,8 @@ main
     flex-direction: column;
     margin-left: 1%;
     margin-top: 1.3%;
+    padding-top: 20px;
+    /* padding-bottom: 20px; */
 }
 
 .text:hover
@@ -324,7 +344,7 @@ main
     margin: 10px 0;
     color: rgb(151, 184, 85);
     font-weight: bold;
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .topic_description
@@ -362,7 +382,7 @@ main
 
 .title_text
 {
-    padding-left: 5%;
+    padding-left: 3%;
 }
 
 li 
@@ -453,7 +473,7 @@ li
     font-size: 27px;
     color: rgb(135, 164, 76);
     font-weight: bold;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 .time
@@ -473,8 +493,8 @@ li
     font-size: 23px;
     color: rgb(135, 164, 76);
     font-weight: bold;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 35px;
+    margin-bottom: 15px;
 }
 
 th
@@ -485,6 +505,7 @@ th
 #teacher_submission_table
 {
     text-align: center;
+    margin-top: 20px;
 }
 
 a[download]
@@ -562,20 +583,26 @@ a[download]:hover
     display: flex;
     flex-direction: row;
 }
+
 .home_main_content{
     flex: 70%;
+    margin-bottom: 25px;
 }
+
 .home_title
 {
-    margin-left:20px;
-    margin-top:20px;
-    margin-bottom:40px;
+    margin-left:18px;
+    margin-top:10px;
+    margin-bottom:35px;
     font-weight: bold;
     color:#bb6880;
 }
 .home_list_courses{
     background-color:#EEEEEE;
-    padding:20px;
+    padding:10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    border: var(--border);
  }
 .box_home_courses
 {
@@ -612,7 +639,7 @@ a[download]:hover
 #home_side_grid
 {
     display:grid;
-    grid-template-columns: 1fr 2.5fr;
+    grid-template-columns: 1fr 2fr;
     gap: 5px;;
 }
 
@@ -647,6 +674,7 @@ a[download]:hover
     border: var(--border);
     padding: 10px;
     background-color:rgb(238, 238, 238);
+    padding-left: 20px;
 }
 
 .grid-container
@@ -687,7 +715,7 @@ a[download]:hover
     color: rgb(135, 164, 76);
     font-weight: bold;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .file_name
@@ -712,19 +740,20 @@ a[download]:hover
 {
     max-width: 90px;
     height:40px;
-    background-color: #c76e87;
+    background-color: #854759;
     border:none;
     border-radius: 5px;
     color:white;
     font-weight:600;
     margin-top:15px;
+    margin-bottom: 10px;
     display: inline-block;
 }
 
-#button_add:hover
+/* #button_add:hover
 {
     background-color: #af5f77;
-}
+} */
 
 .dropdown-item
 {
@@ -735,6 +764,7 @@ a[download]:hover
 .dropdown-item:hover 
 {
     background-color: rgb(223, 220, 220) !important; 
+    cursor: pointer;
 }
 
 .dropdown-item:active, .dropdown-item.active
@@ -770,7 +800,7 @@ a[download]:hover
 
 .window_header
 {
-    background-color: #b5637a;
+    background-color: #854759;
     height: 48px;
     display:flex;
     flex-direction: row;
@@ -820,7 +850,7 @@ a[download]:hover
 {
     width: 75px;
     height: 40px;
-    background-color: #c76e87;
+    background-color: #854759;
     border:none;
     border-radius: 5px;
     color:white;
@@ -964,4 +994,33 @@ a[download]:hover
 #logo
 {
     height: 80px;
+}
+
+#logo:hover
+{
+   cursor: pointer;
+}
+
+#avartar_teacher
+{
+    margin-left:2%; 
+    height: 30px;
+}
+
+#submit_buttons
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-bottom: 20px;
+}
+
+#buttonCancel
+{
+    margin-right: 8px;
+}
+
+#buttonRemove, #buttonSave
+{
+    background-color: #854759;
 }

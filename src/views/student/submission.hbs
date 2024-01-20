@@ -21,7 +21,6 @@
 <body>
     {{>header username=user.user_name}}
 
-
     <main>
         <!-- Logo -->
         <div class="row_content img_language">
@@ -32,7 +31,7 @@
 
 
         <!-- Course -->
-        <div class="box title_course">
+        <div class="title_course">
             <div class="name_course">
                 {{courseInfo.course_name}}
             </div>
@@ -67,6 +66,11 @@
                     <div class="submission_status">Submission</div>
 
                     <table class="table table-striped">
+                        <colgroup>
+                            <col style="width: 25%;">
+                            <col>
+                        </colgroup>
+
                         <tbody>
                             <tr>
                                 <th scope="row">Submission status</th>
@@ -75,7 +79,7 @@
 
                             <tr>
                                 <th scope="row">Grade</th>
-                                <td>{{sub_grading}}</td>
+                                <td style="font-weight:bold; color:#854759">{{sub_grading}}</td>
                             </tr>
 
                             <tr>
@@ -102,22 +106,21 @@
 
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row"> <button type="button" class="btn btn-secondary" id="buttonCancel"
-                                        onclick="CancelSubmission()">Cancel</button></th>
-                                <td>
-                                    <button type="button" class="btn btn-secondary" id="buttonRemove"
-                                        style="display: none;" onclick="RemoveSubmission()">Remove</button>
-                                    <button type="button" class="btn btn-secondary" id="buttonSave"
-                                        style="display: none;"
-                                        onclick="SaveSubmission('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{courseInfo.course_id}}')">Submit</button>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
+
+                    <div id="submit_buttons">
+                        <button type="button" class="btn btn-secondary" id="buttonCancel"
+                                    onclick="CancelSubmission()">Cancel</button>
+                        <button type="button" class="btn btn-secondary" id="buttonRemove"
+                                    style="display: none;" onclick="RemoveSubmission()">Remove</button>
+                        <button type="button" class="btn btn-secondary" id="buttonSave"
+                                    style="display: none;"
+                                    onclick="SaveSubmission('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{courseInfo.course_id}}')">Submit</button>
+                    </div>
+        
                     <input type="hidden" id="isSubmit" value="{{isSubmit}}">
                     <input type="hidden" id="isValid" value="{{isValid}}">
-
                 </div>
             </div>
 
@@ -127,85 +130,90 @@
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Final Score</a>
                     </div>
-                    <div class="home_side_inf_box home_side_content_box">
+
+                    <div class="home_side_inf_box home_side_content_box">  
                         <strong>
                             <a class="Score">{{submission.score}}</a>
                         </strong>
                     </div>
+
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course ID</a>
                     </div>
+
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="id-class">{{courseInfo.course_id}}</a> </strong></h5>
+                        <h5><strong><a class="id-class" style="font-size: 18px;">{{courseInfo.course_id}}</a> </strong></h5>
                     </div>
+
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course name</a>
                     </div>
 
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="course_name">{{courseInfo.course_name}}</a></strong></h5>
+                        <h5><strong><a class="course_name" style="font-size: 18px;">{{courseInfo.course_name}}</a></strong></h5>
                     </div>
+
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Schedule</a>
                     </div>
 
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="course_name">{{courseInfo.schedule}}</a></strong></h5>
+                        <h5><strong><a class="course_name" style="font-size: 18px;">{{courseInfo.schedule}}</a></strong></h5>
                     </div>
 
                     <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Teachers</a>
-                    </div>
-                    <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">{{numberofTeacher}}</a> </strong></h5>
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Teachers</a>
+                        <span style="font-size: 18px; float:right"><strong>{{numberofTeacher}}</strong></span>
                     </div>
 
-                    <div class="list_teacher color_box">
-                        <strong class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</strong>
+                    <div class="home_side_inf_box home_side_content_box" style="padding-top:0px; padding-bottom:0px;">
+                        <div class="list_teacher color_box">
                         {{#each teachers}}
                         <ul class="list">
                             <li class="member">
                                 <div class="teacher">
-                                    <img style="margin-left:2%"
-                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
-                                        alt="Teacher">
+                                    <img id="avartar_teacher" 
+                                        src="/images/icon_teacher.png"
+                                        alt="Teacher" style="margin-left:0px;">
                                     <div class="name_teacher">
-                                        <p class="name">{{this.user_name}}</p>
+                                        <strong class="name">{{this.user_name}}</strong>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                         {{/each}}
                     </div>
+                    </div>
+
+                    
                     <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Students</a>
+                        <span style="font-size: 18px; float:right"><strong>{{numberofStudent}}</strong></span>
                     </div>
+
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">{{numberofStudent}}</a> </strong></h5>
-                    </div>
-                    <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">List Students</a>
-                    </div>
-                    <div class="home_side_inf_box home_side_content_box">
-                        <div class="icon title_text">
-                            <a class="text link_group_people" href="#" onclick="showListStudent(1)">Show participants
-                                list</a>
+                        <div class="icon" style="font-size: 17px;">
+                            <a class="link_group_people" href="#" onclick="showListStudent('{{courseInfo.course_id}}')">
+                                Show participants list</a>
                         </div>
                     </div>
 
+                    <div class="home-side">
+                        <div class="home_side_header_box">
+                            <a class="title_row title_text" style="color: rgb(151, 184, 85);">Upcomming events</a>
+                        </div>
+
+                        <div class="home_side_event_box home_side_content_box">
+                            {{#each events}}
+                            <div class="box_upcoming_events" style="margin-left: -10px !important;">
+                                <div>{{this.duetime}}</div>
+                                <div class="side_deadline">{{this.exercise_name}}</div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div> 
                 </div>
-                <div class="home_side_header_box">
-                    <a class="title_row title_text" style="color: rgb(151, 184, 85);">Upcomming events</a>
-                </div>
-                <div class="home_side_event_box home_side_content_box">
-                    {{#each events}}
-                    <div class="box_upcoming_events">
-                        <div>{{this.duetime}}</div>
-                        <div class="side_deadline">{{this.exercise_name}}</div>
-                    </div>
-                    {{/each}}
-                </div>
-            </div>
+            </div> 
         </div>
         <!-- Khi sử dụng js để load các deadliene, có thể dùng đoạn code bên dưới và file student_course.js để load html
                     Lưu ý phải có dữ liệu đúng thì đoạn code bên dưới mới hiển thị lên.
@@ -234,19 +242,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Remove Submission</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                        onclick="CloseDialog()" style="border:0; background-color:white">X</button>
+                        onclick="CloseDialog()" style="border:0; background-color:white; font-size:20px;">x</button>
                 </div>
                 <div class="modal-body">
                     <form method="post" id="deleteForm">
-                        <p id="delete_description">Are you sure to remove file submitted?</p>
+                        <p id="delete_description">Are you sure to remove the file submitted?</p>
                         <input type="hidden" id="courseIdInput" name="id_course" value="">
                         <input type="hidden" id="personIdInput" name="name_Person" value="">
-                        <div class="modal-footer">
+                        <div class="modal-footer" style="margin-bottom:-10px;">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                 onclick="CloseDialog()">Close</button>
-                            <button type="button" class="btn btn-primary" style="background-color: red;"
+                            <button type="button" class="btn btn-primary" style="background-color: #854759;"
                                 onclick="DeleteAcction('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{nameFileSubmit}}','{{courseInfo.course_id}}')">Remove</button>
                         </div>
                     </form>

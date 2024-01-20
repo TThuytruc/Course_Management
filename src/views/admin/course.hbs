@@ -33,55 +33,51 @@
 
         <div class="box title_course">
             <div class="name_course">
-                {{namecourse}}, {{user.user_id}}
+                {{namecourse}} {{user.user_id}}
                 
             </div>
-            <div class="link_current_page">
-
-                <button style="border: 0;"><a class="btn bg-secondary text-white pd-2 text-center"
-                        href="./home">Home</a></button>
-            </div>
-
-            <h1 class="text-dark">List of teachers</h1>
+          
+            <h1 class="text-dark" style="margin-top:15px; font-size:30px; font-weight: bold; color: rgb(135, 164, 76) !important;">List of teachers</h1>
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <th class="text-center" scope="col">ID</th>
                         <th class="text-center" scope="col">Name</th>
                         <th class="text-center" scope="col">Email</th>
-                        <th class="text-center" scope="col">Handle</th>
+                        <th class="text-center" scope="col"></th>
                     </tr>
                 </thead>
+
                 <tbody id="list_teacher">
                     {{#each teachers}}
                     <tr id="teacher-{{this.user_id}}">
                         <th class="text-center" scope="row">{{this.user_id}}</th>
                         <td class="text-center">{{this.user_name}}</td>
-                        <td class="text-center"><a href="mailto:{{this.account_email}}">{{this.account_email}}</a></td>
+                        <td class="text-center"><a style="color:#e91e63 !important;" href="mailto:{{this.account_email}}">{{this.account_email}}</a></td>
                         <td class="text-center" class="text-center"><button
-                                class="btn bg-secondary text-white pd-2 text-center"onclick="deleteUser('{{this.user_id}}','{{../id_course}}', 'teacher')">Delete</button></td>
+                                class="btn bg-secondary text-white pd-2 text-center" style="background-color:#854759 !important;" onclick="deleteUser('{{this.user_id}}','{{../id_course}}', 'teacher')">Delete</button></td>
                     </tr>
                     {{/each}}
 
                 </tbody>
             </table>
-            <span>
-                <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;" onclick="addUser('{{numberofteacher}}','','teacher')">Add</button>
-                <button class="btn btn-secondary" style="width: 100px; height: 40px;"
+            <span style="display: flex; justify-content:center;">
+                <button class="btn btn-secondary" title="Add teacher" style="width: 70px; margin-right:10px; height: 40px; background-color:#854759 !important;" onclick="addUser('{{numberofteacher}}','','teacher')">Add</button>
+                <button class="btn btn-secondary" style="width: 100px; height: 40px; background-color:#854759 !important;"
                     onclick="DeleteAll('teacher','{{id_course}}')">Delete All</button>
                 <input type="file" id="file_listTeacher" name="excelFileTeacher" accept=".xlsx, .xls" onchange="importExcelTeacher()" style="display:none">
                 <label for="file_listTeacher" class="btn btn-secondary" 
-                    style="width: 100px; height: 40px; margin-bottom: 1.5px">Import</label>
+                    style="width: 90px; margin-left:10px; height: 40px; margin-bottom: 1.5px; background-color:#854759 !important;">Import</label>
             </span>
 
-            <h1 class="text-dark" style="margin-top: 25px">List of students</h1>
+            <h1 class="text-dark" style="margin-top:40px; font-size:30px; font-weight: bold; color: rgb(135, 164, 76) !important;">List of students</h1>
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <th class="text-center" scope="col">ID</th>
                         <th class="text-center" scope="col">Name</th>
                         <th class="text-center" scope="col">Email</th>
-                        <th class="text-center" scope="col">Handle</th>
+                        <th class="text-center" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody id="list_student">
@@ -89,20 +85,20 @@
                     <tr id="student-{{this.user_id}}">
                         <th class="text-center" scope="row">{{this.user_id}}</th>
                         <td class="text-center">{{this.user_name}}</td>
-                        <td class="text-center"><a href="mailto:{{this.account_email}}">{{this.account_email}}</a></td>
-                        <td class="text-center"><button class="btn bg-secondary text-white text-center" onclick="deleteUser('{{this.user_id}}','{{../id_course}}', 'student')">Delete</button></td>
+                        <td class="text-center"><a style="color:#e91e63 !important;" href="mailto:{{this.account_email}}">{{this.account_email}}</a></td>
+                        <td class="text-center"><button class="btn bg-secondary text-white text-center" style="background-color:#854759 !important;" onclick="deleteUser('{{this.user_id}}','{{../id_course}}', 'student')">Delete</button></td>
                         </td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
-            <span>
-                <button class="btn btn-secondary" title="Thêm giáo viên" style="width: 50px; height: 40px;" onclick="addUser('{{numberofstudent}}','{{maxnumberofstudent}}','student')">Add</button>
-                <button class="btn btn-secondary" style="width: 100px; height: 40px;"
+            <span style="display: flex; justify-content:center;">
+                <button class="btn btn-secondary" title="Add teacher" style="width: 70px; margin-right:10px; height: 40px; background-color:#854759 !important;" onclick="addUser('{{numberofstudent}}','{{maxnumberofstudent}}','student')">Add</button>
+                <button class="btn btn-secondary" style="width: 100px; height: 40px; background-color:#854759 !important;"
                     onclick="DeleteAll('student','{{id_course}}')">Delete All</button>
                 <input type="file" id="file_submission" name="excelFile" accept=".xlsx, .xls" onchange="importExcel()">
                 <label for="file_submission" class="btn btn-secondary" 
-                    style="width: 100px; height: 40px; margin-bottom: 1.5px">Import</label>
+                    style="width: 90px; margin-left:10px; height: 40px; margin-bottom: 25px; background-color:#854759 !important;">Import</label>
 
             </span>
         </div>
@@ -128,7 +124,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                 onclick="CloseDialog()">Close</button>
-                            <button type="button" class="btn btn-primary" style="background-color: red;"
+                            <button type="button" class="btn btn-primary" style="background-color:#854759;"
                                 onclick="DeleteAcction()">Delete</button>
                         </div>
                     </form>
@@ -151,7 +147,7 @@
                         <input type="hidden" id="dl_course_id" name="user_id" value="">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="CloseDialog()">Close</button>
-                            <button type="button" class="btn btn-primary" style="background-color: red;" onclick="DeleteOneUser()">Delete</button>
+                            <button type="button" class="btn btn-primary" style="background-color:#854759;" onclick="DeleteOneUser()">Delete</button>
                         </div>
                     </form>
                 </div>
@@ -176,7 +172,7 @@
             <input type="text" id="userIdInput" name="userId">
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="CloseDialog()">Close</button>
-                <button type="submit" class="btn btn-primary" onclick="Add({{id_course}})">Add</button>
+                <button type="submit" class="btn btn-primary" style="background-color:#854759 !important; width:60px;" onclick="Add({{id_course}})">Add</button>
             </div>
             </form>
         </div>

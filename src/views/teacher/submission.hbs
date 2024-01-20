@@ -38,7 +38,7 @@
         </div>
 
         <!-- Course -->
-        <div class="box title_course">
+        <div class="title_course">
             <div class="name_course">
                 {{courseInfo.course_name}}
             </div>
@@ -85,7 +85,6 @@
                         </thead>
                         <tbody>
                             {{#each submissions}}
-
                             <tr>
                                 <td><a class="file_name" href="#" data-course-name="{{../courseInfo.course_name}}" data-exercise-name="{{../exercise.exercise_name}}" id="downloadLink">{{this.submissionfile}}</a></td>
                                 <td>{{this.user_id}}</td>
@@ -102,10 +101,10 @@
                     </table>
                     <div class="btn_download">
                         <label class="choose-file-label" for="file-input" style="margin: auto 5px auto 0; cursor: pointer">Choose file</label>
-                        <button id="import-score-button" class="btn-secondary btn-in-submission disabled" style="font:inherit; opacity: 0.7; cursor: default">Import score</button>
+                        <button id="import-score-button" class="btn-secondary btn-in-submission disabled" style="font:inherit; opacity: 0.7; cursor: default; margin-left:10px; background-color:#854759;">Import score</button>
                         <input type="file" id="file-input" style="display: none;" accept=".xlsx" value="Import Score"
                             class="btn-secondary btn-in-submission mr-2">
-                        <button id="btn_download-all" class="btn-secondary btn-in-submission" style="font: inherit"
+                        <button id="btn_download-all" class="btn btn-secondary btn-in-submission" style="font: inherit; background-color:#854759;"
                             onclick="downloadAll('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{courseInfo.course_id}}')">Download
                             All</button>
                     </div>
@@ -120,58 +119,65 @@
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course ID</a>
                     </div>
+
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="id-class">{{courseInfo.course_id}}</a> </strong></h5>
+                        <h5><strong><a class="id-class" style="font-size: 18px;">{{courseInfo.course_id}}</a> </strong></h5>
                     </div>
+
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course name</a>
                     </div>
 
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="course_name">{{courseInfo.course_name}}</a></strong></h5>
-                    </div>
-                    <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Teachers</a>
-                    </div>
-                    <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">{{numberofTeacher}}</a> </strong></h5>
+                        <h5><strong><a class="course_name" style="font-size: 18px;">{{courseInfo.course_name}}</a></strong></h5>
                     </div>
 
-                    <div class="list_teacher color_box">
-                        <strong class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</strong>
+                    {{!-- <div class="home_side_header_box">
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Schedule</a>
+                    </div>
+
+                    <div class="home_side_inf_box home_side_content_box">
+                        <h5><strong><a class="course_name" style="font-size: 18px;">{{courseInfo.schedule}}</a></strong></h5>
+                    </div> --}}
+
+                    <div class="home_side_header_box">
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Teachers</a>
+                        <span style="font-size: 18px; float:right"><strong>{{numberofTeacher}}</strong></span>
+                    </div>
+
+                    <div class="home_side_inf_box home_side_content_box" style="padding-top:0px; padding-bottom:0px;">
+                        <div class="list_teacher color_box">
+                        {{#each teachers}}
                         <ul class="list">
-                            {{#each teachers}}
                             <li class="member">
                                 <div class="teacher">
-                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
-                                        alt="Teacher">
+                                    <img id="avartar_teacher" 
+                                        src="/images/icon_teacher.png"
+                                        alt="Teacher" style="margin-left:0px;">
                                     <div class="name_teacher">
-                                        <p class="name">{{this.user_name}}</p>
+                                        <strong class="name">{{this.user_name}}</strong>
                                     </div>
                                 </div>
                             </li>
-                            {{/each}}
                         </ul>
+                        {{/each}}
                     </div>
+                    </div>
+
+                    
                     <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Students</a>
+                        <span style="font-size: 18px; float:right"><strong>{{numberofStudent}}</strong></span>
                     </div>
+
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">{{numberofStudent}}</a> </strong></h5>
-                    </div>
-                    <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">List Students</a>
-                    </div>
-                    <div class="home_side_inf_box home_side_content_box">
-                        <div class="icon title_text">
-                            <a class="text link_group_people" href="#" onclick="showListStudent(1)">Show participants
-                                list</a>
+                        <div class="icon" style="font-size: 17px;">
+                            <a class="link_group_people" href="#" onclick="showListStudent('{{courseInfo.course_id}}')">
+                                Show participants list</a>
                         </div>
                     </div>
-
                 </div>
-
-            </div>
+            </div> 
         </div>
     </main>
 

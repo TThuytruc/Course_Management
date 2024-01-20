@@ -21,7 +21,6 @@
 <body>
     {{>header username=user.user_name}}
 
-
     <main>
         <!-- Logo -->
         <div class="row_content img_language">
@@ -31,21 +30,9 @@
         </div>
 
         <!-- Course -->
-        <div class="box title_course">
+        <div class="title_course">
             <div class="name_course">
                 {{course_name}} </div>
-
-            <div class="link_current_page">
-                <a class="link_page" href="#">Home</a>
-                <p class="slash"> / </p>
-
-                <a href="#" class="link_page">{{course_name}}</a>
-                <p class="slash"> / </p>
-
-                <a href="#" class="link_page">Project</a>
-                <p class="slash"> / </p>
-
-                <a href="#" class="link_page">PA1 - Submission - Filename: GroupID.zip - Ex: Group02.zip3</a>
             </div>
         </div>
 
@@ -54,38 +41,42 @@
             <div class="content">
                 <div class="box last_box">
                     <!-- Submission Title -->
-                    <div class="row_content" style="display: flex;   flex-direction: row;justify-content: space-between;">
-                        <div class="title_submission">
-                            List Student
+                    <div style="display: flex; flex-direction: row;justify-content: space-between;">
+                        <div>
+                            <div class="title_submission">List Student</div>
+                            <div><strong>Total:</strong> {{numberofstudent}}</div>
                         </div>
+
                         <div class="dropdown" style=" margin-top: 30px;">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #854759; height:40px;">
                                    Sort
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <p class="dropdown-item" onclick="update('mssv')">mssv</p>
-                                    <p class="dropdown-item" onclick="update('name')">name</p>
-                                    <p class="dropdown-item" onclick="update('finalscore')">finalscore</p>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <p class="dropdown-item" onclick="update('ID')">ID</p>
+                                    <p class="dropdown-item" onclick="update('Name')">Name</p>
+                                    <p class="dropdown-item" onclick="update('Final Score')">Final Score</p>
                                 </div>
                             </div>
                     </div>
+
                     <!-- Student table -->
                     <table id="teacher_submission_table" class="table table-striped">
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
-                                <th>MSSV</th>
-                                <th>Student name</th>
+                                <th>ID</th>
+                                <th>Name</th>
                                 <th>Email</th>
                                 <th>Final Score</th>
                             </tr>
                         </thead>
+
                         <tbody id="list_student">
                             {{#each array}}
                             <tr>
                                 <td>{{this.user_id}}</td>
                                 <td>{{this.user_name}}</td>
-                                <td>{{this.account_email}}</td>
+                                <td><a style="color:#e91e63 !important;">{{this.account_email}}</a></td>
                                 <td>{{this.finalscore}}</td>
                             </tr>
                             {{/each}}
@@ -95,59 +86,57 @@
             </div>
 
             <!-- Side -->
-
             <div class="side">
                 <div class="box list_people">
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course ID</a>
                     </div>
+
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="id-class">{{course_id}}</a> </strong></h5>
+                        <h5><strong><a class="id-class" style="font-size: 18px;">{{course_id}}</a> </strong></h5>
                     </div>
+
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course name</a>
                     </div>
 
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="course_name">{{course_name}}</a></strong></h5>
+                        <h5><strong><a class="course_name" style="font-size: 18px;">{{course_name}}</a></strong></h5>
                     </div>
+
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Schedule</a>
                     </div>
+
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="schedule">{{schedule}}</a> </strong></h5>
+                        <h5><strong><a class="course_name" style="font-size: 18px;">{{schedule}}</a></strong></h5>
                     </div>
+
                     <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Teachers</a>
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Teachers</a>
+                        <span style="font-size: 18px; float:right"><strong>{{numberofteacher}}</strong></span>
                     </div>
-                    <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">{{numberofteacher}}</a> </strong></h5>
-                    </div>
-                    <div class="list_teacher color_box">
-                        <strong class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</strong>
+
+                    <div class="home_side_inf_box home_side_content_box" style="padding-top:0px; padding-bottom:0px;">
+                        <div class="list_teacher color_box">
+                        {{#each teachers}}
                         <ul class="list">
-                            {{#each teachers}}
                             <li class="member">
                                 <div class="teacher">
-                                    <img style="margin-left:2%"
-                                        src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
-                                        alt="Teacher">
+                                    <img id="avartar_teacher" 
+                                        src="/images/icon_teacher.png"
+                                        alt="Teacher" style="margin-left:0px;">
                                     <div class="name_teacher">
-                                        <p class="name">{{this.user_name}}</p>
+                                        <strong class="name">{{this.user_name}}</strong>
                                     </div>
                                 </div>
                             </li>
-                            {{/each}}
                         </ul>
+                        {{/each}}
                     </div>
-                    <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
-                    </div>
-                    <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">{{numberofstudent}}</a> </strong></h5>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
     </main>
 

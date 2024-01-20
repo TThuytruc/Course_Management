@@ -18,7 +18,7 @@ function update(selectedItem) {
         list_student.push(data);
     }
 
-    if (selectedItem === 'mssv') {
+    if (selectedItem === 'ID') {
         list_student.sort(function (a, b) {
             var mssv_a = parseInt(a.mssv, 10);
             var mssv_b = parseInt(b.mssv, 10);
@@ -26,7 +26,7 @@ function update(selectedItem) {
             return mssv_a - mssv_b;
         });
     }
-    if (selectedItem === 'name') {
+    if (selectedItem === 'Name') {
         list_student.sort(function (a, b) {
             var nameA = a.name.toUpperCase();
             var nameB = b.name.toUpperCase();
@@ -44,16 +44,13 @@ function update(selectedItem) {
             else {
                 nameB = '';
             }
-            if (nameA < nameB) {
-                return -1;
-            }
-            if (nameA > nameB) {
-                return 1;
-            }
-            return 0;
+
+            const collator = new Intl.Collator('vi');
+            return collator.compare(nameA, nameB);
         });
     }
-    if (selectedItem === 'finalscore') {
+
+    if (selectedItem === 'Final Score') {
         list_student.sort(function (a, b) {
             var score_a = 0;
             var score_b = 0;
@@ -137,3 +134,9 @@ function updateAllScores(event) {
         
     }
 }
+
+$(document).ready(function() {
+    $("#logo").click(function() {
+        window.location.href = `/`;
+    });
+});

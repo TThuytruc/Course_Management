@@ -23,7 +23,7 @@
     <title>Course</title>
     <style>
         #courses-list:hover {
-            background-color: rgba(208, 196, 196, 0.13);
+            background-color: rgba(147, 145, 145, 0.13);
         }
     </style>
 </head>
@@ -44,8 +44,7 @@
                 Courses management
             </div>
 
-            <h2 class="text-dark">Courses list</h2>
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="margin-top:20px;">
                 <thead class="thead-dark">
                     <tr>
                         <th class="text-center" scope="col">Course ID</th>
@@ -54,9 +53,10 @@
                         <th class="text-center" scope="col">Number Of Teacher</th>
                         <th class="text-center" scope="col">Max Number Of Student</th>
                         <th class="text-center" scope="col">Schedule</th>
-                        <th class="text-center" scope="col">Action</th>
+                        <th class="text-center" scope="col"></th>
                     </tr>
                 </thead>
+
                 <tbody>
                     {{#each arrayCourse}}
                     <tr id="courses-list" style="cursor: pointer;">
@@ -73,21 +73,19 @@
                         <td onclick="adminLoadCourse('{{this.course_id}}')" class="text-center">{{this.schedule}}</td>
                         <td class="text-center"><button type="button"
                                 class="btn bg-secondary text-white pd-2 text-center" data-id={{this.course_id}}
-                                data-bs-toggle="modal" data-bs-target="#modal-course-delete">Delete</button></td>
+                                data-bs-toggle="modal" data-bs-target="#modal-course-delete" style="background-color: #854759 !important;">Delete</button></td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
-            <button type="button" class="btn btn-secondary" title="Add course" style="width: 50px; height: 40px;"
-                data-bs-toggle="modal" data-bs-target="#modal-course-insert">+</button>
+
+            <div style="display:flex; justify-content:center;">
+                <button type="button" class="btn btn-secondary" title="Add course" style="width: 70px; height: 40px;background-color: #854759; margin-bottom: 25px; display:flex; justify-content:center;"
+                data-bs-toggle="modal" data-bs-target="#modal-course-insert">Add</button>
+            </div>
+            
         </div>
-
-
-
     </main>
-
-
-    {{>footer}}
 
 
     <!-- Modal -->
@@ -104,7 +102,7 @@
                         <p>Are you sure to delete this course?</p>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" style="background-color: red;">Delete</button>
+                            <button type="submit" class="btn btn-primary" style="background-color: #854759 !important;">Delete</button>
                         </div>
                     </form>
                 </div>
@@ -148,8 +146,8 @@
                             </select>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width:70px;">Close</button>
+                            <button type="submit" class="btn btn-primary" style="background-color: #854759 !important; width:70px;">Add</button>
                         </div>
                     </form>
                 </div>
@@ -158,6 +156,7 @@
         </div>
     </div>
 
+    {{>footer}}
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

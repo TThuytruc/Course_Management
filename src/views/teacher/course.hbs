@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <div class="box title_course">
+        <div class="title_course">
             <div class="name_course">
                 {{course_name}}
             </div>
@@ -179,64 +179,71 @@
                 </div>
             </div>
 
-
+             <!-- Side -->
             <div class="side">
                 <div class="box list_people">
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course ID</a>
                     </div>
+
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="id-class">{{course_id}}</a> </strong></h5>
+                        <h5><strong><a class="id-class" style="font-size: 18px;">{{course_id}}</a> </strong></h5>
                     </div>
+
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Course name</a>
                     </div>
 
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="course_name">{{course_name}}</a></strong></h5>
+                        <h5><strong><a class="course_name" style="font-size: 18px;">{{course_name}}</a></strong></h5>
                     </div>
+{{!-- 
                     <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Teachers</a>
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Schedule</a>
                     </div>
 
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">{{numberofteacher}}</a> </strong></h5>
+                        <h5><strong><a class="course_name" style="font-size: 18px;">{{courseInfo.schedule}}</a></strong></h5>
+                    </div> --}}
+
+                    <div class="home_side_header_box">
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Teachers</a>
+                        <span style="font-size: 18px; float:right"><strong>{{numberofteacher}}</strong></span>
                     </div>
 
-                    <div class="list_teacher color_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Teacher</a>
+                    <div class="home_side_inf_box home_side_content_box" style="padding-top:0px; padding-bottom:0px;">
+                        <div class="list_teacher color_box">
                         {{#each teacher}}
                         <ul class="list">
                             <li class="member">
                                 <div class="teacher">
-                                    <img src="https://courses.fit.hcmus.edu.vn/theme/image.php/academi/core/1697455118/u/f2"
-                                        alt="Teacher">
+                                    <img id="avartar_teacher" 
+                                        src="/images/icon_teacher.png"
+                                        alt="Teacher" style="margin-left:0px;">
                                     <div class="name_teacher">
-                                        <p class="name">{{user_name}}</p>
+                                        <strong class="name">{{user_name}}</strong>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                         {{/each}}
                     </div>
+                    </div>
+
+                    
                     <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Number of Students</a>
+                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Students</a>
+                        <span style="font-size: 18px; float:right"><strong>{{numberofstudent}}</strong></span>
                     </div>
+
                     <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="number-lecturers">{{numberofstudent}}</a> </strong></h5>
-                    </div>
-                    <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">List Students</a>
-                    </div>
-                    <div class="home_side_inf_box home_side_content_box">
-                        <div class="icon title_text">
-                            <a class="text link_group_people" href="#" onclick="showListStudent('{{course_id}}')">Show
-                                participants
-                                list</a>
+                        <div class="icon" style="font-size: 17px;">
+                            <a class="link_group_people" href="#" onclick="showListStudent('{{course_id}}')">
+                                Show participants list</a>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
     </main>
 

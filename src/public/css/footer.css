@@ -15,7 +15,7 @@ body{
 .row{
 	display: flex;
 	flex-wrap: wrap;
-  flex-direction: row;
+  	flex-direction: row;
 }
 ul{
 	list-style: none;
@@ -25,13 +25,17 @@ ul{
     padding: 10px 0;
 }
 .footer-col{
-   width: 25%;
    padding: 10px 15px;
 }
-
 .footer-col1{
-   width: 45%;
-   padding: 0 15px;
+   width: 38%;
+   padding: 10px 15px;
+}
+.footer-col2{
+	width: 25%;
+}
+.footer-col3{
+	width: 37%;
 }
 .footer-col h4{
 	font-size: 18px;
@@ -57,7 +61,6 @@ ul{
 	background-color: #e91e63;
 	height: 2px;
 	box-sizing: border-box;
-	width: 50px;
 }
 .footer-col1 h4::before{
 	content: '';
@@ -67,7 +70,7 @@ ul{
 	background-color: #e91e63;
 	height: 2px;
 	box-sizing: border-box;
-	width: 50px;
+	width: 45px;
 }
 .footer-col ul li:not(:last-child){
 	margin-bottom: 10px;
@@ -107,7 +110,6 @@ ul{
 }
 .footer-col1 ul li {
 	font-size: 16px;
-	text-transform: capitalize;
 	color: #ffffff;
 	text-decoration: none;
 	font-weight: 300;
@@ -158,6 +160,19 @@ footer .cr-con a{
 	color: #ffffff;
 }
 
+.footer-col2 h4::before{
+	width:90px;
+}
+
+.footer-col3 h4::before{
+	width:105px;
+}
+
+#label-phone
+{
+	margin-right:7px;
+}
+
 /*responsive*/
 @media(max-width: 767px){
   .footer-col{
@@ -170,6 +185,3 @@ footer .cr-con a{
     width: 100%;
 }
 }
-
-
-

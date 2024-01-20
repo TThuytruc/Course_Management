@@ -45,3 +45,9 @@ document.addEventListener('DOMContentLoaded', function(){
         console.log(form)
       })
 })
+
+$(document).ready(function() {
+    $("#logo").click(function() {
+        window.location.href = `/`;
+    });
+});

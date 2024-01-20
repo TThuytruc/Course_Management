@@ -31,6 +31,11 @@ $(document).ready(function () {
         option.text($(this).text());
         selectedElement.append(option);
     });
+
+ 
+    $("#logo").click(function() {
+        window.location.href = `/`;
+    });
 });
 
 function hourEnter(event, hourInput) 

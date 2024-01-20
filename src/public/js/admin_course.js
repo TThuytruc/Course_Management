@@ -290,3 +290,9 @@ async function importExcelTeacher() {
     reader.readAsBinaryString(file);
   }
 }
+
+$(document).ready(function() {
+  $("#logo").click(function() {
+      window.location.href = `/`;
+  });
+});
