@@ -4,23 +4,21 @@ const db = require('../database/db');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
-
 const maxAge = 60*60*1000;
 const createToken = (user_id) => {
     return jwt.sign({ user_id }, 'mySecretKey', {
         expiresIn: maxAge
     })
 }
+
 class SiteController {
     async login_post(req, res) {
         const { account_email, account_password } = req.body;
         const accounts = await Account.getAll();
         const account = accounts.find((acc) => acc.account_email === account_email)
-        // console.log('account', account);
-        // console.log('req.body', req.body);
         var response = null;
         if (account) {
-            let auth = false //
+            let auth = false 
             if (account.account_password === '123') {
                 if (account_password === '123') {
                     auth = true;
@@ -29,7 +27,7 @@ class SiteController {
                     auth = false
                 }
             }
-            else { //Changed password more than once, password was hashed
+            else { 
                 if (await bcrypt.compare(account_password, account.account_password)) {
                     auth = true;
                 }
@@ -37,12 +35,11 @@ class SiteController {
                     auth = false;
                 }
             }
-            if (auth) { //Đúng tài khoản mật khẩu
+            if (auth) { 
                 const user = await db.getUserWithAccountId(account.account_id)
-                const token = createToken(user.user_id);
-                // console.log('token', token);    
+                const token = createToken(user.user_id); 
                 res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge })
-                req.session.user_id = user.user_id; //assign session then bring it to auth.middlware
+                req.session.user_id = user.user_id; 
                 res.json(user);
             }
             else {
@@ -66,8 +63,6 @@ class SiteController {
     async password_change_get(req, res) {
         const user_id = req.session.user_id;
         const user = await User.getAccount(user_id);
-        // console.log(user)
-        // console.log('req.session.user_id', req.session.user_id);
         res.render('password_change', {username: user[0].user_name});
     }
     async password_change_post(req, res) {
@@ -76,14 +71,9 @@ class SiteController {
             let account = await Account.getCondition('account_id', user_id);
             account = account[0];
             const { currentPassword, newPassword, confirmNewPassword } = req.body;
-
             let isHashedPassword = account.account_password !== '123';
-
-            //The first time changepassword
             let regex = /^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$/;
-            // (?=.*[0-9]): This part asserts that somewhere in the string (.*) there must be at least one digit ([0-9]).
 
-            // (?=.*[a-zA-Z]): This part asserts that somewhere in the string (.*) there must be at least one character, which can be any letter (lowercase or uppercase) ([a-zA-Z]).
             if (!isHashedPassword && currentPassword !== '123') {
                 res.json({ currentPassword: 'Wrong current password!', newPassword: '', confirmNewPassword: '' })
             }
@@ -98,7 +88,7 @@ class SiteController {
                 res.json({ currentPassword: '', newPassword: '', confirmNewPassword: 'Confirm wrong password!' });
 
             }
-            else { //Authenticated
+            else { 
                 const hashedPassword = await bcrypt.hash(newPassword, 10);
                 account.account_password = hashedPassword;
                 await Account.update(account);
@@ -110,4 +100,5 @@ class SiteController {
         }
     }
 }
+
 module.exports = new SiteController;

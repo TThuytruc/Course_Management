@@ -1,23 +1,12 @@
 require('dotenv').config();
 const fs = require('fs');
 const XLSX = require('xlsx');
-// const { as } = require('pg-promise');
 const pgp = require('pg-promise')({
     capSQL: true
 });
 
 const cn = {
-    // Sử dụng 1 trong 2 đoạn code dưới để chọn giá trị các thuộc tính.
-
-    // // Cách 1 (nhớ thay đổi tên database và pass tùy vào máy đang chạy (của mấy ông á))
-    // host: 'localhost',
-    // port: 5432,
-    // database: 'nmcnpm',
-    // user: 'postgres',
-    // password: '1234'
-
-
-    // Cách 2 (có thể thay đổi các thuộc tính trong file .env)
+    // (có thể thay đổi các thuộc tính trong file .env)
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     database: process.env.DB_NAME,
@@ -25,7 +14,6 @@ const cn = {
     password: process.env.DB_PW
 };
 
-// Sau khi chọn xong thuộc tính trong cn, hãy connect database
 const db = pgp(cn);
 
 module.exports = {
@@ -33,11 +21,8 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `SELECT * FROM ${tbName}`;
-            // console.log(query);
             dbcn = await db.connect();
             const data = await dbcn.any(query);
-
-            // console.log(data);
             return data;
         }
         catch (error) {
@@ -54,12 +39,9 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `SELECT * FROM ${tbName} WHERE ${tbColum}='${value}'`;
-            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
-
-            // console.log(data);
             return data;
         }
         catch (error) {
@@ -73,40 +55,19 @@ module.exports = {
     },
 
     insert: async (tbName, entity, idreturn) => {
-        try {
-            const query = pgp.helpers.insert(entity, null, tbName);
+        const query = pgp.helpers.insert(entity, null, tbName);
+        const data = await db.one(query + ` RETURNING ${idreturn}`);
 
-            const data = await db.one(query + ` RETURNING ${idreturn};`);
-
-            return data;
-        } catch (err) {
-            console.log(err);
-        }
-
-    },
-    update: async (tbName, entity, tbColumn, value) => {
-        let dbcn = null;
-        try {
-            dbcn = await db.connect();
-            const query = pgp.helpers.update(entity, null, tbName);
-            // console.log(query);
-            await dbcn.any(query + `WHERE ${tbColumn} = ${value}`, );
-        } catch(error) {
-            throw error;
-        }
-      
+        return data;
     },
 
     getAllInforUser: async () => {
         let dbcn = null;
         try {
             const query = `select user_.user_id,account.account_email,user_.user_name  from account  join user_  on account.account_id=user_.account_id`;
-            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
-
-            // console.log(data);
             return data;
         }
         catch (error) {
@@ -123,11 +84,9 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `SELECT get_user_with_account_id($1)`;
-            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query, [accountId]);
-            // console.log(data[0].get_user_with_account_id);
             const resultString = data[0].get_user_with_account_id;
             const matches = resultString.match(/\(([^)]+)\)/);
             const values = matches[1].split(',');
@@ -135,10 +94,10 @@ module.exports = {
             const userObject = {
                 user_id: parseInt(values[0]),
                 account_id: parseInt(values[1]),
-                user_name: values[2].replace(/"/g, ''), // Remove double quotes from the name
-                user_role: values[3].replace(/"/g, ''), // Remove double quotes from the role
+                user_name: values[2].replace(/"/g, ''), 
+                user_role: values[3].replace(/"/g, ''), 
             };
-            // console.log(userObject);
+
             return userObject;
         }
         catch (error) {
@@ -155,12 +114,9 @@ module.exports = {
         let dbcn = null;
         try {
             const query = `select count(*) from ${tbName} where ${tbColum}='${tbValue}' `;
-            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
-
-            // console.log(data);
             return data;
         }
         catch (error) {
@@ -241,14 +197,14 @@ module.exports = {
     importDataFromExcel: async (object) => {
         let dbcn = null;
         try {
-
-            for (const stundet of object.students) {
-                const query = `INSERT INTO Course_Student(Course_id, User_id) VALUES ($1, $2)`;
-                const values = [object.id, stundet];
-                dbcn = await db.connect();
-                await dbcn.query(query, values);
-            }
-        }
+        
+          for (const stundet of object.students) {
+            const query = `INSERT INTO Course_Student(Course_id, User_id) VALUES ($1, $2)`;
+            const values = [object.id, stundet]; 
+            dbcn = await db.connect();
+            await dbcn.query(query, values);
+          }
+        } 
         catch (error) {
             throw error;
         }
@@ -258,17 +214,13 @@ module.exports = {
             }
         }
     },
-
     getTwoCondition: async (tbName, tbColum1,tbColum2, value1,value2) => {
         let dbcn = null;
         try {
             const query = `SELECT * FROM ${tbName} WHERE ${tbColum1}='${value1}' and ${tbColum2}='${value2}' `;
-            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
-
-            // console.log(data);
             return data;
         }
         catch (error) {
@@ -280,16 +232,14 @@ module.exports = {
             }
         }
     },
+
     deleteTwoCOndition: async (tbName, tbColum1,tbColum2, value1,value2) => {
         let dbcn = null;
         try {
             const query = `DELETE FROM ${tbName} WHERE ${tbColum1}='${value1}' and ${tbColum2}='${value2}' `;
-            // console.log(query);
             dbcn = await db.connect();
 
             const data = await dbcn.any(query);
-
-            // console.log(data);
             return data;
         }
         catch (error) {
@@ -301,6 +251,7 @@ module.exports = {
             }
         }
     },
+
     DeleteUser:async(courseId, userId)=>{
         let dbcn = null;
 
@@ -318,6 +269,7 @@ module.exports = {
             }
         }
     },
+
     addStudent:async(courseId, userId)=>{
         let dbcn = null;
         
@@ -335,6 +287,7 @@ module.exports = {
             }
         }
     },
+
     addTeacher:async(courseId, userId)=>{
         let dbcn = null;
 
@@ -352,6 +305,7 @@ module.exports = {
             }
         }
     },
+
     updateScoreForSubmission: async(user_id, exercise_id, score) => {
         let dbcn = null;
 
@@ -359,90 +313,6 @@ module.exports = {
             dbcn = await db.connect();
             const query = 'SELECT update_score_for_submission($1, $2, $3)'
             await dbcn.any(query, [user_id, exercise_id, score]);
-        }
-        catch (error) {
-            throw error;
-        }
-        finally {
-            if (dbcn != null) {
-                dbcn.done();
-            }
-        }
-    },
-    updateFinalScoreForCourseStudent: async(user_id, course_id, finalscore) => {
-        let dbcn = null;
-        try {
-            dbcn = await db.connect();
-            const query = 'SELECT update_final_score_for_course_student($1, $2, $3)'
-            await dbcn.any(query, [user_id, course_id, finalscore]);
-        }
-        catch (error) {
-            throw error;
-        }
-        finally {
-            if (dbcn != null) {
-                dbcn.done();
-            }
-        }
-    },
-    deleteCourse: async(course_id) => {
-        let dbcn = null;
-        try {
-            dbcn = await db.connect();
-            await db.any('SELECT delete_course($1)', [course_id]);
-        }
-        catch (error) {
-            throw error;
-        }
-        finally {
-            if (dbcn != null) {
-                dbcn.done();
-            }
-        }
-    },
-    deleteAllInforInCourse: async (courseId, nameTable) => {
-        let dbcn = null;
-
-        try {
-            const query = `delete from ${nameTable} where course_id='${courseId}'`;
-
-            dbcn = await db.connect();
-
-            const data = await dbcn.any(query);
-            return data;
-        }
-        catch (error) {
-            throw error;
-        }
-        finally {
-            if (dbcn != null) {
-                dbcn.done();
-            }
-        }
-    },
-    UpdateScore: async (exercise_id, user_id, score) =>{
-        let dbcn = null;
-        try {
-            dbcn = await db.connect();
-            const query = 'SELECT update_score($1, $2, $3)';
-            await dbcn.any(query, [exercise_id, user_id, score]);
-        }
-        catch (error) {
-            throw error;
-        }
-        finally {
-            if (dbcn != null) {
-                dbcn.done();
-            }
-        }
-    },
-    UpdateFinalScore: async (course_id, user_id, score) =>{
-        let dbcn = null;
-        try {
-            dbcn = await db.connect();
-            const query = 'SELECT update_finalscore($1, $2, $3)';
-            console.log(user_id);
-            await dbcn.any(query, [course_id, user_id, score]);
         }
         catch (error) {
             throw error;

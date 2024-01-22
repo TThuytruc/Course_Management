@@ -15,7 +15,6 @@ class TeacherController {
     async home(req, res) {
         const userid = req.session.user_id;
         const user = await User.getCondition('user_id', userid);
-
         const userAccount = await User.getAccount(userid);
         const userEmail = userAccount[0].account_email;
 
@@ -27,7 +26,6 @@ class TeacherController {
         }
 
         const dataRender = { user: user[0], arrayCourse: courses, userEmail: userEmail };
-
         res.render('teacher/home', dataRender);
     }
 
@@ -57,7 +55,6 @@ class TeacherController {
         }
 
         let student = await db.countItem('course_Student', 'course_id', id_course);
-        // console.log(student);
         student = student[0].count;
         let teacher = await db.countItem('course_Teacher', 'course_id', id_course);
         teacher = teacher[0].count;
@@ -122,13 +119,14 @@ class TeacherController {
                 mergedArray.push(mergedItem);
             }
         });
+
         submissions.sort((a, b) => a.user_id - b.user_id);
-        // console.log('mergedArray', mergedArray); //mergedArray is array of Submission object
         let totalGraded = 0;
         for (let j = 0; j < submissions.length; j++) {
             if (submissions[j].score !== null)
                 totalGraded++;
         }
+
         mergedArray.sort((a,b) => a.user_id - b.user_id)
         var checkDownload= mergedArray.length>0;
         const dataRender = {
@@ -148,6 +146,7 @@ class TeacherController {
         };
         res.render('teacher/submission', dataRender);
     }
+
     async downloadAll(req, res) {
         const user_id = req.body.user_id;
         const exercise_id = req.body.exercise_id;
@@ -192,7 +191,6 @@ class TeacherController {
                     if (downloadError) {
                         console.error('Error during download:', downloadError);
                     }
-                    console.log('ZIP finalization successful');
                 });
                 // Xóa file ZIP sau khi đã gửi về client
                 fs.unlinkSync(zipFilePath);
@@ -220,7 +218,6 @@ class TeacherController {
 
     async submissionImportScore(req, res) {
         try {
-            //user_id, exercise_id, score
             const submissions = req.body;
             for (const submission of submissions) {
                 const user_id = submission.user_id;
@@ -230,11 +227,11 @@ class TeacherController {
             }
             res.status(200).json(submissions);
         } catch (error) {
-        // console.log('req.body', req.body);
             res.status(500).json({status: 'Invalid information'});
             throw error;
         }
     }
+
     async submissionImportFinalScore(req, res) {
         try {
             const finalScores = req.body;
@@ -247,11 +244,11 @@ class TeacherController {
             }
             res.status(200).json({msg: 'Successfully'})
         } catch (error) {
-        // console.log('req.body', req.body);
             res.status(500).json({status: 'Invalid information'});
             throw error;
         }
     }
+
     async updateScore(req,res){
         const exercise_id = req.body.data.exercise_id;
         const user_id = req.body.data.user_id;
@@ -259,7 +256,8 @@ class TeacherController {
         await Submission.update_score(exercise_id, user_id, score);
         res.json({message: 'ok'});
     }
-    async  downloadSingle(req, res) {
+
+    async downloadSingle(req, res) {
         const exercise_id = req.body.exercise_id;
         const course_id = req.body.course_id;
         let course_name = req.body.course_name;
@@ -272,7 +270,7 @@ class TeacherController {
         exercise_name = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
         exercise_name = exercise_name + `-${exercise_id}`;
     
-        const fileName = req.body.fileName; // Giả sử bạn gửi tên tệp qua yêu cầu
+        const fileName = req.body.fileName; 
     
         const filePath = path.join(__dirname, `../Submission/${course_name}/${exercise_name}/${fileName}`);
     

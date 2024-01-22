@@ -22,7 +22,6 @@ module.exports = class Teacher {
         catch (error) {
             throw error;
         }
-
     }
     static async insert(teacher) {
         try {

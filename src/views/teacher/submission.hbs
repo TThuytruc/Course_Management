@@ -19,7 +19,6 @@
     <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
 </head>
 <style>
-
     .choose-file-label:hover {
         color: rgb(30, 29, 29)
     }
@@ -27,7 +26,6 @@
 </style>
 <body>
     {{>header username = user.user_name}}
-
 
     <main>
         <!-- Logo -->
@@ -94,11 +92,11 @@
                                     <input type="number" class="score"   data-finalscore="{{this.score}}" data-student-id="{{this.user_id}}" data-exercise-id="{{../exercise.exercise_id}}" 
                                     name="score" min="0" max="10" step="0.1" onkeydown="updateAllScores(event)" value="{{this.score}}" placeholder="Scores"></input>
                                 </td>
-                                {{!-- <td>{{this.score}}</td> --}}
                             </tr>
                             {{/each}}
                         </tbody>
                     </table>
+
                     <div class="btn_download">
                         <label class="choose-file-label" for="file-input" style="margin: auto 5px auto 0; cursor: pointer">Choose file</label>
                         <button id="import-score-button" class="btn-secondary btn-in-submission disabled" style="font:inherit; opacity: 0.7; cursor: default; margin-left:10px; background-color:#854759;">Import score</button>
@@ -108,6 +106,7 @@
                             onclick="downloadAll('{{user.user_id}}','{{exercise.exercise_id}}','{{exercise.exercise_name}}','{{courseInfo.course_name}}','{{courseInfo.course_id}}')">Download
                             All</button>
                     </div>
+
                     <div id="import-score-info" class="alert alert-info" style="display: none; text-align: center">After
                         selecting file, press "Import Score" to execute</div>
                 </div>
@@ -145,14 +144,6 @@
                     <div class="home_side_inf_box home_side_content_box">
                         <h5><strong><a class="number-lecturers">{{numberofTeacher}}</a> </strong></h5>
                     </div>
-
-                    {{!-- <div class="home_side_header_box">
-                        <a class="title_row title_text" style="color: rgb(151, 184, 85);">Schedule</a>
-                    </div>
-
-                    <div class="home_side_inf_box home_side_content_box">
-                        <h5><strong><a class="course_name" style="font-size: 18px;">{{courseInfo.schedule}}</a></strong></h5>
-                    </div> --}}
 
                     <div class="home_side_header_box">
                         <a class="title_row title_text" style="color: rgb(151, 184, 85);">Teachers</a>
@@ -195,21 +186,19 @@
         </div>
     </main>
 
-
     {{>footer}}
+
 
     <script>
         const checkDownload = document.getElementById('checkDownload');
         const button_download = document.getElementById('btn_download-all');
         if (checkDownload.value === 'false') {
-            console.log("true");
             button_download.disabled = true;
         }
         else {
-            console.log("false");
-
             button_download.disabled = false;
         }
+
         const exerciseId = {{ exerciseid }}
         document.addEventListener('DOMContentLoaded', function () {
             const input = document.getElementById('file-input');
@@ -246,15 +235,16 @@
                     isValid = false;
                     alert('Error reading the file. Please try again.');
                 }
+
                 if (!isValid) {
                     return;
                 }
+
                 document.getElementById('import-score-info').style.display = 'block';
                 const importScoreButton = document.getElementById('import-score-button')
                 importScoreButton.style.cursor = 'pointer';
                 importScoreButton.style.opacity = 1;
                 importScoreButton.classList.remove('disabled');
-                console.log(importScoreButton);
                 importScoreButton.addEventListener('click', async function (event) {
                     const res = await fetch('/teacher/submission/import_score', {
                         method: 'POST',
@@ -266,7 +256,6 @@
                         window.location.reload();
                     }
                 })
-
             })
         })
 
@@ -282,10 +271,6 @@
         crossorigin="anonymous"></script>
     <script src="/js/teacher_submission.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
-
-    <!-- <script src="./myscript.js">
-
-    </script> -->
 </body>
 
 </html>

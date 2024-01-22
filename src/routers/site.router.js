@@ -7,8 +7,6 @@ const teacherController = require('../controllers/teacher.controller')
 const adminController = require('../controllers/admin.controller')
 const jwt = require('jsonwebtoken');
 const db = require('../database/db')
-// router.use(requireAuth);
-
 
 router.get('/logout', siteController.logout_get)
 router.get('/login', siteController.login_get);
@@ -23,10 +21,8 @@ router.get('/',  (req, res) => {
     else if (token) {
         jwt.verify(token, 'mySecretKey', async (err, decodedToken) => {
             if (err) {
-                console.log(err.message)
                 res.redirect('/login')
             } else {
-                // console.log(decodedToken);
                 const user_id = decodedToken.user_id;
                 const user = await db.getUserWithAccountId(user_id);
                
@@ -42,8 +38,6 @@ router.get('/',  (req, res) => {
                 else {
                     res.redirect('/login');
                 }
-                
-                // res.redirect(`/${user.user_role}/home?user_id=${user.user_id}`);
             }
         })
     }

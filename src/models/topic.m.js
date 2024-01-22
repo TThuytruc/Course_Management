@@ -24,7 +24,6 @@ module.exports = class Topic {
         catch (error) {
             throw error;
         }
-
     }
     static async insert(topic) {
         try {

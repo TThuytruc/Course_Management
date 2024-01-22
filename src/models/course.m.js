@@ -24,7 +24,6 @@ module.exports = class Course {
         catch (error) {
             throw error;
         }
-
     }
     static async insert(course) {
         try {

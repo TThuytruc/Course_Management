@@ -9,13 +9,11 @@ document.addEventListener('DOMContentLoaded', function(){
         var course_id = button.data('id') // Extract info from data-* attributes
         console.log(course_id)
         $('#modal-course-delete').find('form').attr('action',`/course/delete/${course_id}`);
-        // console.log(form)
       })
 
       $('#modal-course-insert').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var course_id = button.data('id') // Extract info from data-* attributes
-        console.log(course_id)
         const form = $('#modal-course-insert').find('form');
         $('#course_name-error').css('display', 'none');
         $('#maxnumberofstudent-error').css('display', 'none');
@@ -37,12 +35,11 @@ document.addEventListener('DOMContentLoaded', function(){
                 $('#maxnumberofstudent-error').css('display', 'block');
                 isValid = false;
             } 
-            console.log('submit');
+    
             if (isValid) {
                 form.get(0).submit();
             }
         })
-        console.log(form)
       })
 })
 

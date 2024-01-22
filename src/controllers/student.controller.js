@@ -11,11 +11,8 @@ const Topic = require('../models/topic.m');
 const fs = require('fs');
 const Submission = require('../models/submission.m');
 
-// Thiết lập multer để lưu trữ file trong thư mục "Submission"
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        // console.log(req.body);
-        // var sanitizedString = inputString.replace(/[\/\\:*?"<>|]/g, '');
         const course_id=req.body.course_id;
         const exercise_id=req.body.exercise_id;
         let course_name = req.body.course_name;
@@ -30,7 +27,6 @@ const storage = multer.diskStorage({
         exercise_name=exercise_name+`-${exercise_id}`
 
         const linkFileSubmission =path.join(__dirname, `../Submission/${course_name}/${exercise_name}`) ;
-        // console.log(linkFileSubmission);
         fs.mkdirSync(linkFileSubmission, { recursive: true });
         cb(null, linkFileSubmission);
     },
@@ -42,13 +38,8 @@ const storage = multer.diskStorage({
 
         const stringWithUnderscore = file.originalname.replace(/\s+/g, '-');
         const submissionfile = stringWithUnderscore;
-
-        // console.log('Uploaded file name:', submissionfile);
-
         const data = new Submission({ user_id, exercise_id, SubmissionTime, submissionfile, Score });
         const insert = await Submission.insert(data);
-
-        // console.log(user_id);
         cb(null, submissionfile);
     },
 });
@@ -57,12 +48,8 @@ const upload = multer({ storage: storage });
 
 class StudentController {
     async home(req, res) {
-        // console.log('req.session.user_id', req.session.user_id);
         const userid = req.session.user_id;
-        // const userid = req.query.user_id;
-        // res.json(req.session);
         const user = await User.getCondition('user_id', userid);
-
         const userAccount = await User.getAccount(userid);
         const userEmail = userAccount[0].account_email;
 
@@ -100,7 +87,6 @@ class StudentController {
         dataTopic.forEach(async (topic) => {
             const data = await Exercise.getCondition('topic_id', topic.topic_id);
             topic['exercise'] = data;
-            //console.log(topic);
         });
 
         let finalscore = await db.getFinalScore(id_course, userid);
@@ -108,7 +94,6 @@ class StudentController {
 
         let courses = await Course_Student.getCondition('course_id', id_course);
         courses = courses[0].course_id;
-        // console.log(courses);
 
         let exercises = [];
         const exerciseInOneCourse = await Exercise.getUpcommingEvents(courses);
@@ -116,7 +101,6 @@ class StudentController {
             exerciseInOneCourse[j].duetime = moment(exerciseInOneCourse[j].duetime).format('DD/MM/YYYY - HH:mm');
             exercises.push(exerciseInOneCourse[j]);
         }
-
 
         const listIDTeacher = await Course_Teacher.getCondition('course_id', id_course);
         const inforTeacher = dataUserAccount.filter(objA => listIDTeacher.some(objB => objB.user_id === objA.user_id));
@@ -127,7 +111,6 @@ class StudentController {
         }
 
         let student = await db.countItem('course_Student', 'course_id', id_course);
-        // console.log(student);
         student = student[0].count;
         let teacher = await db.countItem('course_Teacher', 'course_id', id_course);
         teacher = teacher[0].count;
@@ -143,8 +126,8 @@ class StudentController {
             numberofstudent: student,
             finalscore: finalscore, 
             exercises: exercises
-
         };
+
         res.render('student/course', dataRender);
     }
 
@@ -160,13 +143,11 @@ class StudentController {
         const course = await Course.getCondition('course_id', courseid);
         const course_teacherid = await Course_Teacher.getCondition('course_id', courseid)
         const course_studentid = await Course_Student.getCondition('course_id', courseid)
-
-        //add by quan
         const fileSubmission= await db.getTwoCondition('submission','user_id','exercise_id',userid,exerciseid)
-        // console.log(fileSubmission);
         let nameFileSubmit='No files selected';
         let isSubmit=false;
         let isValid=false;
+
         if(fileSubmission.length>0)
         {
             nameFileSubmit= fileSubmission[0].submissionfile;
@@ -177,8 +158,6 @@ class StudentController {
             nameFileSubmit= 'No files selected';
             isSubmit=false;
         }
-        // finish add.
-
 
         const numberofStudent = course_studentid.length;
         const numberofTeacher = course_teacherid.length;
@@ -224,7 +203,6 @@ class StudentController {
 
                 time_remaining = `Assignment is overdue by: ` + getTimeRemaining(exercise[0].duetime, moment());
             }
-            
         }
 
         exercise[0].opentime = moment(exercise[0].opentime).format('dddd, D MMMM YYYY, HH:mm');
@@ -238,6 +216,7 @@ class StudentController {
                 events.push(exerciseInOneCourse[j]);
             }
         }
+
         const dataRender = {
             user: user[0],
             courseInfo: course[0],
@@ -251,12 +230,11 @@ class StudentController {
             sub_grading: sub_grading,
             sub_status: sub_status,
             sub_modified: sub_modified,
-            //add by quan
             nameFileSubmit:nameFileSubmit,
             isSubmit:isSubmit,
             isValid:isValid
-            // finish
         };
+        
         res.render('student/submission', dataRender);
     }
 
@@ -272,13 +250,13 @@ class StudentController {
             res.json({ message: 'Files uploaded successfully.' });
         });
     }
+
     async removeFile(req,res)
     {
         const user_id=req.body.user_id;
         const exercise_id=req.body.exercise_id;
         const nameFileSubmit=req.body.nameFileSubmit;
         const course_id=req.body.course_id;
-        // console.log(nameFileSubmit);
         const data= await db.deleteTwoCOndition('submission','user_id','exercise_id',user_id,exercise_id);
 
         let course_name = req.body.course_name;
@@ -292,7 +270,6 @@ class StudentController {
         exercise_name = exercise_name.replace(/[\/\\:*?"<>|]/g, '');
         exercise_name=exercise_name+`-${exercise_id}`
 
-
         const linkFileSubmission =path.join(__dirname, `../Submission/${course_name}/${exercise_name}/${nameFileSubmit}`) ;
         fs.unlink(linkFileSubmission, (err) => {
             if (err) {
@@ -300,10 +277,8 @@ class StudentController {
               res.json({ message: 'Files remove error.' });
               return;
             }
-            console.log('Tệp tin đã được xóa thành công.');
             res.json({ message: 'Files remove successfully.' });
-          });
-       
+        });
     }
 }
 

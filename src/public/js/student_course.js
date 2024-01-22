@@ -2,6 +2,7 @@ window.onload=function()
 {
     let listSubmission=document.querySelectorAll(".submission");
     let list_current_submission=document.querySelector('.list_current_submission');
+    
     for(submission of listSubmission)
     {
         let clone= submission.cloneNode(true);

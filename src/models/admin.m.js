@@ -5,6 +5,7 @@ module.exports = class Admin {
     constructor({ user_id }) {
         this.user_id=user_id;
     }
+
     static async getAll() {
         try {
             const data = await db.getAll(tbName);
@@ -14,6 +15,7 @@ module.exports = class Admin {
             throw error;
         }
     }
+
     static async getCondition(tbColum, value) {
         try {
             const data = await db.getCondition(tbName, tbColum, value);
@@ -22,8 +24,8 @@ module.exports = class Admin {
         catch (error) {
             throw error;
         }
-
     }
+
     static async insert(admin) {
         try {
             const data=await db.insert(tbName, admin,'user_id');

@@ -1,19 +1,16 @@
 function DeleteAll(table, id) {
-  console.log("delete");
   const delete_description = document.getElementById('delete_description');
   delete_description.textContent = `Are you sure to delete All ${table} ?`;
   document.getElementById('courseIdInput').value = id;
   document.getElementById('personIdInput').value = table;
   // Show the Bootstrap modal
   $('#modal-course-delete').modal('show');
-
 }
 
 function DeleteAcction() {
   const id = document.getElementById('courseIdInput').value;
   const table = document.getElementById('personIdInput').value;
-  //   console.log(id);
-  //   console.log(table);
+
   if (table === 'student') {
     DeleteAllStudent(id);
   }
@@ -27,7 +24,6 @@ function CloseDialog() {
   $('#modal-user-add').modal('hide');
   $('#modal-user-delete').modal('hide');
 }
-// Show the Bootstrap modal
 
 async function DeleteAllTeacher(id_course) {
   var tbody = document.getElementById("list_teacher");
@@ -45,12 +41,11 @@ async function DeleteAllTeacher(id_course) {
 
   if (response.ok) {
     const result = await response.json();
-    console.log('Server response:', result);
   } else {
     console.error('Failed to send data to server');
   }
-  // console.log("Delete Teacher");
 }
+
 async function DeleteAllStudent(id_course) {
   var tbody = document.getElementById("list_student");
   while (tbody.firstChild) {
@@ -67,12 +62,11 @@ async function DeleteAllStudent(id_course) {
 
   if (response.ok) {
     const result = await response.json();
-    console.log('Server response:', result);
   } else {
     console.error('Failed to send data to server');
   }
-  // console.log("Delete Student");
 }
+
 async function deleteUser(user_id, course_id, userType) {
   var message = 'Are you sure to delete this ' + userType + '?';
   document.getElementById('del_description').textContent = message;
@@ -82,11 +76,10 @@ async function deleteUser(user_id, course_id, userType) {
 
   $('#modal-user-delete').modal('show');
 }
+
 async function DeleteOneUser() {
   const user_id = document.getElementById('dl_user_id').value;
   const course_id = document.getElementById('dl_course_id').value;
-  console.log(course_id);
-  console.log(user_id);
   const response = await fetch('/admin/deleteUser', {
     method: 'POST',
     headers: {
@@ -97,7 +90,6 @@ async function DeleteOneUser() {
 
   if (response.ok) {
     const result = await response.json();
-    console.log('Server response:', result);
 
     // Remove the user from the teacher table
     var userRowInTeacherTable = document.getElementById('teacher-' + user_id);
@@ -113,10 +105,11 @@ async function DeleteOneUser() {
   } else {
     console.error('Failed to send data to server');
   }
-  console.log("Delete User");
+  
   CloseDialog();
   location.reload();
 }
+
 async function addUser(currentCount, maxCount, userType) {
   // Update the user type, current count and max count
   if (userType == 'student') {
@@ -144,12 +137,11 @@ async function addTeacher(course_id, user_id) {
 
   if (response.ok) {
     const result = await response.json();
-    console.log('Server response:', result);
   } else {
     console.error('Failed to send data to server');
   }
-  console.log("Add Teacher");
 }
+
 async function addStudent(course_id, user_id) {
 
   const response = await fetch('/admin/addStudent', {
@@ -162,12 +154,11 @@ async function addStudent(course_id, user_id) {
 
   if (response.ok) {
     const result = await response.json();
-    console.log('Server response:', result);
   } else {
     console.error('Failed to send data to server');
   }
-  console.log("Add Student");
 }
+
 async function Add(course_id) {
   event.preventDefault();
   const user_id_string = document.getElementById('userIdInput').value;
@@ -176,14 +167,12 @@ async function Add(course_id) {
     console.error('Invalid user ID');
     return;
   }
-  console.log(user_id);
+
   const userType = document.getElementById('userType').value;
   if (userType == 'student') {
     addStudent(course_id, user_id);
-    console.log("student");
   } else if (userType == 'teacher') {
     addTeacher(course_id, user_id);
-    console.log("teacher");
   } else {
     console.error('Invalid user type');
   }
@@ -226,15 +215,12 @@ async function importExcel() {
           if (response.status != 200) {
             status = response.status;
           }
-          // console.log(response);
+    
           return response.json();
         })
         .then(data => {
-          console.log(data);
-          console.log('status', status);
           location.reload();
           if (status != 200) {
-            console.log('failed');
             alert(data.message);
           }
           // Xử lý dữ liệu trả về từ server (nếu có)

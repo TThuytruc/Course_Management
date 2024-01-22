@@ -18,15 +18,12 @@
     <title>Submission</title>
 </head>
 <style>
-
     .choose-file-label:hover {
         color: rgb(30, 29, 29)
-    }
-    
+    } 
 </style>
 <body>
     {{>header username=user.user_name}}
-
 
     <main>
         <!-- Logo -->
@@ -149,7 +146,6 @@
     {{>footer}}
     <script>
         const course_id = {{ course_id }}
-        console.log(course_id);
         document.addEventListener('DOMContentLoaded', function () {
             const input = document.getElementById('file-finalscore-input');
             input.addEventListener('change', async (event) => {
@@ -188,15 +184,11 @@
                     alert('Error reading the file. Please try again.');
                 }
 
-                console.log('lala');
-                console.log('isValid outside', isValid);
                 if (!isValid) {
-                    console.log('is valid');
                     return;
                 }
                 document.getElementById('import-finalscore-info').style.display = 'block';
                 const importFinalScore = document.getElementById('import-finalscore-button')
-                console.log(importFinalScore)
                 importFinalScore.style.cursor = 'pointer';
                 importFinalScore.style.opacity = 1;
                 importFinalScore.addEventListener('click', async function (event) {
@@ -207,7 +199,6 @@
                     });
                     if (res.ok) {
                         const data = await res.json();
-                        console.log(data);
                         setTimeout(() => {
                             window.location.reload();
                         }, 200)
@@ -229,9 +220,6 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="/js/list_student.js"></script>
-    <!-- <script src="./myscript.js">
-
-    </script> -->
 </body>
 
 </html>

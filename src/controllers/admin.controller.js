@@ -8,22 +8,6 @@ const xlsx = require('xlsx');
 const fs = require('fs');
 const multer = require('multer');
 
-// // Cấu hình multer
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       // Định nghĩa thư mục lưu trữ cho tệp tin tải lên
-//       cb(null, 'uploads/');
-//     },
-//     filename: function (req, file, cb) {
-//       // Định nghĩa tên tệp tin khi lưu trữ
-//       cb(null, Date.now() + '-' + file.originalname);
-//     }
-//   });
-
-//   const upload = multer({
-//     storage: storage
-//   });
-
 class AdminController {
     async course(req, res, next) {
         const id_course = req.query.course_id;
@@ -42,7 +26,6 @@ class AdminController {
         const data = await Course.getAll();
         for (const item of data) {
             let student = await db.countItem('course_student', 'course_id', item.course_id);
-            // console.log(student);
             student = student[0].count;
             let teacher = await db.countItem('course_teacher', 'course_id', item.course_id);
             teacher = teacher[0].count;
@@ -82,25 +65,18 @@ class AdminController {
     }
     async importExcelFile(req, res) {
         const receivedArray = req.body.data;
-        // console.log(receivedArray.id);
-
         const list_Student = await Course_Student.getCondition('course_id', receivedArray.id);
-        // console.log(list_Student);
         const current_number_student = list_Student.length > 0 ? list_Student.length : 0;
         let total_student = await Course.getCondition('course_id', receivedArray.id);
         total_student = total_student[0].maxnumberofstudent;
-        // console.log(current_number_student + receivedArray.students.length > total_student);
+    
         if (current_number_student + receivedArray.students.length > total_student) {
-            // console.log("So luong vuot qua gioi han");
             res.status(500).json({ message: "The number of students in file exceeded the limit!" });
             return;
-        }
-        else {
         }
 
         try {
             for (const student of receivedArray.students) {
-                // console.log(student[0]);
                 const user = await Student.getCondition('user_id', student[0]);
                 if (user.length > 0) {
                     const checkInsert = await db.getTwoCondition('course_student', 'course_id', 'user_id', receivedArray.id, student[0]);
@@ -119,10 +95,8 @@ class AdminController {
     }
     async importExcelFileTeacher(req, res) {
         const receivedArray = req.body.data;
-        // console.log(receivedArray.id);
         try {
             for (const student of receivedArray.students) {
-                // console.log(student[0]);
                 const user = await Teacher.getCondition('user_id', student[0]);
                 if (user.length > 0) {
                     const checkInsert = await db.getTwoCondition('course_teacher', 'course_id', 'user_id', receivedArray.id, student[0]);

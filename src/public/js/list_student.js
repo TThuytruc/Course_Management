@@ -26,6 +26,7 @@ function update(selectedItem) {
             return mssv_a - mssv_b;
         });
     }
+
     if (selectedItem === 'Name') {
         list_student.sort(function (a, b) {
             var nameA = a.name.toUpperCase();
@@ -63,6 +64,7 @@ function update(selectedItem) {
             return score_a - score_b;
         });
     }
+
     while (tbody.firstChild) {
         tbody.removeChild(tbody.firstChild);
     }
@@ -80,10 +82,9 @@ function update(selectedItem) {
 
         var cellEmail = document.createElement("td");
         cellEmail.textContent = student.email;
-
-        console.log(student);
         var cellScore = document.createElement("td");
         cellScore.textContent = (student.finalscore);
+
         // Thêm các ô vào hàng
         newRow.appendChild(cellId);
         newRow.appendChild(cellName);
@@ -112,13 +113,13 @@ async function updateFinalScore(course_id, user_id, score) {
 
     if (response.ok) {
         const result = await response.json();
-        console.log('Server response:', result);
     } else {
         console.error('Failed to send data to server');
     }
-    console.log("Update Score");
+
     location.reload();
 }
+
 function updateAllScores(event) {
     if (event.key === 'Enter') {
         const inputElements = document.querySelectorAll('.score');
@@ -131,7 +132,6 @@ function updateAllScores(event) {
             }
             updateFinalScore(courseId, userId, score);
         });
-        
     }
 }
 

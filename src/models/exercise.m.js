@@ -28,7 +28,6 @@ module.exports = class Exercise {
         catch (error) {
             throw error;
         }
-
     }
 
     static async insert(exercise) {

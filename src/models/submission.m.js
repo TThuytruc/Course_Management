@@ -26,7 +26,6 @@ module.exports = class Submission {
         catch (error) {
             throw error;
         }
-
     }
     static async insert(submission) {
         try {
