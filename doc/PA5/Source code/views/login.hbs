@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #background {     
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("/images/background_login.jpg"); /
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size:100vw auto;
+        }
+
+        #sign-in-form {
+            background-color: rgba(255, 255, 255, 0.87);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 15px 30px;
+            width: 400px;
+            /* text-align: center; */
+        }
+
+         #sign-in-form h2 {
+            color: #854759;
+            text-align: center;
+            font-weight:800;
+            font-size: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #52504f;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .error {
+            color: rgb(110, 110, 71);
+            font-weight: bold;
+            margin: -10px 0 10px;
+        }
+
+        #sign-in-btn {
+            background-color: #854759;
+            font-weight: 550;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            float: right;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            height: 40px;
+            width: 80px;
+        }
+
+        input:focus
+        {
+             outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="background">
+        <div id="sign-in-form">
+            <h2>Log In for School</h2>
+            <form method="post" action="/login">
+                <div class="form-group">
+                    <label for="account_email">Email</label>
+                    <input class="form-input" type="email" id="account_email" name="account_email" placeholder="Enter email"
+                        required>
+                </div>
+                <div class="email error">
+
+                </div>
+                <div class="form-group">
+                    <label for="account_password">Password</label>
+                    <input class="form-input" type="password" id="account_password" name="account_password"
+                        placeholder="Enter password" required>
+                </div>
+                <div class="password error">
+                </div>
+                <div class="form-group">
+                    <button id="sign-in-btn" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+   </div>
+    <script>
+        const form = document.querySelector('form');
+        const emailError = document.querySelector('.email.error');
+        const passwordError = document.querySelector('.password.error');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            //reset errors
+            emailError.textContent = '';
+            passwordError.textContent = '';
+            //get the value
+            const account_email = form.account_email.value 
+            const account_password = form.account_password.value;
+            try {
+                // fetch request then response
+                const res = await fetch('/login', {
+                    method: 'POST',
+                    //body: data goes along with the request
+                    body: JSON.stringify({ account_email, account_password }),
+                    headers: { 'Content-Type': 'application/json' }
+
+                })
+                const data = await res.json();
+
+                const conditionOne = data.account_email && data.account_email.includes('Wrong');
+                const conditionTwo = data.account_password && data.account_password.includes('Wrong');
+                if (conditionOne || conditionTwo) {
+                    emailError.textContent = data.account_email
+                    passwordError.textContent = data.account_password
+                }
+                else { 
+                    var role = data.user_role;
+
+                    // Construct a query string from the data object
+                    const queryString = Object.keys(data)
+                        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+                        .join('&');
+
+                    localStorage.setItem('user_id', data.user_id);
+                    // Redirect to the same route with the data as query parameters
+                    location.assign(`/`); 
+                }
+            }
+            catch (err) {
+                console.log(err)
+            }
+        })
+    </script>
+</body>
+
+</html>

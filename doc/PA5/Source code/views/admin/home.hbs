@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="admin_course.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Course</title>
+    <style>
+        #courses-list:hover {
+            background-color: rgba(147, 145, 145, 0.13);
+        }
+    </style>
+</head>
+
+<body>
+    {{>header username='Admin'}}
+
+
+    <main>
+        <div class="row_content img_language">
+            <div class="img_university">
+                 <img id="logo" src="/images/logo.jpg" alt="Logo">
+            </div>
+        </div>
+
+        <div class="box title_course">
+            <div class="name_course">
+                Courses management
+            </div>
+
+            <table class="table table-bordered" style="margin-top:20px;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center" scope="col">Course ID</th>
+                        <th class="text-center" scope="col">Course Name</th>
+                        <th class="text-center" scope="col">Number Of Student</th>
+                        <th class="text-center" scope="col">Number Of Teacher</th>
+                        <th class="text-center" scope="col">Max Number Of Student</th>
+                        <th class="text-center" scope="col">Schedule</th>
+                        <th class="text-center" scope="col"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {{#each arrayCourse}}
+                    <tr id="courses-list" style="cursor: pointer;">
+                        <th scope="row" class="text-center" onclick="adminLoadCourse('{{this.course_id}}')">
+                            {{this.course_id}}</th>
+                        <td onclick="adminLoadCourse('{{this.course_id}}')" class="text-center">{{this.course_name}}
+                        </td>
+                        <td onclick="adminLoadCourse('{{this.course_id}}')" class="text-center">{{this.numberofstudent}}
+                        </td>
+                        <td onclick="adminLoadCourse('{{this.course_id}}')" class="text-center">{{this.numberofteacher}}
+                        </td>
+                        <td onclick="adminLoadCourse('{{this.course_id}}')" class="text-center">
+                            {{this.maxnumberofstudent}}</td>
+                        <td onclick="adminLoadCourse('{{this.course_id}}')" class="text-center">{{this.schedule}}</td>
+                        <td class="text-center"><button type="button"
+                                class="btn bg-secondary text-white pd-2 text-center" data-id={{this.course_id}}
+                                data-bs-toggle="modal" data-bs-target="#modal-course-delete" style="background-color: #854759 !important;">Delete</button></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
+            <div style="display:flex; justify-content:center;">
+                <button type="button" class="btn btn-secondary" title="Add course" style="width: 70px; height: 40px;background-color: #854759; margin-bottom: 25px; display:flex; justify-content:center;"
+                data-bs-toggle="modal" data-bs-target="#modal-course-insert">Add</button>
+            </div>
+            
+        </div>
+    </main>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-course-delete" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <p>Are you sure to delete this course?</p>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" style="background-color: #854759 !important;">Delete</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Insert -->
+    <div class="modal fade" id="modal-course-insert" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add course</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-course-insert" action="/course/insert" method="post">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Course name:</label>
+                            <input type="text" name="course_name" class="form-control" id="recipient-name">
+                        </div>
+                        <div id="course_name-error" class="alert alert-danger"></div>
+                        <div class="mb-3">
+                            <label for="quaty" class="col-form-label">Max Number Of Student:</label>
+                            <input type="number" name="maxnumberofstudent" class="form-control" id="quaty" required>
+                        </div>
+                        <div id="maxnumberofstudent-error" class="alert alert-danger">Max Number Of Student must be greater than zero!</div>
+
+                        <div class="mb-3">
+                            <label for="quaty" class="col-form-label">Schedule:</label>
+                
+                            <select style="text-align: center;" name="schedule" id="">
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width:70px;">Close</button>
+                            <button type="submit" class="btn btn-primary" style="background-color: #854759 !important; width:70px;">Add</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {{>footer}}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="/js/course_student.js"></script>
+    <script src="/js/admin_home.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

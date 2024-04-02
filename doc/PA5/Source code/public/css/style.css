@@ -1,0 +1,1016 @@
+* 
+{
+    box-sizing: border-box;
+}
+
+html,
+body 
+{
+    padding: 0;
+    margin: 0;
+}
+
+:root 
+{
+    --header-height: 50px;
+    --header-background: #854759;
+    --body-background: rgb(135, 164, 76);
+    --footer-background: rgb(135, 164, 76);
+    --border: 1px solid rgb(223, 220, 220);
+}
+
+/* Header */
+.header 
+{
+    height: var(--header-height);
+    width: 100%;
+    background-color: var(--header-background);
+    display: flex;
+    justify-content: center;
+}
+
+.header__container 
+{
+    margin-left:100px;
+    height: 100%;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.header__email-link 
+{
+    text-decoration: none;
+    color: white;
+}
+
+.header__email-link:hover 
+{
+    text-decoration: none;
+    color: white;
+}
+
+.header__email-link:hover 
+{
+    text-decoration: underline;
+}
+
+.header__phone-no 
+{
+    border-right: 1px solid white;
+    margin-right: 4px;
+}
+
+.header__user:hover 
+{
+    cursor: pointer;
+}
+
+.header__user 
+{
+    position: relative;
+}
+
+.header__user-list::after 
+{
+    position: absolute;
+    content: "";
+    width: 100%;
+    right: 0;
+    top: -10px;
+    height: 20px;
+}
+
+.header__user-list {
+    position: absolute;
+    top: 130%;
+    background-color: white;
+    border: 1px solid #707070;
+    border-radius: 5px;
+    position: absolute;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    right: 0;
+    width: 200px;
+    display: none;
+    z-index: 1;
+}
+
+.header__user:hover .header__user-list 
+{
+    display: block;
+}
+
+.header__user-list a 
+{
+    text-decoration: none;
+    color: black;
+}
+
+.header__user-list a:hover 
+{
+    color: black;
+    text-decoration: none;
+}
+
+.header__user-item 
+{
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 10px 0;
+    border-top: 1px solid #707070;
+}
+
+.header__user-item:hover 
+{
+    background-color: rgb(223, 220, 220); 
+}
+
+.header__user-item a, .header__user-item a:hover
+{
+    width: 100%; 
+    color:#e91e63;
+}
+
+.header__user-item i, .header__user-item i:hover
+{
+    color:#4d4d4d;
+}
+
+.header__user-logout 
+{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.header__user-logout span 
+{
+    color: black;
+    font-family: inherit;
+}
+
+.header__user-icon 
+{
+    width: 20px;
+    color: black;
+    margin-right: 5px;
+}
+
+/* Body */
+main
+{
+    color:#656565;
+}
+
+.row_content
+{
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    border-bottom: var(--border);
+}
+
+.content_body
+{
+    display: flex;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.content
+{
+    flex: 70%;
+}
+
+.side
+{
+    flex: 30%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5%;
+    margin-right: 10px;
+    margin-bottom: 25px;
+}
+
+.img_language
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.img_university 
+{
+    display: flex;
+    margin-left: 31px;
+}
+
+.img_university img 
+{
+    width: 100%;
+    height: 100%;
+    object-fit:contain; 
+}
+
+.language
+{
+    display: flex;
+    width:fit-content;
+    justify-content: flex-end;
+    margin-right: 9%;
+}
+
+#choosen_language
+{
+    display: inline-block;
+    border: 0;
+    color: #e91e63;
+    margin-bottom: 3px;
+    border-bottom: 3px solid white;
+}
+
+#choosen_language:hover
+{
+    border-bottom: 3px solid #41434a;
+}
+
+.title_course
+{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+.name_course
+{
+    font-size: 35px;
+    color: rgb(135, 164, 76);
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.link_current_page
+{
+    margin-top: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 768px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.link_current_page *
+{
+    margin-bottom:-1px;
+}
+
+.slash
+{
+    margin-left:5px;
+    margin-right:5px;
+}
+
+.link_page
+{
+    color:#e91e63;
+}
+
+.link_page:hover
+{
+    color:#41434a;
+}
+
+.box
+{
+    position: relative;
+    display: flex;
+    width: 98%;
+    background-color: white;
+    flex-direction: row;
+    border: var(--border);
+    padding: 0 30px;
+    flex-direction: column;
+    margin-left: 1%;
+    margin-top: 1.3%;
+    padding-top: 20px;
+}
+
+.text:hover
+{
+    color: #656565;
+}
+
+.icon
+{
+    margin-right: 2%;
+}
+
+.text
+{
+   color:  #656565;
+   font-size: 18px;
+   margin-left: 20px;
+}
+
+.row_icon_link
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 8px 0;
+    padding-left: 15px;
+}
+
+.icon_exercise
+{
+    margin-right:-12px;
+}
+
+.title_row
+{
+    margin: 10px 0;
+    color: rgb(151, 184, 85);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.topic_description
+{
+    color:#973652;
+    white-space: pre-line;
+}
+
+.parent
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.icon
+{
+    display: flex;
+}
+
+.last_row
+{
+    border: 0 ;
+}
+
+.last_box
+{
+    margin-bottom: 50px;
+}
+
+/* Custom for list teacher and list exam on the right page */
+.list_people
+{
+    padding: 0;
+}
+
+.title_text
+{
+    padding-left: 3%;
+}
+
+li 
+{
+    list-style-type: none;
+  
+}
+
+.list_teacher
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.teacher
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.name_teacher
+{
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    padding: 0;
+}
+
+.name
+{
+    margin: 0 10px;
+}
+
+.send_messeage
+{
+    margin: 0 10px;
+}
+
+.send_messeage:hover
+{
+    color: #41434a;
+}
+
+.link_group_people
+{
+    color: #e91e63;
+}
+
+.link_group_people:hover
+{
+    color:#41434a;
+}
+
+.list_exam
+{
+    padding: 0;
+}
+
+.list_submission
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.color_box
+{
+    background-color: #EEEEEE;
+}
+
+.color_submission
+{
+    color: #e91e63;
+    font-weight: normal;
+}
+
+.color_submission:hover
+{
+    color: #41434a;
+}
+
+.score_box
+{
+    display: flex;
+}
+
+.title_submission
+{
+    font-size: 27px;
+    color: rgb(135, 164, 76);
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.time
+{
+    margin-top:10px;
+    margin-bottom:20px;
+}
+
+.exercise_description
+{
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+.submission_status
+{
+    font-size: 23px;
+    color: rgb(135, 164, 76);
+    font-weight: bold;
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+th
+{
+    width:20%;
+}
+
+#teacher_submission_table
+{
+    text-align: center;
+    margin-top: 20px;
+}
+
+a[download]
+{
+    color: #e91e63;
+}
+
+a[download]:hover
+{
+    color: #e91e63;
+}
+
+#file_submission
+{
+    display: none;
+}
+
+#add_submission
+{
+    color: #e91e63;
+}
+
+.plus
+{
+    display: inline;
+    color: #e91e63;
+}
+
+#add_submission:hover
+{
+    color: #e91e63;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.box_home_search{
+    border: var(--border);
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    margin-top:0px;
+    height: 80px;
+    padding:20px;
+}
+
+.search_bar
+{
+    flex: 1;
+    border: var(--border);
+    height: 40px;
+    padding-left: 10px;
+    width: 75%;
+}
+
+.searchbar::placeholder
+{
+    margin-left: 20px;
+}
+
+.search_button
+{
+    border: var(--border);
+    height:40px;
+    width: 30px;
+}
+.search_icon
+{
+    height: 40px;
+    width: 30px;
+    object-fit: cover;
+}
+
+.home_content
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.home_main_content{
+    flex: 70%;
+    margin-bottom: 25px;
+}
+
+.home_title
+{
+    margin-left:18px;
+    margin-top:10px;
+    margin-bottom:35px;
+    font-weight: bold;
+    color:#bb6880;
+}
+.home_list_courses{
+    background-color:#EEEEEE;
+    padding:10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    border: var(--border);
+ }
+.box_home_courses
+{
+   margin:20px;
+   padding: 20px;
+   box-shadow: 2px 2px 2px rgb(135, 135, 135);
+   background-color: white;
+}
+
+.home_classname
+{
+    color:rgb(146, 180, 82);
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.home_classname:hover
+{
+    color:#689f59;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.home_courseid
+{
+    color:#e91e63;
+}
+
+.home_courseid:hover
+{
+    color:#41434a;
+}
+
+#home_side_grid
+{
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5px;;
+}
+
+#home_side_userid
+{
+    color: #e91e63;
+}
+
+#home_side_userid:hover
+{
+    color: #41434a;
+}
+
+.list_teacher
+{
+    list-style-type: none;
+    margin-top: 20px;
+}
+.home_side{
+    flex: 30%;
+    background-color: white;
+    padding: 20px;
+}
+.home_side_header_box{
+    flex:30% ;
+    border: var(--border);
+    background-color: white;
+    padding: 10px;
+}
+.home_side_content_box{
+    flex:25;
+    border: var(--border);
+    padding: 10px;
+    background-color:rgb(238, 238, 238);
+    padding-left: 20px;
+}
+
+.grid-container
+{
+    width:450px;
+    display:grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 7px;;
+}
+
+.box_upcoming_events
+{
+    margin-bottom: 5px;
+    padding: 10px;
+    box-shadow: 1.5px 1.5px 1px rgb(135, 135, 135);
+    background-color: white;
+}
+
+.side_deadline{
+    color: #e91e63;
+}
+.side_deadline:hover{
+    color: #41434a;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.student_email{
+    color: #e91e63;
+    font-size: 0.9em;
+}
+.student_email:hover{
+    color:#41434a
+}
+
+/* Teacher submission.html */
+.submissions    
+{
+    font-size: 23px;
+    color: rgb(135, 164, 76);
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.file_name
+{
+    color: #e91e63;
+}
+
+.file_name:hover
+{
+    color: #e91e63;
+}
+
+/* Teacher course.html */
+.btn-group
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+#button_add
+{
+    max-width: 90px;
+    height:40px;
+    background-color: #854759;
+    border:none;
+    border-radius: 5px;
+    color:white;
+    font-weight:600;
+    margin-top:15px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.dropdown-item
+{
+    color: #e91e63 !important;
+    font-weight: 400;
+}
+
+.dropdown-item:hover 
+{
+    background-color: rgb(223, 220, 220) !important; 
+    cursor: pointer;
+}
+
+.dropdown-item:active, .dropdown-item.active
+{
+    background-color: rgb(223, 220, 220) !important; 
+    outline:0px;
+}
+
+#window_background
+{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;    
+    z-index: 2;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+}
+
+[id^="window__"] 
+{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    flex-direction: column;
+    z-index: 3;
+}
+
+.window_header
+{
+    background-color: #854759;
+    height: 48px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.window_title
+{
+    font-size: 25px;
+    font-weight: 640;
+    color: rgb(241, 238, 238);
+    padding:7px;
+}
+
+.fa-xmark
+{
+    color: rgb(241, 238, 238);
+    font-size: 20px;
+    padding-right: 20px;
+}
+
+.fa-xmark:hover
+{
+    cursor: pointer;
+}
+
+.window_body
+{
+    height: 100%;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.window_footer
+{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.window_footer input
+{
+    width: 75px;
+    height: 40px;
+    background-color: #854759;
+    border:none;
+    border-radius: 5px;
+    color:white;
+    font-weight:600;
+    margin-top:15px;
+    margin-right: 15px;
+    margin-bottom:15px;
+    display: inline-block;
+}
+
+.window_footer input:hover
+{
+    background-color: #af5f77;
+}
+
+#window__add_topic
+{
+    width: 620px;
+    height: 415px;
+}
+
+#table_add_topic
+{
+    margin-top: 15px;
+    width:85%;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 6fr 1fr;
+    gap: 9px;
+}
+
+#window__add_assignment
+{
+    width: 620px;
+    height: 535px;
+}
+
+#table_add_assignment
+{
+    width:85%;
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 6fr 1fr;
+    gap: 9px;
+}
+
+#table_add_assignment label
+{
+    margin-right: 15px;
+}
+
+.window_body input[type="text"] 
+{
+    border:none;
+    border-bottom: solid 1px;
+    outline:0px;
+}
+
+#assignment_name, #assignment_topic, #assignment_description
+{
+    grid-column: span 3;
+}
+
+#assignment_description, #topic_description
+{
+    padding:10px;
+    resize: none;
+}
+
+#assignment_open_date:focus, #assignment_due_date:focus, #assignment_description:focus, #topic_description:focus
+{
+    outline: none;
+}
+
+#assignment_open_hour, #assignment_open_minute, #assignment_due_hour, #assignment_due_minute
+{
+    text-align: center;
+}
+
+#assignment_open_hour::placeholder, #assignment_open_minute::placeholder, #assignment_due_hour::placeholder, #assignment_due_minute::placeholder
+{
+    color: black;
+}
+
+#assignment_open_hour:focus, #assignment_open_minute:focus, #assignment_due_hour:focus, #assignment_due_minute:focus
+{
+    outline: none;
+}
+
+#topic_error_container, #assignment_error_container
+{
+    color: red;
+    font-size: 14px;
+}
+
+#topic_error_container
+{
+    grid-column: span 2;
+}
+
+#assignment_error_container
+{
+    grid-column: span 4;
+}
+
+#box_scores
+{
+    border: 0 solid black;
+    background-color: inherit;
+    text-align: center;
+}
+#btn_download-all,.btn-in-submission
+{
+    border: 0 solid black;
+    color: white;
+    border-radius: 8px;
+    padding: 1%;
+    width: 15%;
+}
+.btn_download
+{
+    margin:1% 0;
+    justify-content: end;
+    display:flex;
+    width: 100%;
+}
+
+.score {
+    text-align: center;
+}
+
+#import-score-button, #import-finalscore-button {
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bolder;
+    line-height: 15px;
+    text-align: center;
+    margin: auto 10px auto 0;
+}
+
+#logo
+{
+    height: 80px;
+}
+
+#logo:hover
+{
+   cursor: pointer;
+}
+
+#avartar_teacher
+{
+    margin-left:2%; 
+    height: 30px;
+}
+
+#submit_buttons
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-bottom: 20px;
+}
+
+#buttonCancel
+{
+    margin-right: 8px;
+}
+
+#buttonRemove, #buttonSave
+{
+    background-color: #854759;
+}
