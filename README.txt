@@ -1,4 +1,4 @@
-Đồ án Nhập môn Công nghệ phần mềm - Nhóm 10 Lớp 21_3
+Course Management Project
 
 # Tổng quan:
 - Chương trình chạy trên nền tảng web (sử dụng tốt nhất trên trình duyệt Google 
