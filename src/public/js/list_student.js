@@ -6,18 +6,34 @@ function update(selectedItem) {
     document.getElementById('dropdownMenuButton').innerText = selectedItem;
     var list_student = []
     var tbody = document.getElementById("list_student");
-
+    var  object_value= document.getElementById('object_value')
     for (var i = 0; i < tbody.rows.length; i++) {
         var cells = tbody.rows[i].cells;
+        var finalscore=0;
+        var dataStudentId=0;
+        var dataCourseId=0;
+        if(object_value.value=='student')
+        {
+            finalscore=cells[3].innerText
+        }
+        else
+        {
+            finalscore= cells[3].firstChild.value;
+            // console.log(finalscore);
+            dataStudentId=cells[3].firstChild.getAttribute('data-student-id');
+            dataCourseId=cells[3].firstChild.getAttribute('data-course-id');
+        }
         var data = {
             mssv: cells[0].innerText,
             name: cells[1].innerText,
             email: cells[2].innerText,
-            finalscore: cells[3].innerText,
+            finalscore: finalscore,
+            dataCourseId:dataCourseId,
+            dataStudentId:dataStudentId
         };
         list_student.push(data);
     }
-
+    // console.log(list_student);
     if (selectedItem === 'ID') {
         list_student.sort(function (a, b) {
             var mssv_a = parseInt(a.mssv, 10);
@@ -81,9 +97,38 @@ function update(selectedItem) {
         cellName.textContent = student.name;
 
         var cellEmail = document.createElement("td");
-        cellEmail.textContent = student.email;
+        var aElement= document.createElement('a');
+        aElement.textContent= student.email;
+        aElement.style="color:#e91e63 !important;"
+        cellEmail.appendChild(aElement); 
+
+        // console.log(student);
         var cellScore = document.createElement("td");
-        cellScore.textContent = (student.finalscore);
+        if(object_value.value==='student')
+        {
+            cellScore.textContent = (student.finalscore);
+        }
+        else
+        {
+
+            var inputElement= document.createElement('input');
+            var inputElement = document.createElement('input');
+            inputElement.type = "number";
+            inputElement.className = "score";
+            inputElement.setAttribute("data-score", `${student.finalscore}`);
+            inputElement.setAttribute("data-student-id", `${student.dataStudentId}`);
+            inputElement.setAttribute("data-course-id", `${student.dataCourseId}`);
+            inputElement.name = "score";
+            inputElement.min = "0";
+            inputElement.max = "10";
+            inputElement.step = "0.1";
+            inputElement.onkeydown = function(event) {
+                updateAllScores(event);
+            };
+            inputElement.setAttribute("value", `${student.finalscore}`);
+            console.log(inputElement);  
+            cellScore.appendChild(inputElement); 
+        }
 
         // Thêm các ô vào hàng
         newRow.appendChild(cellId);

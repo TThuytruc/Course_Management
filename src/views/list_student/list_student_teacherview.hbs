@@ -38,17 +38,30 @@
             <div class="name_course">
                 {{course_name}} </div>
         </div>
-
+        <input type="hidden" id="object_value" value="teacher">
         <!-- Content -->
         <div class="content_body">
             <div class="content">
                 <div class="box last_box">
                     <!-- Submission Title -->
-                    <div>
-                        <div class="title_submission">List Student</div>
-                        <div><strong>Total:</strong> {{numberofstudent}}</div>
+                    <div style="display: flex; flex-direction: row;justify-content: space-between;">
+                        <div>
+                            <div class="title_submission">List Student</div>
+                            <div><strong>Total:</strong> {{numberofstudent}}</div>
+                        </div>
+
+                        <div class="dropdown" style=" margin-top: 30px;">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #854759; height:40px;">
+                                   Sort
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <p class="dropdown-item" onclick="update('ID')">ID</p>
+                                    <p class="dropdown-item" onclick="update('Name')">Name</p>
+                                    <p class="dropdown-item" onclick="update('Final Score')">Final Score</p>
+                                </div>
+                            </div>
                     </div>
-                    
                     <!-- Student table -->
                     <table id="teacher_submission_table" class="table table-striped">
                         <thead class="thead-dark">
@@ -220,6 +233,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="/js/list_student.js"></script>
+    
 </body>
 
 </html>
