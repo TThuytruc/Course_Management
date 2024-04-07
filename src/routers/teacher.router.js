@@ -10,6 +10,5 @@ router.post('/submission/import_score', teacherController.submissionImportScore)
 router.post('/submission/import_final_score', teacherController.submissionImportFinalScore);
 router.post('/downloadAll',teacherController.downloadAll);
 router.post('/updateScore',teacherController.updateScore);
-router.post('//downloadSingle',teacherController.downloadSingle);
-
+router.post('/downloadSingle',teacherController.downloadSingle);
 module.exports = router;
