@@ -84,7 +84,10 @@
                         <tbody>
                             {{#each submissions}}
                             <tr>
-                                <td><a class="file_name" href="#" data-course-name="{{../courseInfo.course_name}}" data-exercise-name="{{../exercise.exercise_name}}" id="downloadLink">{{this.submissionfile}}</a></td>
+                                <td><p class="file_name" href="#" data-course-name="{{../courseInfo.course_name}}" data-exercise-name="{{../exercise.exercise_name}}" id="downloadLink"
+                                 onclick="downloadOneSubmission('{{../courseInfo.course_name}}','{{../exercise.exercise_name}}','{{this.submissionfile}}','{{../exercise.exercise_id}}','{{../courseInfo.course_id}}')">
+                                 {{this.submissionfile}}</p>
+                                 </td>
                                 <td>{{this.user_id}}</td>
                                 <td>{{this.user_name}}</td>
                                 <td>{{this.submissiontime}}</td>
